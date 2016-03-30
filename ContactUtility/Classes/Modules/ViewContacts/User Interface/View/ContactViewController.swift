@@ -53,9 +53,9 @@ class ContactViewController: UITableViewController,ContactViewInterface {
     }
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        var numberOfSections = dataProperty?.sections.count
+        var numberOfSections = dataProperty?.sections!.count
         
-        if dataProperty?.sections.count == nil {
+        if dataProperty?.sections!.count == nil {
             numberOfSections = 0
         }
         
@@ -63,12 +63,12 @@ class ContactViewController: UITableViewController,ContactViewInterface {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let upcomingSection = dataProperty?.sections[section]
+        let upcomingSection = dataProperty?.sections![section]
         return upcomingSection!.items.count
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let upcomingSection = dataProperty?.sections[section]
+        let upcomingSection = dataProperty?.sections![section]
         return upcomingSection!.name
     }
     

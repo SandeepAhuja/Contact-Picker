@@ -65,13 +65,22 @@ class ContactDataManager: NSObject {
                 }
             }
         }
-        var indexedAuthors = []
+        var indexedAuthors = [String: [AnyObject]]()
+
         for person in collection {
             let initialLetter = person.givenName!.substringToIndex((person.givenName?.startIndex.advancedBy(1))!).uppercaseString
             var authorArray = indexedAuthors[initialLetter] ?? [ContactDisplayItem]()
             authorArray.append(person)
             indexedAuthors[initialLetter] = authorArray
         }
+        let contactDisplayData = ContactDisplayData()
+        contactDisplayData.sections = [ContactDisplaySection]()
+        
+        for (key,value) in indexedAuthors {
+            let section = ContactDisplaySection(name: key, items: value)
+            contactDisplayData.sections?.append(section)
+        }
+        
         return collection
     }
 
