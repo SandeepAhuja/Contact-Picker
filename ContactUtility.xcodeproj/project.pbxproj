@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		6705D5B01CAA49E3002EA3BB /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6705D5A91CAA49E3002EA3BB /* ContactViewController.swift */; };
 		6705D5B31CAA4A06002EA3BB /* ContactDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6705D5B21CAA4A06002EA3BB /* ContactDataManager.swift */; };
-		6705D5B61CAA4FD3002EA3BB /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6705D5B51CAA4FD3002EA3BB /* UIDevice.swift */; };
 		6705D5BA1CAA6253002EA3BB /* ContactInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6705D5B91CAA6253002EA3BB /* ContactInteractor.swift */; };
 		6705D5BC1CAA6E4E002EA3BB /* ContactPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6705D5BB1CAA6E4E002EA3BB /* ContactPresenter.swift */; };
 		6705D5BE1CAA7DF9002EA3BB /* ContactInteractorIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6705D5BD1CAA7DF9002EA3BB /* ContactInteractorIO.swift */; };
@@ -52,7 +51,6 @@
 /* Begin PBXFileReference section */
 		6705D5A91CAA49E3002EA3BB /* ContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		6705D5B21CAA4A06002EA3BB /* ContactDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactDataManager.swift; sourceTree = "<group>"; };
-		6705D5B51CAA4FD3002EA3BB /* UIDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
 		6705D5B91CAA6253002EA3BB /* ContactInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactInteractor.swift; sourceTree = "<group>"; };
 		6705D5BB1CAA6E4E002EA3BB /* ContactPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactPresenter.swift; sourceTree = "<group>"; };
 		6705D5BD1CAA7DF9002EA3BB /* ContactInteractorIO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactInteractorIO.swift; sourceTree = "<group>"; };
@@ -202,7 +200,6 @@
 		6705D5B41CAA4F1E002EA3BB /* Category */ = {
 			isa = PBXGroup;
 			children = (
-				6705D5B51CAA4FD3002EA3BB /* UIDevice.swift */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -463,7 +460,6 @@
 				6705D5C11CAA8751002EA3BB /* RootWireFrame.swift in Sources */,
 				6705D5B01CAA49E3002EA3BB /* ContactViewController.swift in Sources */,
 				6705D5C31CAA87E2002EA3BB /* AppDependencies.swift in Sources */,
-				6705D5B61CAA4FD3002EA3BB /* UIDevice.swift in Sources */,
 				6705D5BA1CAA6253002EA3BB /* ContactInteractor.swift in Sources */,
 				6705D5C51CAA884C002EA3BB /* ContactWireFrame.swift in Sources */,
 			);

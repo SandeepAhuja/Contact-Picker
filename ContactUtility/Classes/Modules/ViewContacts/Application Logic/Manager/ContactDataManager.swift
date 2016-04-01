@@ -57,8 +57,8 @@ class ContactDataManager: NSObject {
             for contact in contacts!{
                 let currentContact: ABRecordRef = contact
 //                let currentContactName = ABRecordCopyCompositeName(currentContact)?.takeRetainedValue() as! String
-                let givenName = ABRecordCopyValue(currentContact, kABPersonFirstNameProperty)?.takeRetainedValue() as! String
-                let familyName  = ABRecordCopyValue(currentContact, kABPersonLastNameProperty)?.takeRetainedValue() as! String
+                let givenName = ABRecordCopyValue(currentContact, kABPersonFirstNameProperty)?.takeRetainedValue() as? String ?? ""
+                let familyName  = ABRecordCopyValue(currentContact, kABPersonLastNameProperty)?.takeRetainedValue() as? String ?? ""
                 let identifier =  String(ABRecordGetRecordID(currentContact))
                 if let item =  ContactDisplayItem(identifier: identifier, givenName: givenName, familyName: familyName) as ContactDisplayItem?{
                     collection.append(item)
@@ -66,7 +66,6 @@ class ContactDataManager: NSObject {
             }
         }
         var indexedAuthors = [String: [ContactDisplayItem]]()
-        let sectionvalidNames:[String] = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","W","X","Y","Z"]
         for person in collection {
             guard ((person.familyName?.isEmpty) == false) else{
                 let initialLetter = "#"
@@ -134,7 +133,7 @@ class ContactDataManager: NSObject {
             }
         }
         
-       
+        }
         
 //        store.requestAccessForEntityType(CNEntityType.Contacts, completionHandler: {[unowned self](granted, accessError) -> Void in
 //                if !granted {
@@ -166,8 +165,6 @@ class ContactDataManager: NSObject {
 //        NSLog(@"contact = %@", string);
 //        }
 //        }];
-
-    }
     
     func getError(status:Int)->(NSError?){
         let userInfo = [
