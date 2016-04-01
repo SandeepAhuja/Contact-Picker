@@ -10,6 +10,6 @@ import Foundation
 
 protocol ContactViewInterface {
     func showNoContentMessage()
-    func showFetchedContactsData(data:ContactDisplayData)
+    func showFetchedContactsData(data:ContactDisplayData!)
     func reloadEntries ()
 }

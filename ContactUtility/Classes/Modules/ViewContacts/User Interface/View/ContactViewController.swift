@@ -8,7 +8,7 @@
 
 import UIKit
 
-let ListEntryCellIdentifier = "cell"
+let kContactCellIdentifier = "cell"
 
 class ContactViewController: UITableViewController,ContactViewInterface {
     var eventHandler: ContactModuleInterface?
@@ -28,6 +28,7 @@ class ContactViewController: UITableViewController,ContactViewInterface {
     }
     func configureView() {
         navigationItem.title = "Contacts"
+        strongTableView?.registerClass(UITableViewCell.self, forCellReuseIdentifier:kContactCellIdentifier)
 //        let addItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: Selector("didTapAddButton"))
 //        
 //        navigationItem.rightBarButtonItem = addItem
@@ -38,7 +39,7 @@ class ContactViewController: UITableViewController,ContactViewInterface {
     }
     
     
-    func showFetchedContactsData(data:ContactDisplayData){
+    func showFetchedContactsData(data:ContactDisplayData!){
         view = strongTableView
         dataProperty = data
         reloadEntries()
@@ -73,15 +74,11 @@ class ContactViewController: UITableViewController,ContactViewInterface {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
- //       let upcomingSection = dataProperty?.sections[indexPath.section]
-//        let upcomingItem = upcomingSection!.items[indexPath.row]
+        let upcomingSection = dataProperty?.sections![indexPath.section]
+        let upcomingItem = upcomingSection!.items[indexPath.row]
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(ListEntryCellIdentifier, forIndexPath: indexPath) as UITableViewCell
-//        cell.textLabel.text = upcomingItem.title;
-//        cell.detailTextLabel.text = upcomingItem.dueDate;
-//        cell.imageView.image = UIImage(named: upcomingSection!.imageName)
-//        cell.selectionStyle = UITableViewCellSelectionStyle.None;
-        
+        let cell = tableView.dequeueReusableCellWithIdentifier(kContactCellIdentifier, forIndexPath: indexPath) as UITableViewCell
+        cell.textLabel?.text = upcomingItem.fullName
         return cell
     }
 

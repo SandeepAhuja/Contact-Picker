@@ -20,12 +20,18 @@ class ContactPresenter: NSObject,ContactInteractorOutput,ContactModuleInterface 
     func showError(message: NSError?){
         contactWireFrame?.presentAlertContoller(message)
     }
-    func showContacts(contacts:[AnyObject]){
-        for contact in contacts {
-            let fname = ABRecordCopyValue(contact, kABPersonFirstNameProperty)?.takeRetainedValue() as? NSString
-            let lname = ABRecordCopyValue(contact, kABPersonLastNameProperty)?.takeRetainedValue() as? NSString
-            let name = String(fname) + " " + String(lname)
-            print(name)
+    
+    func showContacts(contacts:ContactDisplayData?){
+        if contacts?.sections?.count == 0 {
+            dispatch_async(dispatch_get_main_queue(), { [unowned self]() -> Void in
+                self.userInterface?.showNoContentMessage()
+            })
+        }else{
+            if (contacts != nil) {
+                dispatch_async(dispatch_get_main_queue(), { [unowned self]() -> Void in
+                    self.userInterface?.showFetchedContactsData(contacts!)
+                })
+            }
         }
     }
     

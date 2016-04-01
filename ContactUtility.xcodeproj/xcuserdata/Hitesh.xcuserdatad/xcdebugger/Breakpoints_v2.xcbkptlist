@@ -6,16 +6,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ContactUtility/Classes/Modules/ViewContacts/User Interface/Presenter/ContactPresenter.swift"
-            timestampString = "481021570.267047"
+            filePath = "ContactUtility/Classes/Modules/ViewContacts/Application Logic/Manager/ContactDataManager.swift"
+            timestampString = "481197265.467946"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
-            landmarkName = "showContacts(_:)"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
+            landmarkName = "contactDisplayData(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

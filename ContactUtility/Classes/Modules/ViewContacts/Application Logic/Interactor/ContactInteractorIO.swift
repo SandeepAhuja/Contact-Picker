@@ -13,7 +13,7 @@ protocol ContactInteractorInput {
 }
 
 protocol ContactInteractorOutput {
-    func showContacts(contacts:[AnyObject])
+    func showContacts(contacts:ContactDisplayData?)
     func showError(message: NSError?)
 }
 

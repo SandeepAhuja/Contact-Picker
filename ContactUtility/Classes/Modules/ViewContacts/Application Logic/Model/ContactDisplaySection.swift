@@ -11,7 +11,7 @@ import Foundation
 class ContactDisplaySection: NSObject {
     var name : String?
     var items : [ContactDisplayItem] = []
-    
+
     init(name: String, items: [ContactDisplayItem]?) {
         self.name = name
         if (items != nil) {
@@ -19,5 +19,4 @@ class ContactDisplaySection: NSObject {
 //            self.items.unshare()
         }
     }
-
 }
