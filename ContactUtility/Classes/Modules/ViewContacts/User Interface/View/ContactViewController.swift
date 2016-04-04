@@ -29,15 +29,13 @@ class ContactViewController: UITableViewController,ContactViewInterface {
     func configureView() {
         navigationItem.title = "Contacts"
         strongTableView?.registerClass(UITableViewCell.self, forCellReuseIdentifier:kContactCellIdentifier)
-//        let addItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: Selector("didTapAddButton"))
-//        
-//        navigationItem.rightBarButtonItem = addItem
+        let settingsItem = UIBarButtonItem(title: "Settings", style: .Plain, target: self, action: Selector("showSettings"))
+        navigationItem.rightBarButtonItem = settingsItem
+        
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func showSettings(){
+        eventHandler?.presentSettingsInterface()
     }
-    
     
     func showFetchedContactsData(data:ContactDisplayData!){
         view = strongTableView

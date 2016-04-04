@@ -26,11 +26,19 @@ class AppDependencies: NSObject {
         let contactPresenter = ContactPresenter()
         let contactDataManager = ContactDataManager()
         let contactInteractor = ContactInteractor(contactManager: contactDataManager)
-        
+        let settingsInteractor = SettingsInteractor()
+        let settingsWireFrame = SettingsWireFrame()
+        let settingsPresenter = SettingsPresenter()
+        settingsWireFrame.settingsPresenter = settingsPresenter
+        settingsPresenter.settingsInteractor = settingsInteractor
+        settingsPresenter.settingsWireframe = settingsWireFrame
+
+
         contactInteractor.output = contactPresenter
         contactPresenter.contactInteractor = contactInteractor
         contactPresenter.contactWireFrame = contactWireframe
         contactWireframe.contactPresenter = contactPresenter
+        contactWireframe.settingsWireFrame = settingsWireFrame
         contactWireframe.rootWireFrame = rootWireframe
     }
 

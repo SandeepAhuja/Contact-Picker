@@ -12,11 +12,14 @@ class ContactPresenter: NSObject,ContactInteractorOutput,ContactModuleInterface 
     var contactInteractor: ContactInteractorInput?
     var contactWireFrame: ContactWireFrame?
     var userInterface : ContactViewInterface?
-    
+
     func updateView(){
         contactInteractor?.fetchContacts()
     }
     
+    func presentSettingsInterface(){
+        contactWireFrame?.presentSettings()
+    }
     func showError(message: NSError?){
         contactWireFrame?.presentAlertContoller(message)
     }

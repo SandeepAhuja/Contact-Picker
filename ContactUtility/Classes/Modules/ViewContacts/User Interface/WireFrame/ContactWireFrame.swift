@@ -13,7 +13,11 @@ class ContactWireFrame: NSObject {
     var contactPresenter: ContactPresenter?
     var rootWireFrame : RootWireFrame?
     var contactViewController: ContactViewController?
-
+    var settingsWireFrame: SettingsWireFrame?
+    
+    func presentSettings(){
+        settingsWireFrame?.presentSettingsInterfaceFromViewController(contactViewController!)
+    }
     
     func presentContactInterfaceFromWindow(window: UIWindow) {
         let viewController = ContactViewController()
