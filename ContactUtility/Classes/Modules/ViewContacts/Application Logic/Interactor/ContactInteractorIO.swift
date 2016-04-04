@@ -10,10 +10,13 @@ import Foundation
 
 protocol ContactInteractorInput {
     func fetchContacts()
+    func configureUI()
 }
 
 protocol ContactInteractorOutput {
     func showContacts(contacts:ContactDisplayData?)
     func showError(message: NSError?)
+    func showSearchBar(flag:Bool)
+    func showIndexedSearch(flag:Bool)
 }
 

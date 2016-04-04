@@ -15,16 +15,13 @@ class SettingsViewController: UITableViewController,SettingsInterface {
     var eventHandler:SettingsModuleInterface?
     
     @IBAction func actionSaveSettings(sender: UIBarButtonItem) {
-        eventHandler?.saveSettings(switchSearchBar.enabled, indexedSearch: switchIndexedSearch.enabled)
+        eventHandler?.saveSettings(switchSearchBar.on, indexedSearch: switchIndexedSearch.on)
     }
     
     @IBAction func actionCancelInterface(sender: AnyObject) {
         eventHandler?.cancelSettingsInterface()
     }
 
-    @IBAction func action_configureSettings(sender: UISwitch) {
-        
-    }
     func configureView(){
         switchIndexedSearch?.setOn(false, animated: false)
         switchSearchBar?.setOn(false, animated: false)

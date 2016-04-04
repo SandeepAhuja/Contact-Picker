@@ -8,6 +8,11 @@
 
 import UIKit
 
-class SettingsInteractor: NSObject {
-
+class SettingsInteractor: NSObject,SettingsInteractoreInput {
+    var output:SettingsInteractoreOuput?
+    var dataManager:SettingsDataManager?
+    func saveSettingsState(searchBar:Bool, indexedSearch:Bool){
+        dataManager?.saveSettingsState(searchBar, indexedSearch: indexedSearch)
+        output?.enforceSettings(searchBar, indexedSearch: indexedSearch)
+    }
 }

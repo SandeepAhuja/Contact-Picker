@@ -8,13 +8,21 @@
 
 import UIKit
 import AddressBook.ABAddressBook
-class ContactPresenter: NSObject,ContactInteractorOutput,ContactModuleInterface {
+class ContactPresenter: NSObject,ContactInteractorOutput,ContactModuleInterface,SettingsModuleDelegate {
     var contactInteractor: ContactInteractorInput?
     var contactWireFrame: ContactWireFrame?
     var userInterface : ContactViewInterface?
 
-    func updateView(){
-        contactInteractor?.fetchContacts()
+    func updateContacts(){
+        contactInteractor?.configureUI()
+        contactInteractor?.fetchContacts()        
+    }
+    
+    func showSearchBar(flag:Bool){
+        userInterface?.addRemoveSearchbar(flag)
+    }
+    func showIndexedSearch(flag:Bool){
+        userInterface?.addRemoveIndexedSearch(flag)
     }
     
     func presentSettingsInterface(){
@@ -38,5 +46,10 @@ class ContactPresenter: NSObject,ContactInteractorOutput,ContactModuleInterface 
         }
     }
     
-    
+    func settingsModuleDidCancelInterface(){
+        //do nothing
+    }
+    func settingsModuleDidSaveChanges(){
+        self.updateContacts()
+    }
 }

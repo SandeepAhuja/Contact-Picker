@@ -9,6 +9,6 @@
 import Foundation
 
 protocol ContactModuleInterface {
-    func updateView()
+    func updateContacts()
     func presentSettingsInterface()
 }

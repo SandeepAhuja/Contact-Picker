@@ -8,18 +8,25 @@
 
 import UIKit
 
-class SettingsPresenter: NSObject,SettingsModuleInterface {
+class SettingsPresenter: NSObject,SettingsModuleInterface,SettingsInteractoreOuput {
     var settingsInteractor : SettingsInteractor?
     var settingsWireframe : SettingsWireFrame?
-
+    var settingsModuleDelegate: SettingsModuleDelegate?
     func updateView() {
         
     }
+    
+    func enforceSettings(searchBar:Bool, indexedSearch:Bool){
+        settingsModuleDelegate?.settingsModuleDidSaveChanges()
+    }
+    
     func cancelSettingsInterface(){
         settingsWireframe?.dismissSettingsInterface()
     }
     func saveSettings(searchbar:Bool,indexedSearch:Bool){
+        settingsInteractor?.saveSettingsState(searchbar, indexedSearch: indexedSearch)
         settingsWireframe?.dismissSettingsInterface()
+        
     }
 
     

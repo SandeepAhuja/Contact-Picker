@@ -38,9 +38,6 @@
                                                             <include reference="gV1-ce-itV"/>
                                                         </mask>
                                                     </variation>
-                                                    <connections>
-                                                        <action selector="action_configureSettings:" destination="QQE-bY-YeD" eventType="valueChanged" id="9Rr-5k-7nN"/>
-                                                    </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SearchBar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1N2-Ns-J3p">
                                                     <rect key="frame" x="-42" y="-21" width="42" height="21"/>
@@ -123,9 +120,6 @@
                                                             <include reference="UNU-pb-ode"/>
                                                         </mask>
                                                     </variation>
-                                                    <connections>
-                                                        <action selector="action_configureSettings:" destination="QQE-bY-YeD" eventType="valueChanged" id="Pqg-1x-YgV"/>
-                                                    </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Indexed Search" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IbT-Ux-NGi">
                                                     <rect key="frame" x="-42" y="-21" width="42" height="21"/>
@@ -206,7 +200,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lfp-E5-9rZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1395" y="229"/>
+            <point key="canvasLocation" x="1123" y="218"/>
         </scene>
     </scenes>
 </document>

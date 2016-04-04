@@ -23,7 +23,7 @@ class ContactWireFrame: NSObject {
         let viewController = ContactViewController()
         viewController.eventHandler = contactPresenter
         contactViewController = viewController
-        contactPresenter!.userInterface = viewController
+        contactPresenter?.userInterface = viewController
         rootWireFrame?.showRootViewController(viewController, inWindow: window)
     }
     

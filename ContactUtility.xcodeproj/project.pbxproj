@@ -35,6 +35,8 @@
 		67F118831CB256FF0032C945 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F118821CB256FF0032C945 /* SettingsViewController.swift */; };
 		67F118871CB25C6C0032C945 /* SettingsModuleInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F118861CB25C6C0032C945 /* SettingsModuleInterface.swift */; };
 		67F1188B1CB2653D0032C945 /* SettingsInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F1188A1CB2653D0032C945 /* SettingsInterface.swift */; };
+		67F1188D1CB27FFC0032C945 /* SettingsInteractoreIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F1188C1CB27FFC0032C945 /* SettingsInteractoreIO.swift */; };
+		67F118931CB294CD0032C945 /* SettingsModuleDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F118921CB294CD0032C945 /* SettingsModuleDelegate.swift */; };
 		67FA98061CA95CC300A15C2F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FA98051CA95CC300A15C2F /* AppDelegate.swift */; };
 		67FA980F1CA95CC300A15C2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67FA980E1CA95CC300A15C2F /* Assets.xcassets */; };
 		67FA981D1CA95CC300A15C2F /* ContactUtilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FA981C1CA95CC300A15C2F /* ContactUtilityTests.swift */; };
@@ -89,6 +91,8 @@
 		67F118821CB256FF0032C945 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		67F118861CB25C6C0032C945 /* SettingsModuleInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsModuleInterface.swift; sourceTree = "<group>"; };
 		67F1188A1CB2653D0032C945 /* SettingsInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsInterface.swift; sourceTree = "<group>"; };
+		67F1188C1CB27FFC0032C945 /* SettingsInteractoreIO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsInteractoreIO.swift; sourceTree = "<group>"; };
+		67F118921CB294CD0032C945 /* SettingsModuleDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsModuleDelegate.swift; sourceTree = "<group>"; };
 		67FA98021CA95CC300A15C2F /* ContactUtility.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContactUtility.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		67FA98051CA95CC300A15C2F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = ../AppDelegate.swift; sourceTree = "<group>"; };
 		67FA980E1CA95CC300A15C2F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
@@ -346,6 +350,7 @@
 			isa = PBXGroup;
 			children = (
 				679C32631CAE97410037B81E /* SettingsInteractor.swift */,
+				67F1188C1CB27FFC0032C945 /* SettingsInteractoreIO.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -398,6 +403,7 @@
 			isa = PBXGroup;
 			children = (
 				67F118861CB25C6C0032C945 /* SettingsModuleInterface.swift */,
+				67F118921CB294CD0032C945 /* SettingsModuleDelegate.swift */,
 			);
 			path = "Module Interface";
 			sourceTree = "<group>";
@@ -648,6 +654,7 @@
 				67C538D21CAAAE7C00CCBFEC /* ContactDisplayItem.swift in Sources */,
 				67FA98061CA95CC300A15C2F /* AppDelegate.swift in Sources */,
 				6705D5BE1CAA7DF9002EA3BB /* ContactInteractorIO.swift in Sources */,
+				67F118931CB294CD0032C945 /* SettingsModuleDelegate.swift in Sources */,
 				6705D5C11CAA8751002EA3BB /* RootWireFrame.swift in Sources */,
 				6705D5B01CAA49E3002EA3BB /* ContactViewController.swift in Sources */,
 				6705D5C31CAA87E2002EA3BB /* AppDependencies.swift in Sources */,
@@ -658,6 +665,7 @@
 				679C32641CAE97410037B81E /* SettingsInteractor.swift in Sources */,
 				679C32601CAE96F70037B81E /* SettingsWireFrame.swift in Sources */,
 				67F118831CB256FF0032C945 /* SettingsViewController.swift in Sources */,
+				67F1188D1CB27FFC0032C945 /* SettingsInteractoreIO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

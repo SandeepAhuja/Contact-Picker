@@ -25,14 +25,17 @@ class AppDependencies: NSObject {
         
         let contactPresenter = ContactPresenter()
         let contactDataManager = ContactDataManager()
-        let contactInteractor = ContactInteractor(contactManager: contactDataManager)
+        let settingsDataManager = SettingsDataManager()
+        let contactInteractor = ContactInteractor(contactManager: contactDataManager, settingsManager: settingsDataManager)
         let settingsInteractor = SettingsInteractor()
+        settingsInteractor.dataManager = settingsDataManager
         let settingsWireFrame = SettingsWireFrame()
         let settingsPresenter = SettingsPresenter()
+        settingsInteractor.output = settingsPresenter
+        settingsPresenter.settingsModuleDelegate = contactPresenter
         settingsWireFrame.settingsPresenter = settingsPresenter
         settingsPresenter.settingsInteractor = settingsInteractor
         settingsPresenter.settingsWireframe = settingsWireFrame
-
 
         contactInteractor.output = contactPresenter
         contactPresenter.contactInteractor = contactInteractor

@@ -10,21 +10,22 @@ import UIKit
 
 let kContactCellIdentifier = "cell"
 
-class ContactViewController: UITableViewController,ContactViewInterface {
+class ContactViewController: UITableViewController,ContactViewInterface,UISearchBarDelegate {
     var eventHandler: ContactModuleInterface?
     var dataProperty:ContactDisplayData?
     var strongTableView : UITableView?
+    var localSearchBar:UISearchBar?
     @IBOutlet var noContentView : UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.edgesForExtendedLayout = .None
         strongTableView = tableView
         configureView()
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
-        eventHandler?.updateView()
+        eventHandler?.updateContacts()
     }
     func configureView() {
         navigationItem.title = "Contacts"
@@ -49,7 +50,41 @@ class ContactViewController: UITableViewController,ContactViewInterface {
     
     func reloadEntries() {
         tableView.reloadData()
+
     }
+    
+    func addRemoveSearchbar(flag:Bool){
+        if flag {
+            
+            let searchBar = UISearchBar()
+            searchBar.delegate = self
+            localSearchBar = searchBar
+            localSearchBar?.translatesAutoresizingMaskIntoConstraints = false
+            strongTableView!.tableHeaderView = localSearchBar
+
+            let viewDict = ["searchbar":localSearchBar!,"tableView":strongTableView!]
+            
+            let horizontalConstraint = NSLayoutConstraint.constraintsWithVisualFormat("H:|[searchbar(==tableView)]|", options:[], metrics: .None, views: viewDict)
+            let verticalConstraint = NSLayoutConstraint.constraintsWithVisualFormat("V:|[searchbar(==44)]", options: [], metrics: .None, views: viewDict)
+            strongTableView!.addConstraints(horizontalConstraint)
+            strongTableView!.addConstraints(verticalConstraint)
+            strongTableView?.tableHeaderView?.sizeToFit()
+        }else {
+            localSearchBar?.delegate = nil
+            tableView.tableHeaderView = nil
+            localSearchBar = nil
+        }
+       
+    }
+    func addRemoveIndexedSearch(flag:Bool){
+        if flag {
+            
+        }else{
+            
+        }
+
+    }
+
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         var numberOfSections = dataProperty?.sections!.count
