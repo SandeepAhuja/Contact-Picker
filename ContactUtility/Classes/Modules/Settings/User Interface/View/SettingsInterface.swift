@@ -9,5 +9,5 @@
 import Foundation
 
 protocol SettingsInterface{
-    func configureView()
+    func configureView(searchBar:Bool,indexedSearch:Bool)
 }

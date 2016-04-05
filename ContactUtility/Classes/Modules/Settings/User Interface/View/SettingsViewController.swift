@@ -22,15 +22,20 @@ class SettingsViewController: UITableViewController,SettingsInterface {
         eventHandler?.cancelSettingsInterface()
     }
 
-    func configureView(){
-        switchIndexedSearch?.setOn(false, animated: false)
-        switchSearchBar?.setOn(false, animated: false)
+    func configureView(searchBar:Bool,indexedSearch:Bool){
+        switchSearchBar?.setOn(searchBar, animated: false)
+        switchIndexedSearch?.setOn(indexedSearch, animated: false)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.clearsSelectionOnViewWillAppear = false
     }
-
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        eventHandler?.updateView()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

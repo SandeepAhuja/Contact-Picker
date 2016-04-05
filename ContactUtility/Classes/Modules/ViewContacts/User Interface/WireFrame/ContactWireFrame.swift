@@ -10,12 +10,13 @@ import Foundation
 import UIKit
 
 class ContactWireFrame: NSObject {
+    var addSearchBarWireFrame: AddSearchBarWireFrame?
     var contactPresenter: ContactPresenter?
     var rootWireFrame : RootWireFrame?
     var contactViewController: ContactViewController?
     var settingsWireFrame: SettingsWireFrame?
     
-    func presentSettings(){
+    func presentSettings() {
         settingsWireFrame?.presentSettingsInterfaceFromViewController(contactViewController!)
     }
     
@@ -30,6 +31,15 @@ class ContactWireFrame: NSObject {
     func presentAlertContoller(message:NSError?) {
         let alert = UIAlertController(title: .None, message: message?.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
         contactViewController?.presentViewController(alert, animated: true, completion: nil)                
+    }
+    
+    func showHideSearchBar(flag:Bool){
+        if flag{
+            addSearchBarWireFrame?.addSearchBarOnViewController(contactViewController!)
+        }else{
+            addSearchBarWireFrame?.removeSearchBar()
+        }
+        contactViewController?.addRemoveSearchbar(flag)
     }
     
 }

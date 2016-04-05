@@ -11,13 +11,16 @@ import UIKit
 class SettingsPresenter: NSObject,SettingsModuleInterface,SettingsInteractoreOuput {
     var settingsInteractor : SettingsInteractor?
     var settingsWireframe : SettingsWireFrame?
-    var settingsModuleDelegate: SettingsModuleDelegate?
-    func updateView() {
-        
+    var settingsModuleDelegate : SettingsModuleDelegate?
+    var settingsViewController : SettingsInterface?
+    
+    func updateView(){
+        let update:(searchBar:Bool,indexedSearch:Bool) =  (settingsInteractor?.readUserPreferences())!
+        settingsViewController?.configureView(update.searchBar, indexedSearch: update.indexedSearch)
     }
     
     func enforceSettings(searchBar:Bool, indexedSearch:Bool){
-        settingsModuleDelegate?.settingsModuleDidSaveChanges()
+        settingsModuleDelegate?.addRemoveSearchBar(searchBar)
     }
     
     func cancelSettingsInterface(){
@@ -27,11 +30,6 @@ class SettingsPresenter: NSObject,SettingsModuleInterface,SettingsInteractoreOup
         settingsInteractor?.saveSettingsState(searchbar, indexedSearch: indexedSearch)
         settingsWireframe?.dismissSettingsInterface()
         
-    }
-
-    
-    func configureUserInterfaceForPresentation(settingsInterface: SettingsInterface) {
-        settingsInterface.configureView()
     }
 
 }

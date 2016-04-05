@@ -10,14 +10,17 @@
             <objects>
                 <tableViewController storyboardIdentifier="SettingsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="QQE-bY-YeD" customClass="SettingsViewController" customModule="ContactUtility" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="0fv-HA-7Pa">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
                             <tableViewSection id="iVM-Rv-9V9">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="OG3-jd-N3e">
+                                        <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OG3-jd-N3e" id="ZfD-Bw-hUc">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EAJ-zY-jNQ">
@@ -46,7 +49,7 @@
                                                         <constraint firstAttribute="width" constant="80" id="VKE-dt-lJb"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
@@ -75,11 +78,11 @@
                                                     <exclude reference="1N2-Ns-J3p"/>
                                                 </mask>
                                                 <mask key="constraints">
+                                                    <exclude reference="STr-ae-6EM"/>
+                                                    <exclude reference="iVG-yz-xUH"/>
                                                     <exclude reference="eVM-X4-Tbm"/>
                                                     <exclude reference="k51-D3-8QR"/>
                                                     <exclude reference="xlx-re-ERe"/>
-                                                    <exclude reference="STr-ae-6EM"/>
-                                                    <exclude reference="iVG-yz-xUH"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
@@ -88,18 +91,20 @@
                                                     <include reference="1N2-Ns-J3p"/>
                                                 </mask>
                                                 <mask key="constraints">
+                                                    <include reference="STr-ae-6EM"/>
+                                                    <include reference="iVG-yz-xUH"/>
                                                     <include reference="eVM-X4-Tbm"/>
                                                     <include reference="k51-D3-8QR"/>
                                                     <exclude reference="xlx-re-ERe"/>
-                                                    <include reference="STr-ae-6EM"/>
-                                                    <include reference="iVG-yz-xUH"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="aVv-Tu-vts">
+                                        <rect key="frame" x="0.0" y="108" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aVv-Tu-vts" id="fTl-Dj-bXN">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g4P-sc-Stg">
@@ -128,7 +133,7 @@
                                                         <constraint firstAttribute="height" constant="21" id="viv-xP-N4M"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
@@ -156,10 +161,10 @@
                                                     <exclude reference="IbT-Ux-NGi"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="7Uf-vw-rX7"/>
-                                                    <exclude reference="xjQ-9q-nl5"/>
                                                     <exclude reference="kjF-sW-Okx"/>
                                                     <exclude reference="rJA-qr-mpI"/>
+                                                    <exclude reference="7Uf-vw-rX7"/>
+                                                    <exclude reference="xjQ-9q-nl5"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
@@ -168,10 +173,10 @@
                                                     <include reference="IbT-Ux-NGi"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <include reference="7Uf-vw-rX7"/>
-                                                    <include reference="xjQ-9q-nl5"/>
                                                     <include reference="kjF-sW-Okx"/>
                                                     <include reference="rJA-qr-mpI"/>
+                                                    <include reference="7Uf-vw-rX7"/>
+                                                    <include reference="xjQ-9q-nl5"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -200,7 +205,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lfp-E5-9rZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1123" y="218"/>
+            <point key="canvasLocation" x="574.5" y="180"/>
         </scene>
     </scenes>
 </document>

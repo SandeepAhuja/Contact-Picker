@@ -8,6 +8,5 @@
 
 import Foundation
 protocol SettingsModuleDelegate {
-    func settingsModuleDidCancelInterface()
-    func settingsModuleDidSaveChanges()
+    func addRemoveSearchBar(flag:Bool)
 }

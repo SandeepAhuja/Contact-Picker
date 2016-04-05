@@ -11,18 +11,16 @@ import AddressBookUI
 class ContactInteractor: NSObject, ContactInteractorInput{
     var output:ContactInteractorOutput?
     var contactManager: ContactDataManager
-    var contactSettingsManager: SettingsDataManager
-    init(contactManager:ContactDataManager, settingsManager: SettingsDataManager){
+    init(contactManager:ContactDataManager){
         self.contactManager = contactManager
-        self.contactSettingsManager = settingsManager
     }
-
+    
     func configureUI(){
-        let update =  self.contactSettingsManager.getUserPreferences()
-        self.output?.showSearchBar(update.searchBar)
+        let settingManager = SettingsDataManager()
+        let update = settingManager.getUserPreferences()
+        self.output?.addRemoveSearchBar(update.searchBar)
         self.output?.showIndexedSearch(update.indexedSearch)
     }
-
     
     func fetchContacts(){
         self.contactManager.fetchAllContacts(nil ,completion: { [unowned self] people,error in

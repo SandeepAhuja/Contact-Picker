@@ -8,6 +8,17 @@
 
 import UIKit
 
-class SearchBarInteractor: NSObject {
-
+class SearchBarInteractor: NSObject,AddSearchBarInteractorInput {
+    var output:AddSearchBarInteractorOutput
+    var dataManager: SearchDataManager
+    var settingManager : SettingsDataManager?
+    init(presenter:AddSearchBarInteractorOutput, dataManager: SearchDataManager){
+        self.dataManager = dataManager
+        self.output = presenter
+    }
+    
+    func updateUI(){
+        let update =  self.settingManager!.getUserPreferences()
+        self.output.showSearchBar(update.searchBar)
+    }
 }

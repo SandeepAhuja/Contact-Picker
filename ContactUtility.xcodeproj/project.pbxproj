@@ -17,7 +17,6 @@
 		6705D5C51CAA884C002EA3BB /* ContactWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6705D5C41CAA884C002EA3BB /* ContactWireFrame.swift */; };
 		6705D5C71CAA8EC2002EA3BB /* ContactModuleInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6705D5C61CAA8EC2002EA3BB /* ContactModuleInterface.swift */; };
 		6705D5C91CAA90B6002EA3BB /* ContactViewInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6705D5C81CAA90B6002EA3BB /* ContactViewInterface.swift */; };
-		679C32291CAE46D20037B81E /* ContactViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 679C32281CAE46D20037B81E /* ContactViewController.xib */; };
 		679C32411CAE90260037B81E /* SearchBarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679C32401CAE90260037B81E /* SearchBarPresenter.swift */; };
 		679C32451CAE93040037B81E /* SearchDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679C32441CAE93040037B81E /* SearchDataManager.swift */; };
 		679C32471CAE93190037B81E /* SearchBarInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679C32461CAE93190037B81E /* SearchBarInteractor.swift */; };
@@ -29,6 +28,11 @@
 		67C538CE1CAAAA9A00CCBFEC /* ContactDisplayData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C538CD1CAAAA9A00CCBFEC /* ContactDisplayData.swift */; };
 		67C538D01CAAAE3B00CCBFEC /* ContactDisplaySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C538CF1CAAAE3B00CCBFEC /* ContactDisplaySection.swift */; };
 		67C538D21CAAAE7C00CCBFEC /* ContactDisplayItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C538D11CAAAE7C00CCBFEC /* ContactDisplayItem.swift */; };
+		67E01C571CB3903A0072E722 /* UITableView+HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E01C561CB3903A0072E722 /* UITableView+HeaderView.swift */; };
+		67E01C591CB3974B0072E722 /* ContactViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67E01C581CB3974B0072E722 /* ContactViewController.xib */; };
+		67E01C5D1CB3B5C10072E722 /* SearchModuleInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E01C5C1CB3B5C10072E722 /* SearchModuleInterface.swift */; };
+		67E01C5F1CB3B6D90072E722 /* SearchModuleDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E01C5E1CB3B6D90072E722 /* SearchModuleDelegate.swift */; };
+		67E01C611CB3BBF60072E722 /* AddSearchBarInteractorIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E01C601CB3BBF60072E722 /* AddSearchBarInteractorIO.swift */; };
 		67E6A8041CAB93F8009B3234 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67E6A8031CAB93F8009B3234 /* Contacts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		67E6A8061CAB9406009B3234 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67E6A8051CAB9406009B3234 /* AddressBook.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		67F118811CB256BF0032C945 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67F118801CB256BF0032C945 /* Settings.storyboard */; };
@@ -73,7 +77,6 @@
 		6705D5C41CAA884C002EA3BB /* ContactWireFrame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactWireFrame.swift; sourceTree = "<group>"; };
 		6705D5C61CAA8EC2002EA3BB /* ContactModuleInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactModuleInterface.swift; sourceTree = "<group>"; };
 		6705D5C81CAA90B6002EA3BB /* ContactViewInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactViewInterface.swift; sourceTree = "<group>"; };
-		679C32281CAE46D20037B81E /* ContactViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactViewController.xib; sourceTree = "<group>"; };
 		679C32401CAE90260037B81E /* SearchBarPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarPresenter.swift; sourceTree = "<group>"; };
 		679C32441CAE93040037B81E /* SearchDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDataManager.swift; sourceTree = "<group>"; };
 		679C32461CAE93190037B81E /* SearchBarInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarInteractor.swift; sourceTree = "<group>"; };
@@ -85,6 +88,11 @@
 		67C538CD1CAAAA9A00CCBFEC /* ContactDisplayData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactDisplayData.swift; sourceTree = "<group>"; };
 		67C538CF1CAAAE3B00CCBFEC /* ContactDisplaySection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactDisplaySection.swift; sourceTree = "<group>"; };
 		67C538D11CAAAE7C00CCBFEC /* ContactDisplayItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactDisplayItem.swift; sourceTree = "<group>"; };
+		67E01C561CB3903A0072E722 /* UITableView+HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+HeaderView.swift"; sourceTree = "<group>"; };
+		67E01C581CB3974B0072E722 /* ContactViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactViewController.xib; sourceTree = "<group>"; };
+		67E01C5C1CB3B5C10072E722 /* SearchModuleInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchModuleInterface.swift; sourceTree = "<group>"; };
+		67E01C5E1CB3B6D90072E722 /* SearchModuleDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchModuleDelegate.swift; sourceTree = "<group>"; };
+		67E01C601CB3BBF60072E722 /* AddSearchBarInteractorIO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSearchBarInteractorIO.swift; sourceTree = "<group>"; };
 		67E6A8031CAB93F8009B3234 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
 		67E6A8051CAB9406009B3234 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		67F118801CB256BF0032C945 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
@@ -175,7 +183,7 @@
 			children = (
 				6705D5C81CAA90B6002EA3BB /* ContactViewInterface.swift */,
 				6705D5A91CAA49E3002EA3BB /* ContactViewController.swift */,
-				679C32281CAE46D20037B81E /* ContactViewController.xib */,
+				67E01C581CB3974B0072E722 /* ContactViewController.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -228,6 +236,7 @@
 		6705D5B41CAA4F1E002EA3BB /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				67E01C561CB3903A0072E722 /* UITableView+HeaderView.swift */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -271,6 +280,7 @@
 			isa = PBXGroup;
 			children = (
 				679C32461CAE93190037B81E /* SearchBarInteractor.swift */,
+				67E01C601CB3BBF60072E722 /* AddSearchBarInteractorIO.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -278,6 +288,8 @@
 		679C323B1CAE900B0037B81E /* Module Interface */ = {
 			isa = PBXGroup;
 			children = (
+				67E01C5C1CB3B5C10072E722 /* SearchModuleInterface.swift */,
+				67E01C5E1CB3B6D90072E722 /* SearchModuleDelegate.swift */,
 			);
 			path = "Module Interface";
 			sourceTree = "<group>";
@@ -611,7 +623,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				67FA983E1CA95DAF00A15C2F /* LaunchScreen.storyboard in Resources */,
-				679C32291CAE46D20037B81E /* ContactViewController.xib in Resources */,
+				67E01C591CB3974B0072E722 /* ContactViewController.xib in Resources */,
 				67FA980F1CA95CC300A15C2F /* Assets.xcassets in Resources */,
 				67FA983F1CA95DAF00A15C2F /* Main.storyboard in Resources */,
 				67F118811CB256BF0032C945 /* Settings.storyboard in Resources */,
@@ -642,9 +654,13 @@
 				6705D5C71CAA8EC2002EA3BB /* ContactModuleInterface.swift in Sources */,
 				67C538D01CAAAE3B00CCBFEC /* ContactDisplaySection.swift in Sources */,
 				679C32661CAE975A0037B81E /* SettingsDataManager.swift in Sources */,
+				67E01C571CB3903A0072E722 /* UITableView+HeaderView.swift in Sources */,
 				679C32411CAE90260037B81E /* SearchBarPresenter.swift in Sources */,
+				67E01C611CB3BBF60072E722 /* AddSearchBarInteractorIO.swift in Sources */,
 				679C32491CAE93390037B81E /* AddSearchBarWireFrame.swift in Sources */,
 				6705D5C91CAA90B6002EA3BB /* ContactViewInterface.swift in Sources */,
+				67E01C5D1CB3B5C10072E722 /* SearchModuleInterface.swift in Sources */,
+				67E01C5F1CB3B6D90072E722 /* SearchModuleDelegate.swift in Sources */,
 				679C32621CAE97270037B81E /* SettingsPresenter.swift in Sources */,
 				6705D5B31CAA4A06002EA3BB /* ContactDataManager.swift in Sources */,
 				67F118871CB25C6C0032C945 /* SettingsModuleInterface.swift in Sources */,

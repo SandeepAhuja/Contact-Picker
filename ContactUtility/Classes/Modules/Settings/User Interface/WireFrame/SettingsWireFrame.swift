@@ -16,8 +16,8 @@ class SettingsWireFrame: NSObject {
         let newViewController = settingsViewController()
         let nav = UINavigationController(rootViewController: newViewController)
         newViewController.eventHandler = settingsPresenter
+        settingsPresenter?.settingsViewController = newViewController
         newViewController.modalPresentationStyle = .FullScreen
-        settingsPresenter?.configureUserInterfaceForPresentation(newViewController)
         viewController.presentViewController(nav, animated: true, completion: nil)
         presentedViewController = newViewController
     }

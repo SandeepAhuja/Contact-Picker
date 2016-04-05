@@ -10,5 +10,6 @@ import Foundation
 
 protocol ContactModuleInterface {
     func updateContacts()
+    func updateUI()
     func presentSettingsInterface()
 }

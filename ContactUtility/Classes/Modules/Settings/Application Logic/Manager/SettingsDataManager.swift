@@ -15,7 +15,7 @@ class SettingsDataManager: NSObject {
     func saveSettingsState(searchBar:Bool, indexedSearch:Bool){
         let userDefaults = NSUserDefaults.standardUserDefaults()
         userDefaults.setBool(searchBar, forKey: kSearchbarKey)
-        userDefaults.setBool(searchBar, forKey: kIndexedSearchkey)
+        userDefaults.setBool(indexedSearch, forKey: kIndexedSearchkey)
         userDefaults.synchronize()
     }
     

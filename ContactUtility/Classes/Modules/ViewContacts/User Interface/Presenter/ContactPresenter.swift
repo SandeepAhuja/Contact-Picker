@@ -12,15 +12,19 @@ class ContactPresenter: NSObject,ContactInteractorOutput,ContactModuleInterface,
     var contactInteractor: ContactInteractorInput?
     var contactWireFrame: ContactWireFrame?
     var userInterface : ContactViewInterface?
-
-    func updateContacts(){
-        contactInteractor?.configureUI()
-        contactInteractor?.fetchContacts()        
+   
+    
+    func addRemoveSearchBar(flag:Bool){
+        contactWireFrame?.showHideSearchBar(flag)
     }
     
-    func showSearchBar(flag:Bool){
-        userInterface?.addRemoveSearchbar(flag)
+    func updateContacts(){
+        contactInteractor?.fetchContacts()        
     }
+    func updateUI(){
+        contactInteractor?.configureUI()
+    }
+    
     func showIndexedSearch(flag:Bool){
         userInterface?.addRemoveIndexedSearch(flag)
     }
@@ -46,10 +50,4 @@ class ContactPresenter: NSObject,ContactInteractorOutput,ContactModuleInterface,
         }
     }
     
-    func settingsModuleDidCancelInterface(){
-        //do nothing
-    }
-    func settingsModuleDidSaveChanges(){
-        self.updateContacts()
-    }
 }

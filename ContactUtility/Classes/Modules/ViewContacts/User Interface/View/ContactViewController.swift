@@ -10,26 +10,33 @@ import UIKit
 
 let kContactCellIdentifier = "cell"
 
-class ContactViewController: UITableViewController,ContactViewInterface,UISearchBarDelegate {
+class ContactViewController: UIViewController,ContactViewInterface,UITableViewDelegate,UITableViewDataSource,SearchModuleDelegate {
+    
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
     var eventHandler: ContactModuleInterface?
     var dataProperty:ContactDisplayData?
-    var strongTableView : UITableView?
+    var filteredData:ContactDisplayData?
+    
     var localSearchBar:UISearchBar?
+    @IBOutlet var tableView : UITableView!
     @IBOutlet var noContentView : UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.edgesForExtendedLayout = .None
-        strongTableView = tableView
         configureView()
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         eventHandler?.updateContacts()
+
     }
     func configureView() {
+        eventHandler?.updateUI()
+        self.edgesForExtendedLayout = .None
+        self.extendedLayoutIncludesOpaqueBars = false
+        self.automaticallyAdjustsScrollViewInsets = false
         navigationItem.title = "Contacts"
-        strongTableView?.registerClass(UITableViewCell.self, forCellReuseIdentifier:kContactCellIdentifier)
+        tableView?.registerClass(UITableViewCell.self, forCellReuseIdentifier:kContactCellIdentifier)
         let settingsItem = UIBarButtonItem(title: "Settings", style: .Plain, target: self, action: Selector("showSettings"))
         navigationItem.rightBarButtonItem = settingsItem
         
@@ -38,44 +45,32 @@ class ContactViewController: UITableViewController,ContactViewInterface,UISearch
         eventHandler?.presentSettingsInterface()
     }
     
-    func showFetchedContactsData(data:ContactDisplayData!){
-        view = strongTableView
+    func showFetchedContactsData(data:ContactDisplayData!){        
         dataProperty = data
         reloadEntries()
     }
     
     func showNoContentMessage() {
-        view = noContentView
+    //    view = noContentView
     }
     
     func reloadEntries() {
-        tableView.reloadData()
+        tableView?.reloadData()
 
     }
     
     func addRemoveSearchbar(flag:Bool){
-        if flag {
-            
-            let searchBar = UISearchBar()
-            searchBar.delegate = self
-            localSearchBar = searchBar
-            localSearchBar?.translatesAutoresizingMaskIntoConstraints = false
-            strongTableView!.tableHeaderView = localSearchBar
-
-            let viewDict = ["searchbar":localSearchBar!,"tableView":strongTableView!]
-            
-            let horizontalConstraint = NSLayoutConstraint.constraintsWithVisualFormat("H:|[searchbar(==tableView)]|", options:[], metrics: .None, views: viewDict)
-            let verticalConstraint = NSLayoutConstraint.constraintsWithVisualFormat("V:|[searchbar(==44)]", options: [], metrics: .None, views: viewDict)
-            strongTableView!.addConstraints(horizontalConstraint)
-            strongTableView!.addConstraints(verticalConstraint)
-            strongTableView?.tableHeaderView?.sizeToFit()
-        }else {
-            localSearchBar?.delegate = nil
-            tableView.tableHeaderView = nil
-            localSearchBar = nil
+        if flag{
+            topConstraint.constant = 44.0
+        }else{
+            topConstraint.constant = 0
         }
-       
+        
     }
+    func parentView()-> UIView!{
+        return view
+    }
+
     func addRemoveIndexedSearch(flag:Bool){
         if flag {
             
@@ -86,7 +81,7 @@ class ContactViewController: UITableViewController,ContactViewInterface,UISearch
     }
 
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         var numberOfSections = dataProperty?.sections!.count
         
         if dataProperty?.sections!.count == nil {
@@ -95,18 +90,17 @@ class ContactViewController: UITableViewController,ContactViewInterface,UISearch
         
         return numberOfSections!
     }
-    
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let upcomingSection = dataProperty?.sections![section]
         return upcomingSection!.items.count
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let upcomingSection = dataProperty?.sections![section]
         return upcomingSection!.name
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let upcomingSection = dataProperty?.sections![indexPath.section]
         let upcomingItem = upcomingSection!.items[indexPath.row]
         

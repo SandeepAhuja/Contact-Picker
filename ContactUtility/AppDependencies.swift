@@ -17,16 +17,33 @@ class AppDependencies: NSObject {
         configureDependencies()
     }
     
-    func installRootViewControllerIntoWindow(window: UIWindow) {        contactWireframe.presentContactInterfaceFromWindow(window)
+    func installRootViewControllerIntoWindow(window: UIWindow) {
+        contactWireframe.presentContactInterfaceFromWindow(window)
     }
     
     func configureDependencies() {
         let rootWireframe = RootWireFrame()
         
+        let settingsDataManager = SettingsDataManager()
+
+        let addSearchBarPresenter = SearchBarPresenter()
+        
+        let addSearchBarWireFrame = AddSearchBarWireFrame()
+        addSearchBarWireFrame.presenter = addSearchBarPresenter
+        
+        addSearchBarPresenter.wireFrame = addSearchBarWireFrame
+
+        let addSearchBarDataManager = SearchDataManager()
+        
+        let addSerchBarInteractor = SearchBarInteractor(presenter: addSearchBarPresenter, dataManager: addSearchBarDataManager)
+        addSearchBarPresenter.interactor = addSerchBarInteractor
+        addSerchBarInteractor.settingManager = settingsDataManager
+        
+        
         let contactPresenter = ContactPresenter()
         let contactDataManager = ContactDataManager()
-        let settingsDataManager = SettingsDataManager()
-        let contactInteractor = ContactInteractor(contactManager: contactDataManager, settingsManager: settingsDataManager)
+
+        let contactInteractor = ContactInteractor(contactManager: contactDataManager)
         let settingsInteractor = SettingsInteractor()
         settingsInteractor.dataManager = settingsDataManager
         let settingsWireFrame = SettingsWireFrame()
@@ -40,6 +57,7 @@ class AppDependencies: NSObject {
         contactInteractor.output = contactPresenter
         contactPresenter.contactInteractor = contactInteractor
         contactPresenter.contactWireFrame = contactWireframe
+        contactWireframe.addSearchBarWireFrame = addSearchBarWireFrame
         contactWireframe.contactPresenter = contactPresenter
         contactWireframe.settingsWireFrame = settingsWireFrame
         contactWireframe.rootWireFrame = rootWireframe
