@@ -8,24 +8,31 @@
 
 import UIKit
 import AddressBook.ABAddressBook
-class ContactPresenter: NSObject,ContactInteractorOutput,ContactModuleInterface,SettingsModuleDelegate {
+class ContactPresenter: NSObject,ContactInteractorOutput,ContactModuleInterface,SettingsModuleDelegate,UISearchBarDelegate {
     var contactInteractor: ContactInteractorInput?
     var contactWireFrame: ContactWireFrame?
     var userInterface : ContactViewInterface?
-   
-    
-    func addRemoveSearchBar(flag:Bool){
-        contactWireFrame?.showHideSearchBar(flag)
-    }
     
     func updateContacts(){
-        contactInteractor?.fetchContacts()        
+        contactInteractor?.fetchContacts(.None)
     }
     func updateUI(){
         contactInteractor?.configureUI()
     }
     
+    func addRemoveSearchBar(flag:Bool){
+        if flag{
+            contactWireFrame?.addSearchBarOnViewController()
+        }else{
+            contactWireFrame?.removeSearchBar()
+        }
+    }
+    
     func showIndexedSearch(flag:Bool){
+        userInterface?.addRemoveIndexedSearch(flag)
+    }
+    
+    func addRemoveIndexedSearch(flag:Bool){
         userInterface?.addRemoveIndexedSearch(flag)
     }
     
@@ -50,4 +57,11 @@ class ContactPresenter: NSObject,ContactInteractorOutput,ContactModuleInterface,
         }
     }
     
-}
+    internal func searchBarCancelButtonClicked(searchBar: UISearchBar){
+        searchBar.resignFirstResponder()
+    }
+    
+    internal func searchBar(searchBar: UISearchBar, textDidChange searchText: String){
+        NSObject.cancelPreviousPerformRequestsWithTarget(contactInteractor as! ContactInteractor)
+        contactInteractor?.fetchContacts(searchText)
+    }}

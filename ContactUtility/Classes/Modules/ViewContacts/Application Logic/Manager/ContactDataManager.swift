@@ -10,8 +10,9 @@ import UIKit
 import AddressBook
 import Contacts
 
+
 class ContactDataManager: NSObject {
-    func fetchAllContacts(searchQuery:NSPredicate?, completion:((ContactDisplayData?,NSError?) -> Void)?){
+    func fetchAllContacts(searchQuery:String?, completion:((ContactDisplayData?,NSError?) -> Void)?){
             if #available(iOS 9.0, *) {
                 fetchContactsFromContactApi(searchQuery, completion: completion)
             } else {
@@ -20,7 +21,7 @@ class ContactDataManager: NSObject {
     }
 
     @available (iOS 8,*)
-    func fetchContactsFromAddressBook(searchQuery:NSPredicate?, completion:((ContactDisplayData?,NSError?) -> Void)?){
+    func fetchContactsFromAddressBook(searchQuery:String?, completion:((ContactDisplayData?,NSError?) -> Void)?){
         let status = ABAddressBookGetAuthorizationStatus();
         if status == .Denied || status == .Restricted{
             completion!(nil,self.getError(ABAuthorizationStatus.Denied.rawValue))
@@ -38,7 +39,11 @@ class ContactDataManager: NSObject {
                  completion!(nil,self.getError(ABAuthorizationStatus.Denied.rawValue))
             }
             
-            if let allContacts:[ABRecordRef] = ABAddressBookCopyArrayOfAllPeople(addressBook).takeRetainedValue() as Array as [ABRecordRef] {
+            /*
+            NSArray *searchResults = CFBridgingRelease(ABAddressBookCopyPeopleWithName(addressBook, (__bridge CFStringRef)searchTerm));
+            */
+            
+            if let allContacts:[ABRecordRef] = ABAddressBookCopyPeopleWithName(addressBook!, searchQuery ?? "").takeRetainedValue() as Array as [ABRecordRef] {
                 let people = self.contactDisplayData(allContacts)
                 completion!(people!,nil)
             }
@@ -56,7 +61,6 @@ class ContactDataManager: NSObject {
         }else {
             for contact in contacts!{
                 let currentContact: ABRecordRef = contact
-//                let currentContactName = ABRecordCopyCompositeName(currentContact)?.takeRetainedValue() as! String
                 let givenName = ABRecordCopyValue(currentContact, kABPersonFirstNameProperty)?.takeRetainedValue() as? String ?? ""
                 let familyName  = ABRecordCopyValue(currentContact, kABPersonLastNameProperty)?.takeRetainedValue() as? String ?? ""
                 let identifier =  String(ABRecordGetRecordID(currentContact))
@@ -67,7 +71,7 @@ class ContactDataManager: NSObject {
         }
         var indexedAuthors = [String: [ContactDisplayItem]]()
         for person in collection {
-            guard ((person.familyName?.isEmpty) == false) else{
+            guard let familyName = person.familyName where !familyName.isEmpty else{
                 let initialLetter = "#"
                 var authorArray = indexedAuthors[initialLetter] ?? [ContactDisplayItem]()                
                 authorArray.append(person)
@@ -96,15 +100,25 @@ class ContactDataManager: NSObject {
         }
         
         contactDisplayData.sections?.sortInPlace{$0.name!.compare ($1.name!) == .OrderedAscending}
-        let section = contactDisplayData.sections?.first
-        contactDisplayData.sections?.removeFirst()
-        contactDisplayData.sections?.append(section!)
+        contactDisplayData.allKeys = [String]()
+        for section in contactDisplayData.sections!{
+            contactDisplayData.allKeys?.append(section.name!)
+        }
+        contactDisplayData.allKeys?.sortInPlace()
+        if let section = contactDisplayData.sections?.first {
+            if section.name == "#" {
+                if contactDisplayData.sections?.count > 0{
+                    contactDisplayData.sections?.removeFirst()
+                }
+                contactDisplayData.sections?.append(section)
+            }
+        }
         return contactDisplayData
     }
 
     
     @available(iOS 9.0, *)
-    func fetchContactsFromContactApi(searchQuery:NSPredicate?, completion:((ContactDisplayData?,NSError?) -> Void)?){
+    func fetchContactsFromContactApi(searchQuery:String?, completion:((ContactDisplayData?,NSError?) -> Void)?){
         let store = CNContactStore()
         let authorizationStatus:CNAuthorizationStatus = CNContactStore.authorizationStatusForEntityType(CNEntityType.Contacts)
         if authorizationStatus == .Denied || authorizationStatus == .Restricted{
@@ -119,6 +133,13 @@ class ContactDataManager: NSObject {
                 let keys = [CNContactFormatter.descriptorForRequiredKeysForStyle(.FullName),CNContactIdentifierKey]
                 var contacts = [CNContact]()
                 let fetchRequest = CNContactFetchRequest(keysToFetch:keys)
+                if let name = searchQuery {
+                    if name.characters.count > 0{
+                        let predicate = CNContact.predicateForContactsMatchingName(name )
+                        fetchRequest.predicate = predicate
+                    }
+                }
+                
                 do{
                     try store.enumerateContactsWithFetchRequest(fetchRequest) {
                         contact, stop in
@@ -134,37 +155,6 @@ class ContactDataManager: NSObject {
         }
         
         }
-        
-//        store.requestAccessForEntityType(CNEntityType.Contacts, completionHandler: {[unowned self](granted, accessError) -> Void in
-//                if !granted {
-//                   completion!([],NSError(domain: "access", code: ABAuthorizationStatus.Denied.rawValue, userInfo: nil))
-//                    return;
-//                }else{
-//                    var fetchEror:NSError?
-//                    let keys = [CNContactFormatter.descriptorForRequiredKeysForStyle(.FullName),CNContactIdentifierKey]
-//                    var contacts = [CNContact]()
-//                    let fetchRequest = CNContactFetchRequest(keysToFetch:keys)
-//                    do{
-//                        try store.enumerateContactsWithFetchRequest(fetchRequest) { (contact, pointer) -> Void in
-//                            contacts.append(contact)
-//                        }
-//                    }catch let error as NSError {
-//                        print(error.description, separator: "", terminator: "\n")
-//                    }
-//                }
-//            })
-//        }
-        
-
-        // you can now do something with the list of contacts, for example, to show the names
-        
-//        CNContactFormatter *formatter = [[CNContactFormatter alloc] init];
-//        
-//        for (CNContact *contact in contacts) {
-//        NSString *string = [formatter stringFromContact:contact];
-//        NSLog(@"contact = %@", string);
-//        }
-//        }];
     
     func getError(status:Int)->(NSError?){
         let userInfo = [

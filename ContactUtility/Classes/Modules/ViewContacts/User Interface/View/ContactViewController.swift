@@ -10,13 +10,13 @@ import UIKit
 
 let kContactCellIdentifier = "cell"
 
-class ContactViewController: UIViewController,ContactViewInterface,UITableViewDelegate,UITableViewDataSource,SearchModuleDelegate {
+class ContactViewController: UIViewController,ContactViewInterface,UITableViewDelegate,UITableViewDataSource {
     
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
     var eventHandler: ContactModuleInterface?
     var dataProperty:ContactDisplayData?
     var filteredData:ContactDisplayData?
-    
+    var sectionIndexes:[String]?
     var localSearchBar:UISearchBar?
     @IBOutlet var tableView : UITableView!
     @IBOutlet var noContentView : UIView!
@@ -28,7 +28,6 @@ class ContactViewController: UIViewController,ContactViewInterface,UITableViewDe
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         eventHandler?.updateContacts()
-
     }
     func configureView() {
         eventHandler?.updateUI()
@@ -67,17 +66,14 @@ class ContactViewController: UIViewController,ContactViewInterface,UITableViewDe
         }
         
     }
-    func parentView()-> UIView!{
-        return view
-    }
 
     func addRemoveIndexedSearch(flag:Bool){
         if flag {
-            
+            sectionIndexes = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z","#"]
         }else{
-            
+            sectionIndexes?.removeAll()
         }
-
+        self.reloadEntries()
     }
 
 
@@ -108,5 +104,14 @@ class ContactViewController: UIViewController,ContactViewInterface,UITableViewDe
         cell.textLabel?.text = upcomingItem.fullName
         return cell
     }
-
+    
+    func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]?{
+        return sectionIndexes
+    }
+    func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int{
+        if let indexFound = dataProperty?.allKeys?.indexOf(title) {
+            return indexFound
+        }
+        return index
+    }
 }

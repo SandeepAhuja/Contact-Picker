@@ -8,7 +8,7 @@
 
 import Foundation
 class ContactDisplayItem: NSObject {
-    var identifier:String!
+    var identifier:String?
     var givenName:String?
     var familyName:String?
     var fullName :String{
@@ -26,7 +26,11 @@ class ContactDisplayItem: NSObject {
             return name!
         }
     }
-    init(identifier:String!,givenName:String?,familyName:String?){
+   convenience init?(identifier:String!,givenName:String?,familyName:String?){
+    guard let firstName = givenName where !firstName.isEmpty, let lastname = familyName where !lastname.isEmpty else{
+        return nil
+    }
+        self.init()
         self.identifier = identifier
         self.givenName = givenName
         self.familyName = familyName

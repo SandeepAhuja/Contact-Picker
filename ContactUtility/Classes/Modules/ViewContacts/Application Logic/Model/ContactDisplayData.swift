@@ -10,4 +10,5 @@ import Foundation
 
 class ContactDisplayData: NSObject {
     var sections:[ContactDisplaySection]?
+    var allKeys:[String]?
 }

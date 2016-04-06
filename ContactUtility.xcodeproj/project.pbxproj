@@ -17,10 +17,6 @@
 		6705D5C51CAA884C002EA3BB /* ContactWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6705D5C41CAA884C002EA3BB /* ContactWireFrame.swift */; };
 		6705D5C71CAA8EC2002EA3BB /* ContactModuleInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6705D5C61CAA8EC2002EA3BB /* ContactModuleInterface.swift */; };
 		6705D5C91CAA90B6002EA3BB /* ContactViewInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6705D5C81CAA90B6002EA3BB /* ContactViewInterface.swift */; };
-		679C32411CAE90260037B81E /* SearchBarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679C32401CAE90260037B81E /* SearchBarPresenter.swift */; };
-		679C32451CAE93040037B81E /* SearchDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679C32441CAE93040037B81E /* SearchDataManager.swift */; };
-		679C32471CAE93190037B81E /* SearchBarInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679C32461CAE93190037B81E /* SearchBarInteractor.swift */; };
-		679C32491CAE93390037B81E /* AddSearchBarWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679C32481CAE93390037B81E /* AddSearchBarWireFrame.swift */; };
 		679C32601CAE96F70037B81E /* SettingsWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679C325F1CAE96F70037B81E /* SettingsWireFrame.swift */; };
 		679C32621CAE97270037B81E /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679C32611CAE97270037B81E /* SettingsPresenter.swift */; };
 		679C32641CAE97410037B81E /* SettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679C32631CAE97410037B81E /* SettingsInteractor.swift */; };
@@ -30,9 +26,6 @@
 		67C538D21CAAAE7C00CCBFEC /* ContactDisplayItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C538D11CAAAE7C00CCBFEC /* ContactDisplayItem.swift */; };
 		67E01C571CB3903A0072E722 /* UITableView+HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E01C561CB3903A0072E722 /* UITableView+HeaderView.swift */; };
 		67E01C591CB3974B0072E722 /* ContactViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67E01C581CB3974B0072E722 /* ContactViewController.xib */; };
-		67E01C5D1CB3B5C10072E722 /* SearchModuleInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E01C5C1CB3B5C10072E722 /* SearchModuleInterface.swift */; };
-		67E01C5F1CB3B6D90072E722 /* SearchModuleDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E01C5E1CB3B6D90072E722 /* SearchModuleDelegate.swift */; };
-		67E01C611CB3BBF60072E722 /* AddSearchBarInteractorIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E01C601CB3BBF60072E722 /* AddSearchBarInteractorIO.swift */; };
 		67E6A8041CAB93F8009B3234 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67E6A8031CAB93F8009B3234 /* Contacts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		67E6A8061CAB9406009B3234 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67E6A8051CAB9406009B3234 /* AddressBook.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		67F118811CB256BF0032C945 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67F118801CB256BF0032C945 /* Settings.storyboard */; };
@@ -77,10 +70,6 @@
 		6705D5C41CAA884C002EA3BB /* ContactWireFrame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactWireFrame.swift; sourceTree = "<group>"; };
 		6705D5C61CAA8EC2002EA3BB /* ContactModuleInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactModuleInterface.swift; sourceTree = "<group>"; };
 		6705D5C81CAA90B6002EA3BB /* ContactViewInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactViewInterface.swift; sourceTree = "<group>"; };
-		679C32401CAE90260037B81E /* SearchBarPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarPresenter.swift; sourceTree = "<group>"; };
-		679C32441CAE93040037B81E /* SearchDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDataManager.swift; sourceTree = "<group>"; };
-		679C32461CAE93190037B81E /* SearchBarInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarInteractor.swift; sourceTree = "<group>"; };
-		679C32481CAE93390037B81E /* AddSearchBarWireFrame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSearchBarWireFrame.swift; sourceTree = "<group>"; };
 		679C325F1CAE96F70037B81E /* SettingsWireFrame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsWireFrame.swift; sourceTree = "<group>"; };
 		679C32611CAE97270037B81E /* SettingsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
 		679C32631CAE97410037B81E /* SettingsInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsInteractor.swift; sourceTree = "<group>"; };
@@ -90,9 +79,6 @@
 		67C538D11CAAAE7C00CCBFEC /* ContactDisplayItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactDisplayItem.swift; sourceTree = "<group>"; };
 		67E01C561CB3903A0072E722 /* UITableView+HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+HeaderView.swift"; sourceTree = "<group>"; };
 		67E01C581CB3974B0072E722 /* ContactViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactViewController.xib; sourceTree = "<group>"; };
-		67E01C5C1CB3B5C10072E722 /* SearchModuleInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchModuleInterface.swift; sourceTree = "<group>"; };
-		67E01C5E1CB3B6D90072E722 /* SearchModuleDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchModuleDelegate.swift; sourceTree = "<group>"; };
-		67E01C601CB3BBF60072E722 /* AddSearchBarInteractorIO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSearchBarInteractorIO.swift; sourceTree = "<group>"; };
 		67E6A8031CAB93F8009B3234 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
 		67E6A8051CAB9406009B3234 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		67F118801CB256BF0032C945 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
@@ -247,84 +233,6 @@
 				6705D5C01CAA8751002EA3BB /* RootWireFrame.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		679C322E1CAE7D560037B81E /* AddSearchBar */ = {
-			isa = PBXGroup;
-			children = (
-				679C32381CAE900B0037B81E /* Application Logic */,
-				679C323B1CAE900B0037B81E /* Module Interface */,
-				679C323C1CAE900B0037B81E /* User Interface */,
-			);
-			path = AddSearchBar;
-			sourceTree = "<group>";
-		};
-		679C32381CAE900B0037B81E /* Application Logic */ = {
-			isa = PBXGroup;
-			children = (
-				679C32391CAE900B0037B81E /* DataManager */,
-				679C323A1CAE900B0037B81E /* Interactor */,
-			);
-			path = "Application Logic";
-			sourceTree = "<group>";
-		};
-		679C32391CAE900B0037B81E /* DataManager */ = {
-			isa = PBXGroup;
-			children = (
-				679C32441CAE93040037B81E /* SearchDataManager.swift */,
-			);
-			path = DataManager;
-			sourceTree = "<group>";
-		};
-		679C323A1CAE900B0037B81E /* Interactor */ = {
-			isa = PBXGroup;
-			children = (
-				679C32461CAE93190037B81E /* SearchBarInteractor.swift */,
-				67E01C601CB3BBF60072E722 /* AddSearchBarInteractorIO.swift */,
-			);
-			path = Interactor;
-			sourceTree = "<group>";
-		};
-		679C323B1CAE900B0037B81E /* Module Interface */ = {
-			isa = PBXGroup;
-			children = (
-				67E01C5C1CB3B5C10072E722 /* SearchModuleInterface.swift */,
-				67E01C5E1CB3B6D90072E722 /* SearchModuleDelegate.swift */,
-			);
-			path = "Module Interface";
-			sourceTree = "<group>";
-		};
-		679C323C1CAE900B0037B81E /* User Interface */ = {
-			isa = PBXGroup;
-			children = (
-				679C323D1CAE900B0037B81E /* Presenter */,
-				679C323E1CAE900B0037B81E /* View */,
-				679C323F1CAE900B0037B81E /* WireFrame */,
-			);
-			path = "User Interface";
-			sourceTree = "<group>";
-		};
-		679C323D1CAE900B0037B81E /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-				679C32401CAE90260037B81E /* SearchBarPresenter.swift */,
-			);
-			path = Presenter;
-			sourceTree = "<group>";
-		};
-		679C323E1CAE900B0037B81E /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		679C323F1CAE900B0037B81E /* WireFrame */ = {
-			isa = PBXGroup;
-			children = (
-				679C32481CAE93390037B81E /* AddSearchBarWireFrame.swift */,
-			);
-			path = WireFrame;
 			sourceTree = "<group>";
 		};
 		679C324A1CAE94CE0037B81E /* Settings */ = {
@@ -494,7 +402,6 @@
 			isa = PBXGroup;
 			children = (
 				679C324A1CAE94CE0037B81E /* Settings */,
-				679C322E1CAE7D560037B81E /* AddSearchBar */,
 				6705D5931CAA40A6002EA3BB /* ViewContacts */,
 			);
 			path = Modules;
@@ -655,16 +562,10 @@
 				67C538D01CAAAE3B00CCBFEC /* ContactDisplaySection.swift in Sources */,
 				679C32661CAE975A0037B81E /* SettingsDataManager.swift in Sources */,
 				67E01C571CB3903A0072E722 /* UITableView+HeaderView.swift in Sources */,
-				679C32411CAE90260037B81E /* SearchBarPresenter.swift in Sources */,
-				67E01C611CB3BBF60072E722 /* AddSearchBarInteractorIO.swift in Sources */,
-				679C32491CAE93390037B81E /* AddSearchBarWireFrame.swift in Sources */,
 				6705D5C91CAA90B6002EA3BB /* ContactViewInterface.swift in Sources */,
-				67E01C5D1CB3B5C10072E722 /* SearchModuleInterface.swift in Sources */,
-				67E01C5F1CB3B6D90072E722 /* SearchModuleDelegate.swift in Sources */,
 				679C32621CAE97270037B81E /* SettingsPresenter.swift in Sources */,
 				6705D5B31CAA4A06002EA3BB /* ContactDataManager.swift in Sources */,
 				67F118871CB25C6C0032C945 /* SettingsModuleInterface.swift in Sources */,
-				679C32451CAE93040037B81E /* SearchDataManager.swift in Sources */,
 				67C538CE1CAAAA9A00CCBFEC /* ContactDisplayData.swift in Sources */,
 				6705D5BC1CAA6E4E002EA3BB /* ContactPresenter.swift in Sources */,
 				67C538D21CAAAE7C00CCBFEC /* ContactDisplayItem.swift in Sources */,
@@ -676,7 +577,6 @@
 				6705D5C31CAA87E2002EA3BB /* AppDependencies.swift in Sources */,
 				6705D5BA1CAA6253002EA3BB /* ContactInteractor.swift in Sources */,
 				67F1188B1CB2653D0032C945 /* SettingsInterface.swift in Sources */,
-				679C32471CAE93190037B81E /* SearchBarInteractor.swift in Sources */,
 				6705D5C51CAA884C002EA3BB /* ContactWireFrame.swift in Sources */,
 				679C32641CAE97410037B81E /* SettingsInteractor.swift in Sources */,
 				679C32601CAE96F70037B81E /* SettingsWireFrame.swift in Sources */,

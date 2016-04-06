@@ -21,6 +21,7 @@ class SettingsPresenter: NSObject,SettingsModuleInterface,SettingsInteractoreOup
     
     func enforceSettings(searchBar:Bool, indexedSearch:Bool){
         settingsModuleDelegate?.addRemoveSearchBar(searchBar)
+        settingsModuleDelegate?.addRemoveIndexedSearch(indexedSearch)
     }
     
     func cancelSettingsInterface(){

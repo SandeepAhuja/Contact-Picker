@@ -61,7 +61,7 @@
             <point key="canvasLocation" x="599" y="319"/>
         </view>
         <view contentMode="scaleToFill" id="XHS-gf-dFs" userLabel="No Contacts">
-            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Contacts Available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aoP-JI-vdZ">

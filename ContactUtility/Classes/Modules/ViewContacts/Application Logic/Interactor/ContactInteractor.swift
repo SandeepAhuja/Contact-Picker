@@ -22,8 +22,8 @@ class ContactInteractor: NSObject, ContactInteractorInput{
         self.output?.showIndexedSearch(update.indexedSearch)
     }
     
-    func fetchContacts(){
-        self.contactManager.fetchAllContacts(nil ,completion: { [unowned self] people,error in
+    func fetchContacts(searchQuery:String?){
+        self.contactManager.fetchAllContacts(searchQuery ,completion: { [unowned self] people,error in
             if (error == nil) {
                 self.output?.showContacts(people)
             }else{

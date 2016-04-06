@@ -9,4 +9,5 @@
 import Foundation
 protocol SettingsModuleDelegate {
     func addRemoveSearchBar(flag:Bool)
+    func addRemoveIndexedSearch(flag:Bool)
 }

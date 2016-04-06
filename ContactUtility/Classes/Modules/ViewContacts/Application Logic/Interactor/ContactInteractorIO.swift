@@ -9,7 +9,7 @@
 import Foundation
 
 protocol ContactInteractorInput {
-    func fetchContacts()
+    func fetchContacts(searchQuery:String?)
     func configureUI()
 }
 

@@ -13,4 +13,5 @@ protocol ContactViewInterface {
     func showFetchedContactsData(data:ContactDisplayData!)
     func reloadEntries ()
     func addRemoveIndexedSearch(flag:Bool)
+    func addRemoveSearchbar(flag:Bool)
 }
