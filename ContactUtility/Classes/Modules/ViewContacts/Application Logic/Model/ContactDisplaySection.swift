@@ -7,7 +7,7 @@
 //
 
 import Foundation
-let sectionvalidNames:[String] = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","W","X","Y","Z"]
+let sectionvalidNames:[String] = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 
 class ContactDisplaySection: NSObject {
     var name : String?

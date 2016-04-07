@@ -54,7 +54,14 @@ class ContactDataManager: NSObject {
         var collection:[ContactDisplayItem] = []
         if #available(iOS 9, *){
             for contact in contacts!{
-                if let item =  ContactDisplayItem(identifier: contact.identifier, givenName: contact.givenName, familyName: contact.familyName) as ContactDisplayItem?{
+                var phone:String?
+                if (contact.isKeyAvailable(CNContactPhoneNumbersKey)) {
+                    for phoneNumber:CNLabeledValue in contact.phoneNumbers {
+                        let a = phoneNumber.value as! CNPhoneNumber
+                        phone = a.stringValue
+                    }
+                }
+                if let item =  ContactDisplayItem(identifier: contact.identifier, givenName: contact.givenName, familyName: contact.familyName,phoneNumber:phone) as ContactDisplayItem?{
                     collection.append(item)
                 }
             }
@@ -64,30 +71,46 @@ class ContactDataManager: NSObject {
                 let givenName = ABRecordCopyValue(currentContact, kABPersonFirstNameProperty)?.takeRetainedValue() as? String ?? ""
                 let familyName  = ABRecordCopyValue(currentContact, kABPersonLastNameProperty)?.takeRetainedValue() as? String ?? ""
                 let identifier =  String(ABRecordGetRecordID(currentContact))
-                if let item =  ContactDisplayItem(identifier: identifier, givenName: givenName, familyName: familyName) as ContactDisplayItem?{
+                let phoneNumbers:ABMultiValueRef = ABRecordCopyValue(contact, kABPersonPhoneProperty).takeRetainedValue()
+                var phoneNumber:String = ""
+                let numberOfPhoneNumbers:CFIndex = ABMultiValueGetCount(phoneNumbers)
+                for var i = 0; i < numberOfPhoneNumbers; i++ {
+                    phoneNumber = ABMultiValueCopyValueAtIndex(phoneNumbers, i).takeRetainedValue() as! String
+                    break
+                }
+
+                if let item =  ContactDisplayItem(identifier: identifier, givenName: givenName, familyName: familyName, phoneNumber:phoneNumber) as ContactDisplayItem?{
                     collection.append(item)
                 }
             }
         }
         var indexedAuthors = [String: [ContactDisplayItem]]()
         for person in collection {
-            guard let familyName = person.familyName where !familyName.isEmpty else{
+            if person.familyName?.isEmpty == true && person.givenName?.isEmpty == true {
                 let initialLetter = "#"
-                var authorArray = indexedAuthors[initialLetter] ?? [ContactDisplayItem]()                
+                var authorArray = indexedAuthors[initialLetter] ?? [ContactDisplayItem]()
                 authorArray.append(person)
                 indexedAuthors[initialLetter] = authorArray
                 continue
-            }
-            let initialLetter = person.familyName!.substringToIndex((person.familyName?.startIndex.advancedBy(1))!).uppercaseString
-            if sectionvalidNames.contains(initialLetter) {
-                var authorArray = indexedAuthors[initialLetter] ?? [ContactDisplayItem]()
-                authorArray.append(person)
-                indexedAuthors[initialLetter] = authorArray
             }else{
-                let initialLetter = "#"
-                var authorArray = indexedAuthors[initialLetter] ?? [ContactDisplayItem]()
-                authorArray.append(person)
-                indexedAuthors[initialLetter] = authorArray
+                var initialLetter = ""
+                if person.familyName?.isEmpty == false{
+                    initialLetter = person.familyName!.substringToIndex((person.familyName?.startIndex.advancedBy(1))!).uppercaseString
+                }else if person.givenName?.isEmpty == false{
+                    initialLetter = person.givenName!.substringToIndex((person.givenName?.startIndex.advancedBy(1))!).uppercaseString
+                }
+                
+                if sectionvalidNames.contains(initialLetter) {
+                    var authorArray = indexedAuthors[initialLetter] ?? [ContactDisplayItem]()
+                    authorArray.append(person)
+                    indexedAuthors[initialLetter] = authorArray
+                }else{
+                    let initialLetter = "#"
+                    var authorArray = indexedAuthors[initialLetter] ?? [ContactDisplayItem]()
+                    authorArray.append(person)
+                    indexedAuthors[initialLetter] = authorArray
+                }
+
             }
             
         }
@@ -130,7 +153,7 @@ class ContactDataManager: NSObject {
                 completion!(nil,NSError(domain: "access", code: CNAuthorizationStatus.Denied.rawValue, userInfo: nil))
                 return;
             }else{
-                let keys = [CNContactFormatter.descriptorForRequiredKeysForStyle(.FullName),CNContactIdentifierKey]
+                let keys = [CNContactFormatter.descriptorForRequiredKeysForStyle(.FullName),CNContactIdentifierKey,CNContactPhoneNumbersKey]
                 var contacts = [CNContact]()
                 let fetchRequest = CNContactFetchRequest(keysToFetch:keys)
                 if let name = searchQuery {

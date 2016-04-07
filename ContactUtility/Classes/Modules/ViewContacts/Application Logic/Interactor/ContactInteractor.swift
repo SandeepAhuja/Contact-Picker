@@ -19,7 +19,7 @@ class ContactInteractor: NSObject, ContactInteractorInput{
         let settingManager = SettingsDataManager()
         let update = settingManager.getUserPreferences()
         self.output?.addRemoveSearchBar(update.searchBar)
-        self.output?.showIndexedSearch(update.indexedSearch)
+        self.output?.addRemoveIndexedSearch(update.indexedSearch)
     }
     
     func fetchContacts(searchQuery:String?){

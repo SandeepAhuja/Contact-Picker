@@ -17,6 +17,6 @@ protocol ContactInteractorOutput {
     func showContacts(contacts:ContactDisplayData?)
     func showError(message: NSError?)
     func addRemoveSearchBar(flag:Bool)    
-    func showIndexedSearch(flag:Bool)
+    func addRemoveIndexedSearch(flag:Bool)
 }
 

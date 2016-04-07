@@ -11,11 +11,16 @@ class ContactDisplayItem: NSObject {
     var identifier:String?
     var givenName:String?
     var familyName:String?
+    var phoneNumber:String?
     var fullName :String{
         get{
             
             if familyName?.isEmpty == true && givenName?.isEmpty == true {
-                return "No Name"
+                if phoneNumber?.isEmpty == false{
+                    return phoneNumber!
+                }else{
+                    return "No Name"
+                }
             }
             
             var name = givenName
@@ -26,13 +31,10 @@ class ContactDisplayItem: NSObject {
             return name!
         }
     }
-   convenience init?(identifier:String!,givenName:String?,familyName:String?){
-    guard let firstName = givenName where !firstName.isEmpty, let lastname = familyName where !lastname.isEmpty else{
-        return nil
-    }
-        self.init()
+    init(identifier:String!,givenName:String?,familyName:String?,phoneNumber:String?){
         self.identifier = identifier
         self.givenName = givenName
         self.familyName = familyName
+        self.phoneNumber = phoneNumber
     }
 }

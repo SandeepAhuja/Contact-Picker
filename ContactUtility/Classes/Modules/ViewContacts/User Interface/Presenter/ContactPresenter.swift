@@ -28,10 +28,6 @@ class ContactPresenter: NSObject,ContactInteractorOutput,ContactModuleInterface,
         }
     }
     
-    func showIndexedSearch(flag:Bool){
-        userInterface?.addRemoveIndexedSearch(flag)
-    }
-    
     func addRemoveIndexedSearch(flag:Bool){
         userInterface?.addRemoveIndexedSearch(flag)
     }
