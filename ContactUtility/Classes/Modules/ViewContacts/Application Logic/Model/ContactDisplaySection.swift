@@ -12,12 +12,22 @@ let sectionvalidNames:[String] = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "
 class ContactDisplaySection: NSObject {
     var name : String?
     var items : [ContactDisplayItem] = []
-
-    init(name: String, items: [ContactDisplayItem]?) {
-        self.name = name
-        if (items != nil) {
-            self.items = items!
-//            self.items.unshare()
+    override init() {
+        
+    }
+    
+    init(sectionName: String, sectionItems: [ContactDisplayItem]) {
+        self.name = sectionName
+        self.items = sectionItems
+    }
+    
+    convenience init?(name: String?, items: [ContactDisplayItem]?) {
+        guard let sectionName = name where !sectionName.isEmpty else{
+            return nil
         }
+        guard let sectionItems = items where sectionItems.count > 0 else{
+            return nil
+        }
+        self.init(sectionName: name!,sectionItems: items!)
     }
 }

@@ -43,100 +43,11 @@ class ContactDataManager: NSObject {
             NSArray *searchResults = CFBridgingRelease(ABAddressBookCopyPeopleWithName(addressBook, (__bridge CFStringRef)searchTerm));
             */
             
-            if let allContacts:[ABRecordRef] = ABAddressBookCopyPeopleWithName(addressBook!, searchQuery ?? "").takeRetainedValue() as Array as [ABRecordRef] {
-                let people = self.contactDisplayData(allContacts)
-                completion!(people!,nil)
+            if let allContacts:[AnyObject] = ABAddressBookCopyPeopleWithName(addressBook!, searchQuery ?? "").takeRetainedValue() as Array {
+                let people:ContactDisplayData = ContactDisplayData(contacts: allContacts)
+                completion!(people,nil)
             }
         }
-    }
-    
-    func contactDisplayData(contacts:[AnyObject]?) ->ContactDisplayData? {
-        var collection:[ContactDisplayItem] = []
-        if #available(iOS 9, *){
-            for contact in contacts!{
-                var phone:String?
-                if (contact.isKeyAvailable(CNContactPhoneNumbersKey)) {
-                    for phoneNumber:CNLabeledValue in contact.phoneNumbers {
-                        let a = phoneNumber.value as! CNPhoneNumber
-                        phone = a.stringValue
-                    }
-                }
-                if let item =  ContactDisplayItem(identifier: contact.identifier, givenName: contact.givenName, familyName: contact.familyName,phoneNumber:phone) as ContactDisplayItem?{
-                    collection.append(item)
-                }
-            }
-        }else {
-            for contact in contacts!{
-                let currentContact: ABRecordRef = contact
-                let givenName = ABRecordCopyValue(currentContact, kABPersonFirstNameProperty)?.takeRetainedValue() as? String ?? ""
-                let familyName  = ABRecordCopyValue(currentContact, kABPersonLastNameProperty)?.takeRetainedValue() as? String ?? ""
-                let identifier =  String(ABRecordGetRecordID(currentContact))
-                let phoneNumbers:ABMultiValueRef = ABRecordCopyValue(contact, kABPersonPhoneProperty).takeRetainedValue()
-                var phoneNumber:String = ""
-                let numberOfPhoneNumbers:CFIndex = ABMultiValueGetCount(phoneNumbers)
-                for var i = 0; i < numberOfPhoneNumbers; i++ {
-                    phoneNumber = ABMultiValueCopyValueAtIndex(phoneNumbers, i).takeRetainedValue() as! String
-                    break
-                }
-
-                if let item =  ContactDisplayItem(identifier: identifier, givenName: givenName, familyName: familyName, phoneNumber:phoneNumber) as ContactDisplayItem?{
-                    collection.append(item)
-                }
-            }
-        }
-        var indexedAuthors = [String: [ContactDisplayItem]]()
-        for person in collection {
-            if person.familyName?.isEmpty == true && person.givenName?.isEmpty == true {
-                let initialLetter = "#"
-                var authorArray = indexedAuthors[initialLetter] ?? [ContactDisplayItem]()
-                authorArray.append(person)
-                indexedAuthors[initialLetter] = authorArray
-                continue
-            }else{
-                var initialLetter = ""
-                if person.familyName?.isEmpty == false{
-                    initialLetter = person.familyName!.substringToIndex((person.familyName?.startIndex.advancedBy(1))!).uppercaseString
-                }else if person.givenName?.isEmpty == false{
-                    initialLetter = person.givenName!.substringToIndex((person.givenName?.startIndex.advancedBy(1))!).uppercaseString
-                }
-                
-                if sectionvalidNames.contains(initialLetter) {
-                    var authorArray = indexedAuthors[initialLetter] ?? [ContactDisplayItem]()
-                    authorArray.append(person)
-                    indexedAuthors[initialLetter] = authorArray
-                }else{
-                    let initialLetter = "#"
-                    var authorArray = indexedAuthors[initialLetter] ?? [ContactDisplayItem]()
-                    authorArray.append(person)
-                    indexedAuthors[initialLetter] = authorArray
-                }
-
-            }
-            
-        }
-        
-        let contactDisplayData = ContactDisplayData()
-        contactDisplayData.sections = [ContactDisplaySection]()
-        for (key,value) in indexedAuthors {
-            let section = ContactDisplaySection(name: key, items: value as [ContactDisplayItem])
-            contactDisplayData.sections?.append(section)
-        }
-        
-        contactDisplayData.sections?.sortInPlace{$0.name!.compare ($1.name!) == .OrderedAscending}
-        contactDisplayData.allKeys = [String]()
-        for section in contactDisplayData.sections!{
-            contactDisplayData.allKeys?.append(section.name!)
-        }
-        contactDisplayData.allKeys?.sortInPlace()
-        if let section = contactDisplayData.sections?.first {
-            if section.name == "#" {
-                if contactDisplayData.sections?.count > 0{
-                    contactDisplayData.sections?.removeFirst()
-                }
-                contactDisplayData.sections?.append(section)
-            }
-        }
-        return contactDisplayData
     }
 
     
@@ -168,8 +79,8 @@ class ContactDataManager: NSObject {
                         contact, stop in
                         contacts.append(contact)
                     }
-                    let people = self.contactDisplayData(contacts)
-                    completion!(people!,nil)
+                    let people:ContactDisplayData = ContactDisplayData(contacts: contacts)
+                    completion!(people,nil)
                 } catch let err{
                     print(err)
                 }

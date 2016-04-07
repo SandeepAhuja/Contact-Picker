@@ -17,6 +17,9 @@
 		6705D5C51CAA884C002EA3BB /* ContactWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6705D5C41CAA884C002EA3BB /* ContactWireFrame.swift */; };
 		6705D5C71CAA8EC2002EA3BB /* ContactModuleInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6705D5C61CAA8EC2002EA3BB /* ContactModuleInterface.swift */; };
 		6705D5C91CAA90B6002EA3BB /* ContactViewInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6705D5C81CAA90B6002EA3BB /* ContactViewInterface.swift */; };
+		672AD9B31CB6607900D3FABE /* ContactUtilityModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 672AD9B21CB6607900D3FABE /* ContactUtilityModelTests.swift */; };
+		672AD9B61CB6740800D3FABE /* ContactUtilitySectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 672AD9B51CB6740800D3FABE /* ContactUtilitySectionTests.swift */; };
+		672AD9B91CB689A500D3FABE /* ContactDisplayDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 672AD9B81CB689A500D3FABE /* ContactDisplayDataTests.swift */; };
 		679C32601CAE96F70037B81E /* SettingsWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679C325F1CAE96F70037B81E /* SettingsWireFrame.swift */; };
 		679C32621CAE97270037B81E /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679C32611CAE97270037B81E /* SettingsPresenter.swift */; };
 		679C32641CAE97410037B81E /* SettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679C32631CAE97410037B81E /* SettingsInteractor.swift */; };
@@ -70,6 +73,9 @@
 		6705D5C41CAA884C002EA3BB /* ContactWireFrame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactWireFrame.swift; sourceTree = "<group>"; };
 		6705D5C61CAA8EC2002EA3BB /* ContactModuleInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactModuleInterface.swift; sourceTree = "<group>"; };
 		6705D5C81CAA90B6002EA3BB /* ContactViewInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactViewInterface.swift; sourceTree = "<group>"; };
+		672AD9B21CB6607900D3FABE /* ContactUtilityModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactUtilityModelTests.swift; sourceTree = "<group>"; };
+		672AD9B51CB6740800D3FABE /* ContactUtilitySectionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactUtilitySectionTests.swift; sourceTree = "<group>"; };
+		672AD9B81CB689A500D3FABE /* ContactDisplayDataTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactDisplayDataTests.swift; sourceTree = "<group>"; };
 		679C325F1CAE96F70037B81E /* SettingsWireFrame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsWireFrame.swift; sourceTree = "<group>"; };
 		679C32611CAE97270037B81E /* SettingsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
 		679C32631CAE97410037B81E /* SettingsInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsInteractor.swift; sourceTree = "<group>"; };
@@ -365,6 +371,9 @@
 			children = (
 				67FA981C1CA95CC300A15C2F /* ContactUtilityTests.swift */,
 				67FA981E1CA95CC300A15C2F /* Info.plist */,
+				672AD9B21CB6607900D3FABE /* ContactUtilityModelTests.swift */,
+				672AD9B51CB6740800D3FABE /* ContactUtilitySectionTests.swift */,
+				672AD9B81CB689A500D3FABE /* ContactDisplayDataTests.swift */,
 			);
 			path = ContactUtilityTests;
 			sourceTree = "<group>";
@@ -590,6 +599,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				67FA981D1CA95CC300A15C2F /* ContactUtilityTests.swift in Sources */,
+				672AD9B61CB6740800D3FABE /* ContactUtilitySectionTests.swift in Sources */,
+				672AD9B31CB6607900D3FABE /* ContactUtilityModelTests.swift in Sources */,
+				672AD9B91CB689A500D3FABE /* ContactDisplayDataTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
