@@ -50,7 +50,7 @@ class ContactDisplayData: NSObject {
         }
     }
     
-    public func getIndexedContacts(collection:[ContactDisplayItem])->[String: [ContactDisplayItem]]{
+    internal func getIndexedContacts(collection:[ContactDisplayItem])->[String: [ContactDisplayItem]]{
         var indexedAuthors = [String: [ContactDisplayItem]]()
         if collection.count > 0{
             for person in collection {
@@ -97,6 +97,7 @@ class ContactDisplayData: NSObject {
                         phone = a.stringValue
                     }
                 }
+                                
                 if let item =  ContactDisplayItem(identifier: contact.identifier, givenName: contact.givenName, familyName: contact.familyName,phoneNumber:phone) as ContactDisplayItem?{
                     collection.append(item)
                 }

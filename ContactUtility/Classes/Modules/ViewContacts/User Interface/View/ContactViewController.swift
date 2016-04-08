@@ -24,12 +24,14 @@ class ContactViewController: UIViewController,ContactViewInterface,UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
+        
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         eventHandler?.updateContacts()
     }
     func configureView() {
+        tableView.allowsMultipleSelection = true
         eventHandler?.updateUI()
         self.edgesForExtendedLayout = .None
         self.extendedLayoutIncludesOpaqueBars = false
@@ -101,10 +103,23 @@ class ContactViewController: UIViewController,ContactViewInterface,UITableViewDe
         let upcomingItem = upcomingSection!.items[indexPath.row]
         
         let cell = tableView.dequeueReusableCellWithIdentifier(kContactCellIdentifier, forIndexPath: indexPath) as UITableViewCell
+        if upcomingItem.isSelected == true{
+            cell.accessoryType = .Checkmark
+        }else{
+            cell.accessoryType = .None
+        }
         cell.textLabel?.text = upcomingItem.fullName
         return cell
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let upcomingSection = dataProperty?.sections![indexPath.section]
+        let upcomingItem:ContactDisplayItem = upcomingSection!.items[indexPath.row]
+        upcomingItem.isSelected = !upcomingItem.isSelected
+    
+        tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+        
+    }
     func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]?{
         return sectionIndexes
     }

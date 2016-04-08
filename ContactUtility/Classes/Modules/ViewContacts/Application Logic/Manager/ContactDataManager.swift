@@ -59,12 +59,12 @@ class ContactDataManager: NSObject {
             completion!(nil,NSError(domain: "access", code: authorizationStatus.rawValue, userInfo: nil))
             return;
         }
-        store.requestAccessForEntityType(CNEntityType.Contacts){ [unowned self](granted: Bool, err: NSError?) in
+        store.requestAccessForEntityType(CNEntityType.Contacts){ (granted: Bool, err: NSError?) in
             if !granted {
                 completion!(nil,NSError(domain: "access", code: CNAuthorizationStatus.Denied.rawValue, userInfo: nil))
                 return;
             }else{
-                let keys = [CNContactFormatter.descriptorForRequiredKeysForStyle(.FullName),CNContactIdentifierKey,CNContactPhoneNumbersKey]
+                let keys = [CNContactFormatter.descriptorForRequiredKeysForStyle(.FullName),CNContactIdentifierKey,CNContactPhoneNumbersKey,CNContactThumbnailImageDataKey]
                 var contacts = [CNContact]()
                 let fetchRequest = CNContactFetchRequest(keysToFetch:keys)
                 if let name = searchQuery {

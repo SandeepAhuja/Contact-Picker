@@ -7,10 +7,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ContactViewController" customModule="ContactUtility" customModuleProvider="target">
             <connections>
-                <outlet property="noContentView" destination="XHS-gf-dFs" id="sbg-Nm-EmY"/>
-                <outlet property="tableView" destination="LuS-fv-mWt" id="j7A-2P-t9u"/>
-                <outlet property="topConstraint" destination="eZd-6z-cXx" id="f96-Cr-389"/>
-                <outlet property="view" destination="iN0-l3-epB" id="387-9a-Km8"/>
+                <outlet property="tableView" destination="SEH-JT-xnl" id="95B-1h-ZIq"/>
+                <outlet property="topConstraint" destination="cOi-N2-T9C" id="XJR-5i-Z2O"/>
+                <outlet property="view" destination="iN0-l3-epB" id="Vm7-JH-a4v"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -18,82 +17,46 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LuS-fv-mWt">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SEH-JT-xnl">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
-                        <outlet property="dataSource" destination="-1" id="xod-uf-RNi"/>
-                        <outlet property="delegate" destination="-1" id="Yzt-3e-ugz"/>
+                        <outlet property="dataSource" destination="-1" id="hdY-zg-ejM"/>
+                        <outlet property="delegate" destination="-1" id="kOP-1E-aVt"/>
                     </connections>
                 </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="LuS-fv-mWt" secondAttribute="bottom" id="ORh-au-uCU"/>
-                <constraint firstItem="LuS-fv-mWt" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="eZZ-ML-iVE"/>
-                <constraint firstItem="LuS-fv-mWt" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="eZd-6z-cXx">
-                    <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
-                </constraint>
-                <constraint firstAttribute="trailing" secondItem="LuS-fv-mWt" secondAttribute="trailing" id="mq1-a6-a9R"/>
+                <constraint firstAttribute="bottom" secondItem="SEH-JT-xnl" secondAttribute="bottom" id="92q-Cp-TGx"/>
+                <constraint firstItem="SEH-JT-xnl" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="FBf-wR-lTc"/>
+                <constraint firstAttribute="trailing" secondItem="SEH-JT-xnl" secondAttribute="trailing" id="X9j-QD-RP7"/>
+                <constraint firstItem="SEH-JT-xnl" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="cOi-N2-T9C"/>
             </constraints>
             <variation key="default">
                 <mask key="subviews">
-                    <exclude reference="LuS-fv-mWt"/>
+                    <exclude reference="SEH-JT-xnl"/>
                 </mask>
                 <mask key="constraints">
-                    <exclude reference="ORh-au-uCU"/>
-                    <exclude reference="eZZ-ML-iVE"/>
-                    <exclude reference="eZd-6z-cXx"/>
-                    <exclude reference="mq1-a6-a9R"/>
+                    <exclude reference="92q-Cp-TGx"/>
+                    <exclude reference="FBf-wR-lTc"/>
+                    <exclude reference="X9j-QD-RP7"/>
+                    <exclude reference="cOi-N2-T9C"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=compact">
                 <mask key="subviews">
-                    <include reference="LuS-fv-mWt"/>
+                    <include reference="SEH-JT-xnl"/>
                 </mask>
                 <mask key="constraints">
-                    <include reference="ORh-au-uCU"/>
-                    <include reference="eZZ-ML-iVE"/>
-                    <include reference="eZd-6z-cXx"/>
-                    <include reference="mq1-a6-a9R"/>
+                    <include reference="92q-Cp-TGx"/>
+                    <include reference="FBf-wR-lTc"/>
+                    <include reference="X9j-QD-RP7"/>
+                    <include reference="cOi-N2-T9C"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="599" y="319"/>
-        </view>
-        <view contentMode="scaleToFill" id="XHS-gf-dFs" userLabel="No Contacts">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Contacts Available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aoP-JI-vdZ">
-                    <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-            </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstItem="aoP-JI-vdZ" firstAttribute="centerY" secondItem="XHS-gf-dFs" secondAttribute="centerY" id="GaC-Bt-Pm9"/>
-                <constraint firstItem="aoP-JI-vdZ" firstAttribute="centerX" secondItem="XHS-gf-dFs" secondAttribute="centerX" id="ta2-7r-9d5"/>
-            </constraints>
-            <variation key="default">
-                <mask key="subviews">
-                    <exclude reference="aoP-JI-vdZ"/>
-                </mask>
-                <mask key="constraints">
-                    <exclude reference="GaC-Bt-Pm9"/>
-                    <exclude reference="ta2-7r-9d5"/>
-                </mask>
-            </variation>
-            <variation key="heightClass=regular-widthClass=compact">
-                <mask key="subviews">
-                    <include reference="aoP-JI-vdZ"/>
-                </mask>
-                <mask key="constraints">
-                    <include reference="GaC-Bt-Pm9"/>
-                    <include reference="ta2-7r-9d5"/>
-                </mask>
-            </variation>
+            <point key="canvasLocation" x="713" y="65"/>
         </view>
     </objects>
 </document>

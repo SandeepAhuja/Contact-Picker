@@ -38,6 +38,7 @@ class ContactWireFrame: NSObject {
         if self.localSearchBar == nil {
             let view = contactViewController?.view
             let searchBar = UISearchBar()
+            searchBar.placeholder = "Search"
             searchBar.showsCancelButton = true
             searchBar.delegate = contactPresenter
             searchBar.translatesAutoresizingMaskIntoConstraints = false
