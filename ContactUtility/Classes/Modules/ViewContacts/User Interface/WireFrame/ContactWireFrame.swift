@@ -21,7 +21,7 @@ class ContactWireFrame: NSObject {
     }
     
     func presentContactInterfaceFromWindow(window: UIWindow) {
-        let viewController = ContactViewController()
+        let viewController = ContactViewController(nibName: "ContactViewController", bundle: nil)
         viewController.eventHandler = contactPresenter
         contactViewController = viewController
         contactPresenter?.userInterface = viewController

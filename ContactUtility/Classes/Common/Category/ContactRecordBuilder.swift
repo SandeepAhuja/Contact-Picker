@@ -13,16 +13,6 @@ import Contacts
 class ContactRecordBuilder: NSObject {
     var extractor:AnyObject?
     
-    
-    required override init(){
-        if #available(iOS 9, *){
-            extractor = ContactExtractorPlus()
-        }else{
-            extractor = ContactExtractor()
-        }
-    }
-    
-    
     func contactWithRecord(record:AnyObject)->ContactDisplayItem?{
         if #available(iOS 9.0, *) {
             return self.contactWithCNContact(record as! CNContact)

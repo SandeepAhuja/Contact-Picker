@@ -10,7 +10,7 @@ import UIKit
 import QuartzCore
 let kContactCellIdentifier = "cell"
 
-class ContactViewController: UIViewController,ContactViewInterface,UITableViewDelegate,UITableViewDataSource {
+class ContactViewController: UIViewController {
     
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
     var eventHandler: ContactModuleInterface?
@@ -21,23 +21,25 @@ class ContactViewController: UIViewController,ContactViewInterface,UITableViewDe
     @IBOutlet var tableView : UITableView!
     @IBOutlet var noContentView : UIView!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureView()
-        
+        self.configureView()
     }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         eventHandler?.updateContacts()
     }
+    
     func configureView() {
-        tableView.allowsMultipleSelection = true
+        self.tableView.allowsMultipleSelection = true
         eventHandler?.updateUI()
         self.edgesForExtendedLayout = .None
         self.extendedLayoutIncludesOpaqueBars = false
         self.automaticallyAdjustsScrollViewInsets = false
         navigationItem.title = "Contacts"
-        tableView?.registerClass(UITableViewCell.self, forCellReuseIdentifier:kContactCellIdentifier)
+        self.tableView?.registerClass(UITableViewCell.self, forCellReuseIdentifier:kContactCellIdentifier)
         let settingsItem = UIBarButtonItem(title: "Settings", style: .Plain, target: self, action: Selector("showSettings"))
         navigationItem.rightBarButtonItem = settingsItem
         
@@ -46,18 +48,39 @@ class ContactViewController: UIViewController,ContactViewInterface,UITableViewDe
         eventHandler?.presentSettingsInterface()
     }
     
-    func showFetchedContactsData(data:ContactDisplayData!){        
+    
+    func contactName(contact :ContactDisplayItem) -> String? {
+        if let firstName = contact.name?.firstName, lastName = contact.name?.lastName {
+            return "\(firstName) \(lastName)"
+        }
+        else if let firstName = contact.name?.firstName {
+            return "\(firstName)"
+        }
+        else if let lastName = contact.name?.lastName {
+            return "\(lastName)"
+        }
+        else if contact.phones?.count > 0{
+            for phone in contact.phones!{
+                return phone.number as String!
+            }
+        }
+        return "No Name"
+    }
+
+}
+
+extension ContactViewController : ContactViewInterface{
+ 
+    func showFetchedContactsData(data:ContactDisplayData!){
         dataProperty = data
         reloadEntries()
     }
-    
     func showNoContentMessage() {
-    //    view = noContentView
     }
     
     func reloadEntries() {
-        tableView?.reloadData()
-
+        self.tableView?.reloadData()
+        
     }
     
     func addRemoveSearchbar(flag:Bool){
@@ -68,7 +91,7 @@ class ContactViewController: UIViewController,ContactViewInterface,UITableViewDe
         }
         
     }
-
+    
     func addRemoveIndexedSearch(flag:Bool){
         if flag {
             sectionIndexes = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z","#"]
@@ -78,7 +101,9 @@ class ContactViewController: UIViewController,ContactViewInterface,UITableViewDe
         self.reloadEntries()
     }
 
+}
 
+extension ContactViewController : UITableViewDelegate,UITableViewDataSource {
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         var numberOfSections = dataProperty?.sections!.count
         
@@ -108,9 +133,9 @@ class ContactViewController: UIViewController,ContactViewInterface,UITableViewDe
         }else{
             cell.accessoryType = .None
         }
-        cell.textLabel?.text = upcomingItem.name?.fullName
-
-      
+        cell.textLabel?.text = self.contactName(upcomingItem)
+        
+        
         var finalimage:UIImage?
         if let image = upcomingItem.thumbnailImage {
             finalimage = image
@@ -132,7 +157,7 @@ class ContactViewController: UIViewController,ContactViewInterface,UITableViewDe
         let upcomingSection = dataProperty?.sections![indexPath.section]
         let upcomingItem:ContactDisplayItem = upcomingSection!.items[indexPath.row]
         upcomingItem.isSelected = !upcomingItem.isSelected
-    
+        
         tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
         
     }
@@ -146,3 +171,6 @@ class ContactViewController: UIViewController,ContactViewInterface,UITableViewDe
         return index
     }
 }
+
+
+

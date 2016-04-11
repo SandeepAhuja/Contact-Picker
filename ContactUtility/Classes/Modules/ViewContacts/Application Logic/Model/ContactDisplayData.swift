@@ -20,6 +20,13 @@ class ContactDisplayData: NSObject {
     func contactDisplayData(contacts:[AnyObject]?) {
         var collection:[ContactDisplayItem]? = []
         let contactBuilder = ContactRecordBuilder()
+        if #available(iOS 9, *){
+            contactBuilder.extractor = ContactExtractorPlus()
+        }else{
+            contactBuilder.extractor = ContactExtractor()
+        }
+        
+
         for contact in contacts! {
             if let item:ContactDisplayItem = contactBuilder.contactWithRecord(contact){
                 collection!.append(item)

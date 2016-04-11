@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ContactViewController" customModule="ContactUtility" customModuleProvider="target">
             <connections>
+                <outlet property="noContentView" destination="e9c-0p-utt" id="4AM-Os-bR7"/>
                 <outlet property="tableView" destination="SEH-JT-xnl" id="95B-1h-ZIq"/>
                 <outlet property="topConstraint" destination="cOi-N2-T9C" id="XJR-5i-Z2O"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Vm7-JH-a4v"/>
@@ -57,6 +58,43 @@
                 </mask>
             </variation>
             <point key="canvasLocation" x="713" y="65"/>
+        </view>
+        <view contentMode="scaleToFill" id="e9c-0p-utt">
+            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Results" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6yT-gU-s5d">
+                    <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="6yT-gU-s5d" firstAttribute="centerX" secondItem="e9c-0p-utt" secondAttribute="centerX" id="EF0-tj-Ooa"/>
+                <constraint firstItem="6yT-gU-s5d" firstAttribute="centerY" secondItem="e9c-0p-utt" secondAttribute="centerY" id="tuk-jD-Lun"/>
+            </constraints>
+            <variation key="default">
+                <mask key="subviews">
+                    <exclude reference="6yT-gU-s5d"/>
+                </mask>
+                <mask key="constraints">
+                    <exclude reference="EF0-tj-Ooa"/>
+                    <exclude reference="tuk-jD-Lun"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=regular-widthClass=compact">
+                <mask key="subviews">
+                    <include reference="6yT-gU-s5d"/>
+                </mask>
+                <mask key="constraints">
+                    <include reference="EF0-tj-Ooa"/>
+                    <include reference="tuk-jD-Lun"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="1059" y="-162"/>
         </view>
     </objects>
 </document>

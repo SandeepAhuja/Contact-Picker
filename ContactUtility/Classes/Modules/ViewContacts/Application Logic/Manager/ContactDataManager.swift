@@ -39,14 +39,21 @@ class ContactDataManager: NSObject {
                  completion!(nil,self.getError(ABAuthorizationStatus.Denied.rawValue))
             }
             
-            /*
-            NSArray *searchResults = CFBridgingRelease(ABAddressBookCopyPeopleWithName(addressBook, (__bridge CFStringRef)searchTerm));
-            */
             
-            if let allContacts:[AnyObject] = ABAddressBookCopyPeopleWithName(addressBook!, searchQuery ?? "").takeRetainedValue() as Array {
-                let people:ContactDisplayData = ContactDisplayData(contacts: allContacts)
-                completion!(people,nil)
+            if let contactName = searchQuery where contactName.characters.count > 0 {
+                if let allContacts = ABAddressBookCopyPeopleWithName(addressBook!,contactName as CFStringRef)?.takeRetainedValue(){
+                    let people:ContactDisplayData = ContactDisplayData(contacts: allContacts as [AnyObject])
+                    completion!(people,nil)
+                }
+            }else{
+                if let allContacts = ABAddressBookCopyArrayOfAllPeople(addressBook!)?.takeRetainedValue(){
+                    let people:ContactDisplayData = ContactDisplayData(contacts: allContacts as [AnyObject])
+                    completion!(people,nil)
+                }
+                
             }
+            
+            
         }
     }
 
@@ -100,33 +107,4 @@ class ContactDataManager: NSObject {
         let error = NSError(domain: "Access Issue", code: 1, userInfo:userInfo)
         return error
     }
-    
-       /*
-    - (void)listPeopleInAddressBook:(ABAddressBookRef)addressBook
-    {
-    NSArray *allPeople = CFBridgingRelease(ABAddressBookCopyArrayOfAllPeople(addressBook));
-    NSInteger numberOfPeople = [allPeople count];
-    
-    for (NSInteger i = 0; i < numberOfPeople; i++) {
-    ABRecordRef person = (__bridge ABRecordRef)allPeople[i];
-    
-    NSString *firstName = CFBridgingRelease(ABRecordCopyValue(person, kABPersonFirstNameProperty));
-    NSString *lastName  = CFBridgingRelease(ABRecordCopyValue(person, kABPersonLastNameProperty));
-    NSLog(@"Name:%@ %@", firstName, lastName);
-    
-    ABMultiValueRef phoneNumbers = ABRecordCopyValue(person, kABPersonPhoneProperty);
-    
-    CFIndex numberOfPhoneNumbers = ABMultiValueGetCount(phoneNumbers);
-    for (CFIndex i = 0; i < numberOfPhoneNumbers; i++) {
-    NSString *phoneNumber = CFBridgingRelease(ABMultiValueCopyValueAtIndex(phoneNumbers, i));
-    NSLog(@"  phone:%@", phoneNumber);
-    }
-    
-    CFRelease(phoneNumbers);
-    
-    NSLog(@"=============================================");
-    }
-    }
-
-    */
 }

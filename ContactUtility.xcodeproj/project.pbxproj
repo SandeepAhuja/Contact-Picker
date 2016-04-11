@@ -43,6 +43,7 @@
 		67F1188D1CB27FFC0032C945 /* SettingsInteractoreIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F1188C1CB27FFC0032C945 /* SettingsInteractoreIO.swift */; };
 		67F118931CB294CD0032C945 /* SettingsModuleDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F118921CB294CD0032C945 /* SettingsModuleDelegate.swift */; };
 		67F389EB1CBB7D000063FEE0 /* UIImage+Thumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F389EA1CBB7D000063FEE0 /* UIImage+Thumbnail.swift */; };
+		67F389EF1CBB8CAE0063FEE0 /* ContactBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F389EE1CBB8CAE0063FEE0 /* ContactBuilderTests.swift */; };
 		67FA98061CA95CC300A15C2F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FA98051CA95CC300A15C2F /* AppDelegate.swift */; };
 		67FA980F1CA95CC300A15C2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67FA980E1CA95CC300A15C2F /* Assets.xcassets */; };
 		67FA981D1CA95CC300A15C2F /* ContactUtilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FA981C1CA95CC300A15C2F /* ContactUtilityTests.swift */; };
@@ -105,6 +106,7 @@
 		67F1188C1CB27FFC0032C945 /* SettingsInteractoreIO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsInteractoreIO.swift; sourceTree = "<group>"; };
 		67F118921CB294CD0032C945 /* SettingsModuleDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsModuleDelegate.swift; sourceTree = "<group>"; };
 		67F389EA1CBB7D000063FEE0 /* UIImage+Thumbnail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Thumbnail.swift"; sourceTree = "<group>"; };
+		67F389EE1CBB8CAE0063FEE0 /* ContactBuilderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactBuilderTests.swift; sourceTree = "<group>"; };
 		67FA98021CA95CC300A15C2F /* ContactUtility.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContactUtility.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		67FA98051CA95CC300A15C2F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = ../AppDelegate.swift; sourceTree = "<group>"; };
 		67FA980E1CA95CC300A15C2F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
@@ -400,6 +402,7 @@
 				672AD9B21CB6607900D3FABE /* ContactUtilityModelTests.swift */,
 				672AD9B51CB6740800D3FABE /* ContactUtilitySectionTests.swift */,
 				672AD9B81CB689A500D3FABE /* ContactDisplayDataTests.swift */,
+				67F389EE1CBB8CAE0063FEE0 /* ContactBuilderTests.swift */,
 			);
 			path = ContactUtilityTests;
 			sourceTree = "<group>";
@@ -634,6 +637,7 @@
 				672AD9B61CB6740800D3FABE /* ContactUtilitySectionTests.swift in Sources */,
 				672AD9B31CB6607900D3FABE /* ContactUtilityModelTests.swift in Sources */,
 				672AD9B91CB689A500D3FABE /* ContactDisplayDataTests.swift in Sources */,
+				67F389EF1CBB8CAE0063FEE0 /* ContactBuilderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -697,7 +701,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Rohit K Singhania (TFZ6PN49ES)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rohit K Singhania (TFZ6PN49ES)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -719,6 +724,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "9257b383-5083-4b02-ba04-74bbb23b1b92";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -757,6 +763,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "9257b383-5083-4b02-ba04-74bbb23b1b92";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -802,7 +809,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = ContactUtilityTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Demo.ContactUtilityTests;
+				PRODUCT_BUNDLE_IDENTIFIER = iZofy.com.iZofy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ContactUtility.app/ContactUtility";
 			};
@@ -814,7 +821,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = ContactUtilityTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Demo.ContactUtilityTests;
+				PRODUCT_BUNDLE_IDENTIFIER = iZofy.com.iZofy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ContactUtility.app/ContactUtility";
 			};
@@ -825,7 +832,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = ContactUtilityUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Demo.ContactUtilityUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = iZofy.com.iZofy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_TARGET_NAME = ContactUtility;
 				USES_XCTRUNNER = YES;
@@ -837,7 +844,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = ContactUtilityUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Demo.ContactUtilityUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = iZofy.com.iZofy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_TARGET_NAME = ContactUtility;
 				USES_XCTRUNNER = YES;

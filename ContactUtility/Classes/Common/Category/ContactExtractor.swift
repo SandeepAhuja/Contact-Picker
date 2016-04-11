@@ -21,19 +21,20 @@ class ContactExtractor: NSObject {
         return contactName
     }
     
-    private func stringProperty(propertyId:ABPropertyID)->String{
-        return ABRecordCopyValue(person, propertyId).takeRetainedValue() as! String
-    }
-    private func compositeName()->String{
-        return ABRecordCopyCompositeName(person).takeRetainedValue() as String
+    private func stringProperty(propertyId:ABPropertyID)->String?{
+        return ABRecordCopyValue(person, propertyId)?.takeRetainedValue() as? String
     }
     
-    func phonesWithLabels(needLabels: Bool) -> [AnyObject] {
+    private func compositeName()->String?{
+        return ABRecordCopyCompositeName(person)?.takeRetainedValue() as? String
+    }
+    
+    func phonesWithLabels(needLabels: Bool) -> [AnyObject]? {
         return self.mapMultiValueOfProperty(kABPersonPhoneProperty, withBlock: {(multiValue: ABMultiValueRef, value: AnyObject?, index: CFIndex) -> AnyObject in
             var phone: ContactPhone?
             if value != nil {
                 phone = ContactPhone()
-                phone!.number = String(value)
+                phone!.number = value as! String!
                 if needLabels {
                     phone!.originalLabel = self.originalLabelFromMultiValue(multiValue, index: index)
                     phone!.localizedLabel = self.localizedLabelFromMultiValue(multiValue, index: index)
@@ -44,26 +45,29 @@ class ContactExtractor: NSObject {
     }
     func localizedLabelFromMultiValue(multiValue: ABMultiValueRef, index: CFIndex) -> String {
         var label: String = ""
-        let rawLabel: AnyObject? = ABMultiValueCopyLabelAtIndex(multiValue, index).takeRetainedValue()
+        let rawLabel: AnyObject? = ABMultiValueCopyLabelAtIndex(multiValue, index)?.takeRetainedValue()
         if let strLabel = rawLabel {
             label = ABAddressBookCopyLocalizedLabel(strLabel as! CFString).takeRetainedValue() as String
         }
         return label
     }
-    func originalLabelFromMultiValue(multiValue: ABMultiValueRef, index: CFIndex) -> String {
-        let rawLabel: AnyObject = ABMultiValueCopyLabelAtIndex(multiValue, index).takeRetainedValue() as String
-        return rawLabel as! String
+    func originalLabelFromMultiValue(multiValue: ABMultiValueRef, index: CFIndex) -> String? {
+        if let rawLabel = ABMultiValueCopyLabelAtIndex(multiValue, index)?.takeRetainedValue() as? String {
+            return rawLabel
+        }
+        return ""
     }
     func mapMultiValueOfProperty(property: ABPropertyID, withBlock block: (multiValue: ABMultiValueRef, value: AnyObject, index: CFIndex) -> AnyObject) -> [AnyObject]? {
         var array: [AnyObject] = [AnyObject]()
-        let multiValue: ABMultiValueRef? = ABRecordCopyValue(self.person, property).takeRetainedValue()
+        let multiValue: ABMultiValueRef? = ABRecordCopyValue(self.person, property)?.takeRetainedValue()
         if multiValue != nil {
             let count: CFIndex = ABMultiValueGetCount(multiValue)
             for var i = 0; i < count; i++ {
-                let value: AnyObject = ABMultiValueCopyValueAtIndex(multiValue, i).takeRetainedValue()
-                let object: AnyObject? = block(multiValue: multiValue!, value: value, index: i)
-                if let finalobject = object {
-                    array.append(finalobject)
+                if let value = ABMultiValueCopyValueAtIndex(multiValue, i)?.takeRetainedValue(){
+                    let object = block(multiValue: multiValue!, value: value, index: i)
+                    if let finalobject:AnyObject = object {
+                        array.append(finalobject)
+                    }
                 }
             }
         }
@@ -71,5 +75,5 @@ class ContactExtractor: NSObject {
         if array.count > 0 {
             return NSArray(array:array, copyItems: true) as [AnyObject]
         }
-        return nil
+        return []
     }}
