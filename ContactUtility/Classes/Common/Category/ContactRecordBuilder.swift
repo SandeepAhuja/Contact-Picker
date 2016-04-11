@@ -22,6 +22,16 @@ class ContactRecordBuilder: NSObject {
         }
     }
     
+    
+    func contactWithRecord(record:AnyObject)->ContactDisplayItem?{
+        if #available(iOS 9.0, *) {
+            return self.contactWithCNContact(record as! CNContact)
+        } else {
+            // Fallback on earlier versions
+            return self.contactWithRecordRef(record as ABRecordRef)
+        }
+    }
+    
     func contactWithRecordRef(recordRef:ABRecordRef)->ContactDisplayItem?{
         let localExtractor:ContactExtractor = self.extractor as! ContactExtractor
         localExtractor.person = recordRef
@@ -36,6 +46,7 @@ class ContactRecordBuilder: NSObject {
     @available(iOS 9.0, *)
     func contactWithCNContact(contact:CNContact)->ContactDisplayItem?{
         let localExtractor:ContactExtractorPlus = self.extractor as! ContactExtractorPlus
+        localExtractor.contact = contact
         let contactItem = ContactDisplayItem()
         contactItem.identifier = contact.identifier
         contactItem.name = localExtractor.name()

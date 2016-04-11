@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import QuartzCore
 let kContactCellIdentifier = "cell"
 
 class ContactViewController: UIViewController,ContactViewInterface,UITableViewDelegate,UITableViewDataSource {
@@ -108,7 +108,23 @@ class ContactViewController: UIViewController,ContactViewInterface,UITableViewDe
         }else{
             cell.accessoryType = .None
         }
-        cell.textLabel?.text = upcomingItem.fullName
+        cell.textLabel?.text = upcomingItem.name?.fullName
+
+      
+        var finalimage:UIImage?
+        if let image = upcomingItem.thumbnailImage {
+            finalimage = image
+        }else{
+            finalimage = UIImage(named: "contactplaceholder")
+        }
+        finalimage = finalimage?.makeThumbnailOfSize(CGSizeMake(30, 30))
+        cell.imageView?.image = finalimage
+        cell.imageView?.contentMode = .ScaleAspectFill
+        
+        let layer:CALayer = (cell.imageView?.layer)!
+        layer.cornerRadius = 15
+        layer.masksToBounds = true
+        cell.imageView?.clipsToBounds = true
         return cell
     }
     
