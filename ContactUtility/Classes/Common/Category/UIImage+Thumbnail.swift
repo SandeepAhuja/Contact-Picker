@@ -18,7 +18,7 @@ extension UIImage {
         // pop the context
         UIGraphicsEndImageContext()
         if newThumbnail == nil {
-            NSLog("could not scale image")
+            print("could not scale image")
         }
         return newThumbnail!
     }

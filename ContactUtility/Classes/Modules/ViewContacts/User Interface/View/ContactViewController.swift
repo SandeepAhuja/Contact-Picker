@@ -40,9 +40,6 @@ class ContactViewController: BaseViewController {
         strongTableView = self.tableView
         self.tableView.allowsMultipleSelection = true
         eventHandler?.updateUI()
-//        self.edgesForExtendedLayout = .None
-//        self.extendedLayoutIncludesOpaqueBars = false
-//        self.automaticallyAdjustsScrollViewInsets = false
         navigationItem.title = "Contacts"
         let settingsItem = UIBarButtonItem(title: "Settings", style: .Plain, target: self, action: Selector("showSettings"))
         navigationItem.rightBarButtonItem = settingsItem

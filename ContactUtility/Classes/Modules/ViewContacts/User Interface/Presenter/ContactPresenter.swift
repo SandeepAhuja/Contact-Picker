@@ -9,8 +9,7 @@
 import UIKit
 import AddressBook
 
-class ContactPresenter: NSObject,ContactInteractorOutput,ContactModuleInterface,SettingsModuleDelegate {
-    
+class ContactPresenter: NSObject,ContactInteractorOutput,ContactModuleInterface,SettingsModuleDelegate {    
     var contactInteractor: ContactInteractorInput?
     var contactWireFrame: ContactWireFrame?
     var userInterface : ContactViewInterface?
@@ -26,8 +25,6 @@ class ContactPresenter: NSObject,ContactInteractorOutput,ContactModuleInterface,
     func updateUI(){
         contactInteractor?.configureUI()
     }
-    
-    
     
     
     func addRemoveSearchBar(flag:Bool){
@@ -51,8 +48,8 @@ class ContactPresenter: NSObject,ContactInteractorOutput,ContactModuleInterface,
     
     func showFilteredContacts(contacts:[AnyObject]?){
         if  let people = contacts{
+            let contactDisplayItems = self.contactBuilder.contactDisplayItemsCollection(people)
             dispatch_async(dispatch_get_main_queue(), { [unowned self]() -> Void in
-                let contactDisplayItems = self.contactBuilder.contactDisplayItemsCollection(people)
                 self.userInterface?.updateFilteredContacts(contactDisplayItems)
                 })
         }//end of if
@@ -60,8 +57,8 @@ class ContactPresenter: NSObject,ContactInteractorOutput,ContactModuleInterface,
     
     func showContacts(contacts:[AnyObject]?){
         if  let people = contacts where people.count > 0 {
+            let contactDisplayData = self.contactBuilder.contactDisplayData(people)
             dispatch_async(dispatch_get_main_queue(), { [unowned self]() -> Void in
-                let contactDisplayData = self.contactBuilder.contactDisplayData(people)
                 self.userInterface?.showFetchedContactsData(contactDisplayData)
             })
         }else{

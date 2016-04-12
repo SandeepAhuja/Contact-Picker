@@ -30,17 +30,16 @@ class ContactExtractor: NSObject {
     }
     
     func phonesWithLabels(needLabels: Bool) -> [AnyObject]? {
-        return self.mapMultiValueOfProperty(kABPersonPhoneProperty, withBlock: {(multiValue: ABMultiValueRef, value: AnyObject?, index: CFIndex) -> AnyObject in
+        return self.mapMultiValueOfProperty(kABPersonPhoneProperty, withBlock: {(multiValue: ABMultiValueRef, value: AnyObject, index: CFIndex) -> AnyObject in
             var phone: ContactPhone?
-            if value != nil {
-                phone = ContactPhone()
-                phone!.number = value as! String!
-                if needLabels {
-                    phone!.originalLabel = self.originalLabelFromMultiValue(multiValue, index: index)
-                    phone!.localizedLabel = self.localizedLabelFromMultiValue(multiValue, index: index)
-                }
+            phone = ContactPhone()
+            phone!.number = value as? String
+            if needLabels {
+                phone!.originalLabel = self.originalLabelFromMultiValue(multiValue, index: index)
+                phone!.localizedLabel = self.localizedLabelFromMultiValue(multiValue, index: index)
             }
             return phone!
+            
         })!
     }
     func localizedLabelFromMultiValue(multiValue: ABMultiValueRef, index: CFIndex) -> String {
@@ -59,18 +58,18 @@ class ContactExtractor: NSObject {
     }
     func mapMultiValueOfProperty(property: ABPropertyID, withBlock block: (multiValue: ABMultiValueRef, value: AnyObject, index: CFIndex) -> AnyObject) -> [AnyObject]? {
         var array: [AnyObject] = [AnyObject]()
-        let multiValue: ABMultiValueRef? = ABRecordCopyValue(self.person, property)?.takeRetainedValue()
-        if multiValue != nil {
+        if let multiValue = ABRecordCopyValue(self.person, property)?.takeRetainedValue() {
             let count: CFIndex = ABMultiValueGetCount(multiValue)
             for var i = 0; i < count; i++ {
                 if let value = ABMultiValueCopyValueAtIndex(multiValue, i)?.takeRetainedValue(){
-                    let object = block(multiValue: multiValue!, value: value, index: i)
+                    let object = block(multiValue: multiValue, value: value, index: i)
                     if let finalobject:AnyObject = object {
                         array.append(finalobject)
                     }
                 }
             }
         }
+        
         
         if array.count > 0 {
             return NSArray(array:array, copyItems: true) as [AnyObject]
