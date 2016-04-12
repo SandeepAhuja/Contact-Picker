@@ -11,6 +11,7 @@ import Foundation
 protocol ContactViewInterface {
     func showNoContentMessage()
     func showFetchedContactsData(data:ContactDisplayData!)
+    func updateFilteredContacts(data:[ContactDisplayItem])
     func reloadEntries ()
     func addRemoveIndexedSearch(flag:Bool)
     func addRemoveSearchbar(flag:Bool)

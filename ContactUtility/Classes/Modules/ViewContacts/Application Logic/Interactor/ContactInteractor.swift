@@ -25,7 +25,11 @@ class ContactInteractor: NSObject, ContactInteractorInput{
     func fetchContacts(searchQuery:String?){
         self.contactManager.fetchAllContacts(searchQuery ,completion: { [unowned self] people,error in
             if (error == nil) {
-                self.output?.showContacts(people)
+                if let search = searchQuery where search.characters.count > 0 {
+                    self.output?.showFilteredContacts(people)
+                }else{
+                    self.output?.showContacts(people)
+                }
             }else{
                 self.output?.showError(error)
             }

@@ -46,7 +46,6 @@
                                                     <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="5JY-7o-Mx1"/>
-                                                        <constraint firstAttribute="width" constant="80" id="VKE-dt-lJb"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -54,13 +53,11 @@
                                                     <variation key="default">
                                                         <mask key="constraints">
                                                             <exclude reference="5JY-7o-Mx1"/>
-                                                            <exclude reference="VKE-dt-lJb"/>
                                                         </mask>
                                                     </variation>
                                                     <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="5JY-7o-Mx1"/>
-                                                            <include reference="VKE-dt-lJb"/>
                                                         </mask>
                                                     </variation>
                                                 </label>
@@ -129,7 +126,6 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Indexed Search" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IbT-Ux-NGi">
                                                     <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="119" id="dCD-1l-lLL"/>
                                                         <constraint firstAttribute="height" constant="21" id="viv-xP-N4M"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -137,13 +133,11 @@
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
-                                                            <exclude reference="dCD-1l-lLL"/>
                                                             <exclude reference="viv-xP-N4M"/>
                                                         </mask>
                                                     </variation>
                                                     <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
-                                                            <include reference="dCD-1l-lLL"/>
                                                             <include reference="viv-xP-N4M"/>
                                                         </mask>
                                                     </variation>
@@ -205,7 +199,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lfp-E5-9rZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="574.5" y="180"/>
+            <point key="canvasLocation" x="314" y="134"/>
         </scene>
     </scenes>
 </document>

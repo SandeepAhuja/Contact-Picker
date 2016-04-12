@@ -7,11 +7,18 @@
 //
 
 import UIKit
-import AddressBook.ABAddressBook
-class ContactPresenter: NSObject,ContactInteractorOutput,ContactModuleInterface,SettingsModuleDelegate,UISearchBarDelegate {
+import AddressBook
+
+class ContactPresenter: NSObject,ContactInteractorOutput,ContactModuleInterface,SettingsModuleDelegate {
+    
     var contactInteractor: ContactInteractorInput?
     var contactWireFrame: ContactWireFrame?
     var userInterface : ContactViewInterface?
+    let contactBuilder : ContactRecordBuilder = ContactRecordBuilder()
+    
+    func searchContacts(searchSting:String){
+        contactInteractor?.fetchContacts(searchSting)
+    }
     
     func updateContacts(){
         contactInteractor?.fetchContacts(.None)
@@ -19,6 +26,9 @@ class ContactPresenter: NSObject,ContactInteractorOutput,ContactModuleInterface,
     func updateUI(){
         contactInteractor?.configureUI()
     }
+    
+    
+    
     
     func addRemoveSearchBar(flag:Bool){
         if flag{
@@ -39,25 +49,25 @@ class ContactPresenter: NSObject,ContactInteractorOutput,ContactModuleInterface,
         contactWireFrame?.presentAlertContoller(message)
     }
     
-    func showContacts(contacts:ContactDisplayData?){
-        if contacts?.sections?.count == 0 {
+    func showFilteredContacts(contacts:[AnyObject]?){
+        if  let people = contacts{
+            dispatch_async(dispatch_get_main_queue(), { [unowned self]() -> Void in
+                let contactDisplayItems = self.contactBuilder.contactDisplayItemsCollection(people)
+                self.userInterface?.updateFilteredContacts(contactDisplayItems)
+                })
+        }//end of if
+    }
+    
+    func showContacts(contacts:[AnyObject]?){
+        if  let people = contacts where people.count > 0 {
+            dispatch_async(dispatch_get_main_queue(), { [unowned self]() -> Void in
+                let contactDisplayData = self.contactBuilder.contactDisplayData(people)
+                self.userInterface?.showFetchedContactsData(contactDisplayData)
+            })
+        }else{
             dispatch_async(dispatch_get_main_queue(), { [unowned self]() -> Void in
                 self.userInterface?.showNoContentMessage()
             })
-        }else{
-            if (contacts != nil) {
-                dispatch_async(dispatch_get_main_queue(), { [unowned self]() -> Void in
-                    self.userInterface?.showFetchedContactsData(contacts!)
-                })
-            }
         }
     }
-    
-    internal func searchBarCancelButtonClicked(searchBar: UISearchBar){
-        searchBar.resignFirstResponder()
-    }
-    
-    internal func searchBar(searchBar: UISearchBar, textDidChange searchText: String){
-        NSObject.cancelPreviousPerformRequestsWithTarget(contactInteractor as! ContactInteractor)
-        contactInteractor?.fetchContacts(searchText)
-    }}
+}

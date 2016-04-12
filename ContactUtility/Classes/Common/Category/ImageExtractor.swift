@@ -43,9 +43,12 @@ class ImageExtractor: NSObject {
     private class func imageWithRecordRef(recordRef:ABRecordRef,fullsize:Bool?)->UIImage?{
         let format:ABPersonImageFormat = fullsize! ? kABPersonImageFormatOriginalSize :
         kABPersonImageFormatThumbnail
-        if let data:NSData = ABPersonCopyImageDataWithFormat(recordRef, format)?.takeRetainedValue(){
-            return UIImage(data: data, scale: UIScreen.mainScreen().scale)
+        if ABPersonHasImageData(recordRef){
+            if let data:NSData = ABPersonCopyImageDataWithFormat(recordRef, format)?.takeRetainedValue(){
+                return UIImage(data: data, scale: UIScreen.mainScreen().scale)
+            }
         }
+        
         return nil
         
     }

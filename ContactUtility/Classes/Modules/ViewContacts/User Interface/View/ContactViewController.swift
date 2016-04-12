@@ -8,20 +8,23 @@
 
 import UIKit
 import QuartzCore
-let kContactCellIdentifier = "cell"
 
-class ContactViewController: UIViewController {
+
+class ContactViewController: BaseViewController {
     
-    @IBOutlet weak var topConstraint: NSLayoutConstraint!
-    var eventHandler: ContactModuleInterface?
-    var dataProperty:ContactDisplayData?
-    var filteredData:ContactDisplayData?
-    var sectionIndexes:[String]?
-    var localSearchBar:UISearchBar?
-    @IBOutlet var tableView : UITableView!
+    // MARK: Properties
+    var eventHandler : ContactModuleInterface?
+    var dataProperty : ContactDisplayData?
+    var sectionIndexes :[String]?
+    var searchController : UISearchController!
+    var resultController : ResultViewController!
+    var strongTableView:UITableView?
+    var allowMultipleSelection : Bool?
+    var searchBarVisible : Bool?
+    var indexedSearchVisible :Bool?
     @IBOutlet var noContentView : UIView!
     
-    
+    // MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureView()
@@ -32,14 +35,15 @@ class ContactViewController: UIViewController {
         eventHandler?.updateContacts()
     }
     
+    // MARK: Selector
     func configureView() {
+        strongTableView = self.tableView
         self.tableView.allowsMultipleSelection = true
         eventHandler?.updateUI()
-        self.edgesForExtendedLayout = .None
-        self.extendedLayoutIncludesOpaqueBars = false
-        self.automaticallyAdjustsScrollViewInsets = false
+//        self.edgesForExtendedLayout = .None
+//        self.extendedLayoutIncludesOpaqueBars = false
+//        self.automaticallyAdjustsScrollViewInsets = false
         navigationItem.title = "Contacts"
-        self.tableView?.registerClass(UITableViewCell.self, forCellReuseIdentifier:kContactCellIdentifier)
         let settingsItem = UIBarButtonItem(title: "Settings", style: .Plain, target: self, action: Selector("showSettings"))
         navigationItem.rightBarButtonItem = settingsItem
         
@@ -48,46 +52,102 @@ class ContactViewController: UIViewController {
         eventHandler?.presentSettingsInterface()
     }
     
-    
-    func contactName(contact :ContactDisplayItem) -> String? {
-        if let firstName = contact.name?.firstName, lastName = contact.name?.lastName {
-            return "\(firstName) \(lastName)"
+    // MARK: TableView Delegate and Datasource
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        var numberOfSections = dataProperty?.sections!.count
+        
+        if dataProperty?.sections!.count == nil {
+            numberOfSections = 0
         }
-        else if let firstName = contact.name?.firstName {
-            return "\(firstName)"
-        }
-        else if let lastName = contact.name?.lastName {
-            return "\(lastName)"
-        }
-        else if contact.phones?.count > 0{
-            for phone in contact.phones!{
-                return phone.number as String!
-            }
-        }
-        return "No Name"
+        
+        return numberOfSections!
     }
-
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let upcomingSection = dataProperty?.sections![section]
+        return upcomingSection!.items.count
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let upcomingSection = dataProperty?.sections![section]
+        return upcomingSection!.name
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let upcomingSection = dataProperty?.sections![indexPath.section]
+        let upcomingItem = upcomingSection!.items[indexPath.row]
+        let cell = tableView.dequeueReusableCellWithIdentifier(BaseViewController.cellIdentifier, forIndexPath: indexPath) as UITableViewCell
+        self.configureCell(cell, upcomingItem: upcomingItem)
+        return cell
+    }
+    
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let upcomingSection = dataProperty?.sections![indexPath.section]
+        let upcomingItem:ContactDisplayItem = upcomingSection!.items[indexPath.row]
+        upcomingItem.isSelected = !upcomingItem.isSelected
+        
+        tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+        
+    }
+    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]?{
+        return sectionIndexes
+    }
+    override func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int{
+        if let indexFound = dataProperty?.allKeys?.indexOf(title) {
+            return indexFound
+        }
+        return index
+    }
+    
 }
 
-extension ContactViewController : ContactViewInterface{
- 
+// MARK: ContactViewInterface
+extension ContactViewController : ContactViewInterface {
+    func updateFilteredContacts(data:[ContactDisplayItem]){
+        let resultsController = searchController.searchResultsController as! ResultViewController
+        resultsController.filteredProducts = data
+        resultsController.tableView.reloadData()
+    }
+    
     func showFetchedContactsData(data:ContactDisplayData!){
+        view = strongTableView
         dataProperty = data
         reloadEntries()
     }
     func showNoContentMessage() {
+        view = noContentView
     }
     
     func reloadEntries() {
         self.tableView?.reloadData()
-        
     }
     
     func addRemoveSearchbar(flag:Bool){
         if flag{
-            topConstraint.constant = 44.0
+            if self.searchController == nil {
+                self.resultController = ResultViewController()
+                
+                self.resultController!.tableView.delegate = self
+
+                self.searchController = UISearchController(searchResultsController: resultController)
+                self.searchController.hidesNavigationBarDuringPresentation = true
+                self.searchController.searchResultsUpdater = self
+                self.searchController.searchBar.sizeToFit()
+                tableView.tableHeaderView = searchController.searchBar
+                
+                self.searchController.dimsBackgroundDuringPresentation = false // default is YES
+                self.searchController.searchBar.delegate = self    // so we can monitor text changes + others
+                
+                definesPresentationContext = true
+            }
         }else{
-            topConstraint.constant = 0
+            if self.searchController != nil {
+                self.searchController?.searchBar.delegate = nil
+                self.resultController = nil
+                strongTableView?.tableHeaderView = nil
+                self.searchController?.searchBar.removeFromSuperview()
+                self.searchController = nil
+            }
         }
         
     }
@@ -103,72 +163,16 @@ extension ContactViewController : ContactViewInterface{
 
 }
 
-extension ContactViewController : UITableViewDelegate,UITableViewDataSource {
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        var numberOfSections = dataProperty?.sections!.count
-        
-        if dataProperty?.sections!.count == nil {
-            numberOfSections = 0
-        }
-        
-        return numberOfSections!
-    }
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let upcomingSection = dataProperty?.sections![section]
-        return upcomingSection!.items.count
+// MARK: SearchBar Delegate and Results Update
+extension ContactViewController : UISearchResultsUpdating,UISearchBarDelegate {
+    func searchBarCancelButtonClicked(searchBar: UISearchBar){
+        searchBar.resignFirstResponder()
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let upcomingSection = dataProperty?.sections![section]
-        return upcomingSection!.name
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let upcomingSection = dataProperty?.sections![indexPath.section]
-        let upcomingItem = upcomingSection!.items[indexPath.row]
-        
-        let cell = tableView.dequeueReusableCellWithIdentifier(kContactCellIdentifier, forIndexPath: indexPath) as UITableViewCell
-        if upcomingItem.isSelected == true{
-            cell.accessoryType = .Checkmark
-        }else{
-            cell.accessoryType = .None
-        }
-        cell.textLabel?.text = self.contactName(upcomingItem)
-        
-        
-        var finalimage:UIImage?
-        if let image = upcomingItem.thumbnailImage {
-            finalimage = image
-        }else{
-            finalimage = UIImage(named: "contactplaceholder")
-        }
-        finalimage = finalimage?.makeThumbnailOfSize(CGSizeMake(30, 30))
-        cell.imageView?.image = finalimage
-        cell.imageView?.contentMode = .ScaleAspectFill
-        
-        let layer:CALayer = (cell.imageView?.layer)!
-        layer.cornerRadius = 15
-        layer.masksToBounds = true
-        cell.imageView?.clipsToBounds = true
-        return cell
-    }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let upcomingSection = dataProperty?.sections![indexPath.section]
-        let upcomingItem:ContactDisplayItem = upcomingSection!.items[indexPath.row]
-        upcomingItem.isSelected = !upcomingItem.isSelected
-        
-        tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
-        
-    }
-    func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]?{
-        return sectionIndexes
-    }
-    func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int{
-        if let indexFound = dataProperty?.allKeys?.indexOf(title) {
-            return indexFound
-        }
-        return index
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        let whitespaceCharacterSet = NSCharacterSet.whitespaceCharacterSet()
+        let strippedString = searchController.searchBar.text!.stringByTrimmingCharactersInSet(whitespaceCharacterSet)
+        eventHandler?.searchContacts(strippedString)
     }
 }
 

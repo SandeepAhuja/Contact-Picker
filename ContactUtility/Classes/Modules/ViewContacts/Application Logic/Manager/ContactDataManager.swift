@@ -12,7 +12,7 @@ import Contacts
 
 
 class ContactDataManager: NSObject {
-    func fetchAllContacts(searchQuery:String?, completion:((ContactDisplayData?,NSError?) -> Void)?){
+    func fetchAllContacts(searchQuery:String?, completion:(([AnyObject]?,NSError?) -> Void)?){
             if #available(iOS 9.0, *) {
                 fetchContactsFromContactApi(searchQuery, completion: completion)
             } else {
@@ -21,7 +21,7 @@ class ContactDataManager: NSObject {
     }
 
     @available (iOS 8,*)
-    func fetchContactsFromAddressBook(searchQuery:String?, completion:((ContactDisplayData?,NSError?) -> Void)?){
+    func fetchContactsFromAddressBook(searchQuery:String?, completion:(([AnyObject]?,NSError?) -> Void)?){
         let status = ABAddressBookGetAuthorizationStatus();
         if status == .Denied || status == .Restricted{
             completion!(nil,self.getError(ABAuthorizationStatus.Denied.rawValue))
@@ -42,24 +42,19 @@ class ContactDataManager: NSObject {
             
             if let contactName = searchQuery where contactName.characters.count > 0 {
                 if let allContacts = ABAddressBookCopyPeopleWithName(addressBook!,contactName as CFStringRef)?.takeRetainedValue(){
-                    let people:ContactDisplayData = ContactDisplayData(contacts: allContacts as [AnyObject])
-                    completion!(people,nil)
+                    completion!(allContacts as [AnyObject],nil)
                 }
             }else{
                 if let allContacts = ABAddressBookCopyArrayOfAllPeople(addressBook!)?.takeRetainedValue(){
-                    let people:ContactDisplayData = ContactDisplayData(contacts: allContacts as [AnyObject])
-                    completion!(people,nil)
+                    completion!(allContacts as [AnyObject],nil)
                 }
-                
             }
-            
-            
         }
     }
 
     
     @available(iOS 9.0, *)
-    func fetchContactsFromContactApi(searchQuery:String?, completion:((ContactDisplayData?,NSError?) -> Void)?){
+    func fetchContactsFromContactApi(searchQuery:String?, completion:(([AnyObject]?,NSError?) -> Void)?){
         let store = CNContactStore()
         let authorizationStatus:CNAuthorizationStatus = CNContactStore.authorizationStatusForEntityType(CNEntityType.Contacts)
         if authorizationStatus == .Denied || authorizationStatus == .Restricted{
@@ -86,8 +81,7 @@ class ContactDataManager: NSObject {
                         contact, stop in
                         contacts.append(contact)
                     }
-                    let people:ContactDisplayData = ContactDisplayData(contacts: contacts)
-                    completion!(people,nil)
+                    completion!(contacts,nil)
                 } catch let err{
                     print(err)
                 }
