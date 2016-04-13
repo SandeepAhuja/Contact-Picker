@@ -13,14 +13,13 @@ class ContactWireFrame: NSObject {
     var contactPresenter: ContactPresenter?
     var rootWireFrame : RootWireFrame?
     var contactViewController: ContactViewController?
-    var settingsWireFrame: SettingsWireFrame?
     
-    func presentSettings() {
-        settingsWireFrame?.presentSettingsInterfaceFromViewController(contactViewController!)
-    }
-    
+     
     func presentContactInterfaceFromWindow(window: UIWindow) {
         let viewController = ContactViewController(nibName: "ContactViewController", bundle: nil)
+        viewController.searchBarVisible = true
+        viewController.indexedSearchVisible = true
+        viewController.allowMultipleSelection = true
         viewController.eventHandler = contactPresenter
         contactViewController = viewController
         contactPresenter?.userInterface = viewController

@@ -15,17 +15,11 @@ class ContactInteractor: NSObject, ContactInteractorInput{
         self.contactManager = contactManager
     }
     
-    func configureUI(){
-        let settingManager = SettingsDataManager()
-        let update = settingManager.getUserPreferences()
-        self.output?.addRemoveSearchBar(update.searchBar)
-        self.output?.addRemoveIndexedSearch(update.indexedSearch)
-    }
-    
+
     func fetchContacts(searchQuery:String?){
         self.contactManager.fetchAllContacts(searchQuery ,completion: { [unowned self] people,error in
             if (error == nil) {
-                if let search = searchQuery where search.characters.count > 0 {
+                if let _ = searchQuery {
                     self.output?.showFilteredContacts(people)
                 }else{
                     self.output?.showContacts(people)

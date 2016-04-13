@@ -9,7 +9,7 @@
 import UIKit
 import AddressBook
 
-class ContactPresenter: NSObject,ContactInteractorOutput,ContactModuleInterface,SettingsModuleDelegate {    
+class ContactPresenter: NSObject,ContactInteractorOutput,ContactModuleInterface {    
     var contactInteractor: ContactInteractorInput?
     var contactWireFrame: ContactWireFrame?
     var userInterface : ContactViewInterface?
@@ -22,27 +22,8 @@ class ContactPresenter: NSObject,ContactInteractorOutput,ContactModuleInterface,
     func updateContacts(){
         contactInteractor?.fetchContacts(.None)
     }
-    func updateUI(){
-        contactInteractor?.configureUI()
-    }
     
-    
-    func addRemoveSearchBar(flag:Bool){
-        if flag{
-            contactWireFrame?.addSearchBarOnViewController()
-        }else{
-            contactWireFrame?.removeSearchBar()
-        }
-    }
-    
-    func addRemoveIndexedSearch(flag:Bool){
-        userInterface?.addRemoveIndexedSearch(flag)
-    }
-    
-    func presentSettingsInterface(){
-        contactWireFrame?.presentSettings()
-    }
-    func showError(message: NSError?){
+    func showError(message: NSError?) {
         contactWireFrame?.presentAlertContoller(message)
     }
     

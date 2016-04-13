@@ -11,6 +11,4 @@ import Foundation
 protocol ContactModuleInterface {
     func updateContacts()
     func searchContacts(searchSting:String)
-    func updateUI()
-    func presentSettingsInterface()
 }

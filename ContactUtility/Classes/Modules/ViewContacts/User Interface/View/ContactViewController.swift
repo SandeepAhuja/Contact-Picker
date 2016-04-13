@@ -38,16 +38,11 @@ class ContactViewController: BaseViewController {
     // MARK: Selector
     func configureView() {
         strongTableView = self.tableView
-        self.tableView.allowsMultipleSelection = true
-        eventHandler?.updateUI()
-        navigationItem.title = "Contacts"
-        let settingsItem = UIBarButtonItem(title: "Settings", style: .Plain, target: self, action: Selector("showSettings"))
-        navigationItem.rightBarButtonItem = settingsItem
-        
+        self.tableView.allowsMultipleSelection = self.allowMultipleSelection != nil ? self.allowMultipleSelection! : false
+        self.addRemoveSearchbar(self.searchBarVisible != nil ? self.searchBarVisible! : false)
+        self.addRemoveIndexedSearch(self.indexedSearchVisible != nil ? self.indexedSearchVisible! : false)
     }
-    func showSettings(){
-        eventHandler?.presentSettingsInterface()
-    }
+  
     
     // MARK: TableView Delegate and Datasource
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -80,11 +75,18 @@ class ContactViewController: BaseViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let upcomingSection = dataProperty?.sections![indexPath.section]
-        let upcomingItem:ContactDisplayItem = upcomingSection!.items[indexPath.row]
-        upcomingItem.isSelected = !upcomingItem.isSelected
-        
-        tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
-        
+        let upcomingItem:ContactDisplayItem
+
+        if tableView === strongTableView {
+            upcomingItem = upcomingSection!.items[indexPath.row]
+            upcomingItem.isSelected = !upcomingItem.isSelected
+            tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+        }
+        else {
+            upcomingItem = resultController.filteredProducts[indexPath.row]
+            upcomingItem.isSelected = !upcomingItem.isSelected
+            resultController.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+        }
     }
     override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]?{
         return sectionIndexes
@@ -132,7 +134,7 @@ extension ContactViewController : ContactViewInterface {
                 self.searchController.searchBar.sizeToFit()
                 tableView.tableHeaderView = searchController.searchBar
                 
-                self.searchController.dimsBackgroundDuringPresentation = false // default is YES
+                self.searchController.dimsBackgroundDuringPresentation = true // default is YES
                 self.searchController.searchBar.delegate = self    // so we can monitor text changes + others
                 
                 definesPresentationContext = true
@@ -169,7 +171,12 @@ extension ContactViewController : UISearchResultsUpdating,UISearchBarDelegate {
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         let whitespaceCharacterSet = NSCharacterSet.whitespaceCharacterSet()
         let strippedString = searchController.searchBar.text!.stringByTrimmingCharactersInSet(whitespaceCharacterSet)
-        eventHandler?.searchContacts(strippedString)
+        
+        let lockQueue = dispatch_queue_create("com.test.LockQueue", nil)
+        dispatch_sync(lockQueue) {
+            self.eventHandler?.searchContacts(strippedString)
+        }
+        
     }
 }
 

@@ -10,8 +10,12 @@ import UIKit
 import AddressBook
 import Contacts
 
-
 class ContactDataManager: NSObject {
+    var sharedAddressbook : AddressBookWrapper?
+    override init(){
+        sharedAddressbook = AddressBookWrapper.sharedInstance
+    }
+
     func fetchAllContacts(searchQuery:String?, completion:(([AnyObject]?,NSError?) -> Void)?){
             if #available(iOS 9.0, *) {
                 fetchContactsFromContactApi(searchQuery, completion: completion)
@@ -24,29 +28,29 @@ class ContactDataManager: NSObject {
     func fetchContactsFromAddressBook(searchQuery:String?, completion:(([AnyObject]?,NSError?) -> Void)?){
         let status = ABAddressBookGetAuthorizationStatus();
         if status == .Denied || status == .Restricted{
-            completion!(nil,self.getError(ABAuthorizationStatus.Denied.rawValue))
+            completion?(nil,self.getError(ABAuthorizationStatus.Denied.rawValue))
             return;
         }
-        var error: Unmanaged<CFError>?
-        guard let addressBook: ABAddressBookRef? = ABAddressBookCreateWithOptions(nil, &error)?.takeRetainedValue() else {
-            print(error?.takeRetainedValue())
-            completion!(nil,error?.takeRetainedValue() as NSError?)
+        
+        
+        guard let addressBook = sharedAddressbook?.addressBookRef else {
+            print(sharedAddressbook?.errorRef)
+            completion?(nil,sharedAddressbook?.errorRef)
             return
         }
         
         ABAddressBookRequestAccessWithCompletion(addressBook) {[unowned self] granted, error in
             if !granted {
-                 completion!(nil,self.getError(ABAuthorizationStatus.Denied.rawValue))
+                completion?(nil,self.getError(ABAuthorizationStatus.Denied.rawValue))
             }
             
-            
             if let contactName = searchQuery where contactName.characters.count > 0 {
-                if let allContacts = ABAddressBookCopyPeopleWithName(addressBook!,contactName as CFStringRef)?.takeRetainedValue(){
-                    completion!(allContacts as [AnyObject],nil)
+                if let allContacts = ABAddressBookCopyPeopleWithName(addressBook,contactName as CFStringRef)?.takeRetainedValue(){
+                completion?(allContacts as [AnyObject],nil)
                 }
             }else{
-                if let allContacts = ABAddressBookCopyArrayOfAllPeople(addressBook!)?.takeRetainedValue(){
-                    completion!(allContacts as [AnyObject],nil)
+                if let allContacts = ABAddressBookCopyArrayOfAllPeople(addressBook)?.takeRetainedValue(){
+                    completion?(allContacts as [AnyObject],nil)
                 }
             }
         }
@@ -58,12 +62,12 @@ class ContactDataManager: NSObject {
         let store = CNContactStore()
         let authorizationStatus:CNAuthorizationStatus = CNContactStore.authorizationStatusForEntityType(CNEntityType.Contacts)
         if authorizationStatus == .Denied || authorizationStatus == .Restricted{
-            completion!(nil,NSError(domain: "access", code: authorizationStatus.rawValue, userInfo: nil))
+            completion?(nil,NSError(domain: "access", code: authorizationStatus.rawValue, userInfo: nil))
             return;
         }
         store.requestAccessForEntityType(CNEntityType.Contacts){ (granted: Bool, err: NSError?) in
             if !granted {
-                completion!(nil,NSError(domain: "access", code: CNAuthorizationStatus.Denied.rawValue, userInfo: nil))
+                completion?(nil,NSError(domain: "access", code: CNAuthorizationStatus.Denied.rawValue, userInfo: nil))
                 return;
             }else{
                 let keys = [CNContactFormatter.descriptorForRequiredKeysForStyle(.FullName),CNContactIdentifierKey,CNContactPhoneNumbersKey,CNContactThumbnailImageDataKey]
@@ -81,7 +85,7 @@ class ContactDataManager: NSObject {
                         contact, stop in
                         contacts.append(contact)
                     }
-                    completion!(contacts,nil)
+                    completion?(contacts,nil)
                 } catch let err{
                     print(err)
                 }
@@ -100,5 +104,32 @@ class ContactDataManager: NSObject {
         
         let error = NSError(domain: "Access Issue", code: 1, userInfo:userInfo)
         return error
+    }
+}
+
+class AddressBookWrapper : NSObject {
+    var addressBookRef : ABAddressBookRef? = nil
+    var errorRef:NSError? = nil
+
+    class var sharedInstance: AddressBookWrapper {
+    struct Static {
+        static var onceToken: dispatch_once_t = 0
+        static var instance: AddressBookWrapper? = nil
+      
+    }
+    dispatch_once(&Static.onceToken) {
+        Static.instance = AddressBookWrapper()
+       
+    }
+        return Static.instance!
+    }
+    
+    override init() {
+        var error: Unmanaged<CFError>?
+        guard let addressBook = ABAddressBookCreateWithOptions(nil, &error)?.takeRetainedValue() else {
+            self.errorRef = error?.takeRetainedValue() as NSError?
+            return
+        }
+        self.addressBookRef = addressBook
     }
 }
