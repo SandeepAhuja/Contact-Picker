@@ -23,28 +23,13 @@ class AppDependencies: NSObject {
     
     func configureDependencies() {
         let rootWireframe = RootWireFrame()
-        
-        let settingsDataManager = SettingsDataManager()
-        
         let contactPresenter = ContactPresenter()
         let contactDataManager = ContactDataManager()
-
         let contactInteractor = ContactInteractor(contactManager: contactDataManager)
-        let settingsInteractor = SettingsInteractor()
-        settingsInteractor.dataManager = settingsDataManager
-        let settingsWireFrame = SettingsWireFrame()
-        let settingsPresenter = SettingsPresenter()
-        settingsInteractor.output = settingsPresenter
-        settingsPresenter.settingsModuleDelegate = contactPresenter
-        settingsWireFrame.settingsPresenter = settingsPresenter
-        settingsPresenter.settingsInteractor = settingsInteractor
-        settingsPresenter.settingsWireframe = settingsWireFrame
-
         contactInteractor.output = contactPresenter
         contactPresenter.contactInteractor = contactInteractor
         contactPresenter.contactWireFrame = contactWireframe
         contactWireframe.contactPresenter = contactPresenter
-        contactWireframe.settingsWireFrame = settingsWireFrame
         contactWireframe.rootWireFrame = rootWireframe
     }
 
