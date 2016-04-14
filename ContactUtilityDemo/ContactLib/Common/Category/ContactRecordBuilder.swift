@@ -11,7 +11,7 @@ import AddressBook
 import Contacts
 
 class ContactRecordBuilder: NSObject {
-    var extractor:AnyObject
+    var extractor:AnyObject?
     
     override init() {
         if #available(iOS 9.0, *) {
@@ -21,49 +21,35 @@ class ContactRecordBuilder: NSObject {
         }
     }
     
-    func contactWithRecord(record:AnyObject,fieldMask:DFGContactFields)->ContactDisplayItem?{
+    func contactWithRecord(record:AnyObject)->ContactDisplayItem?{
         if #available(iOS 9.0, *) {
-            return self.contactWithCNContact(record as! CNContact,fieldMask: fieldMask)
+            return self.contactWithCNContact(record as! CNContact)
         } else {
             // Fallback on earlier versions
-            return self.contactWithRecordRef(record as ABRecordRef,fieldMask: fieldMask)
+            return self.contactWithRecordRef(record as ABRecordRef)
         }
     }
     
-    func contactWithRecordRef(recordRef:ABRecordRef,fieldMask:DFGContactFields)->ContactDisplayItem?{
+    func contactWithRecordRef(recordRef:ABRecordRef)->ContactDisplayItem?{
         let localExtractor:ContactExtractor = self.extractor as! ContactExtractor
         localExtractor.person = recordRef
         let contactItem = ContactDisplayItem()
         contactItem.identifier = String(ABRecordGetRecordID(recordRef))
-        if (fieldMask.contains(DFGContactFields.DFGContactFieldName)){
-            contactItem.name = localExtractor.name()
-        }
-        if (fieldMask.contains(DFGContactFields.DFGContactFieldPhonesOnly) || (fieldMask.contains(DFGContactFields.DFGContactFieldPhonesWithLabels))){
-            contactItem.phones = localExtractor.phonesWithLabels(true) as? [ContactPhone]
-        }
-        if fieldMask.contains(DFGContactFields.DFGContactFieldThumbnail){
-            contactItem.thumbnailImage = ImageExtractor.thumbnailWithRecordRef(recordRef)
-        }
-
+        contactItem.name = localExtractor.name()
+        contactItem.phones = localExtractor.phonesWithLabels(true) as? [ContactPhone]
+        contactItem.thumbnailImage = ImageExtractor.thumbnailWithRecordRef(recordRef)
         return contactItem
     }
     
     @available(iOS 9.0, *)
-    func contactWithCNContact(contact:CNContact,fieldMask:DFGContactFields)->ContactDisplayItem? {
+    func contactWithCNContact(contact:CNContact)->ContactDisplayItem? {
         let localExtractor:ContactExtractorPlus = self.extractor as! ContactExtractorPlus
         localExtractor.contact = contact
         let contactItem = ContactDisplayItem()
         contactItem.identifier = contact.identifier
-        
-        if (fieldMask.contains(DFGContactFields.DFGContactFieldName)){
-            contactItem.name = localExtractor.name()
-        }
-        if (fieldMask.contains(DFGContactFields.DFGContactFieldPhonesOnly) || (fieldMask.contains(DFGContactFields.DFGContactFieldPhonesWithLabels))){
-            contactItem.phones = localExtractor.phonesWithLabels(true)
-        }
-        if fieldMask.contains(DFGContactFields.DFGContactFieldThumbnail){
-            contactItem.thumbnailImage = ImageExtractor.thumbnailWithRecordRef(contact)
-        }
+        contactItem.name = localExtractor.name()
+        contactItem.phones = localExtractor.phonesWithLabels(true)
+        contactItem.thumbnailImage = ImageExtractor.thumbnailWithRecordRef(contact)
         return contactItem
     }
     
@@ -106,7 +92,7 @@ class ContactRecordBuilder: NSObject {
     func contactDisplayItemsCollection(contacts:[AnyObject]) -> [ContactDisplayItem]{
         var collection:[ContactDisplayItem] = []
         for contact in contacts {
-            if let item:ContactDisplayItem = self.contactWithRecord(contact) {
+            if let item:ContactDisplayItem = self.contactWithRecord(contact){
                 collection.append(item)
             }
         }

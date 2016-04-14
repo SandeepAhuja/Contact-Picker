@@ -10,12 +10,8 @@ import UIKit
 import AddressBook
 import Contacts
 
-class ContactDataManager: NSObject {
-    var sharedAddressbook : AddressBookWrapperRef?
-    override init(){
-        sharedAddressbook = AddressBookWrapperRef.sharedInstance
-    }
 
+class ContactDataManager: NSObject {
     func fetchAllContacts(searchQuery:String?, completion:(([AnyObject]?,NSError?) -> Void)?){
             if #available(iOS 9.0, *) {
                 fetchContactsFromContactApi(searchQuery, completion: completion)
@@ -28,29 +24,29 @@ class ContactDataManager: NSObject {
     func fetchContactsFromAddressBook(searchQuery:String?, completion:(([AnyObject]?,NSError?) -> Void)?){
         let status = ABAddressBookGetAuthorizationStatus();
         if status == .Denied || status == .Restricted{
-            completion?(nil,self.getError(ABAuthorizationStatus.Denied.rawValue))
+            completion!(nil,self.getError(ABAuthorizationStatus.Denied.rawValue))
             return;
         }
-        
-        
-        guard let addressBook = sharedAddressbook?.addressBook else {
-            print(sharedAddressbook?.errorRef)
-            completion?(nil,sharedAddressbook?.errorRef)
+        var error: Unmanaged<CFError>?
+        guard let addressBook: ABAddressBookRef? = ABAddressBookCreateWithOptions(nil, &error)?.takeRetainedValue() else {
+            print(error?.takeRetainedValue())
+            completion!(nil,error?.takeRetainedValue() as NSError?)
             return
         }
         
         ABAddressBookRequestAccessWithCompletion(addressBook) {[unowned self] granted, error in
             if !granted {
-                completion?(nil,self.getError(ABAuthorizationStatus.Denied.rawValue))
+                 completion!(nil,self.getError(ABAuthorizationStatus.Denied.rawValue))
             }
             
+            
             if let contactName = searchQuery where contactName.characters.count > 0 {
-                if let allContacts = ABAddressBookCopyPeopleWithName(addressBook,contactName as CFStringRef)?.takeRetainedValue(){
-                completion?(allContacts as [AnyObject],nil)
+                if let allContacts = ABAddressBookCopyPeopleWithName(addressBook!,contactName as CFStringRef)?.takeRetainedValue(){
+                    completion!(allContacts as [AnyObject],nil)
                 }
             }else{
-                if let allContacts = ABAddressBookCopyArrayOfAllPeople(addressBook)?.takeRetainedValue(){
-                    completion?(allContacts as [AnyObject],nil)
+                if let allContacts = ABAddressBookCopyArrayOfAllPeople(addressBook!)?.takeRetainedValue(){
+                    completion!(allContacts as [AnyObject],nil)
                 }
             }
         }
@@ -62,12 +58,12 @@ class ContactDataManager: NSObject {
         let store = CNContactStore()
         let authorizationStatus:CNAuthorizationStatus = CNContactStore.authorizationStatusForEntityType(CNEntityType.Contacts)
         if authorizationStatus == .Denied || authorizationStatus == .Restricted{
-            completion?(nil,NSError(domain: "access", code: authorizationStatus.rawValue, userInfo: nil))
+            completion!(nil,NSError(domain: "access", code: authorizationStatus.rawValue, userInfo: nil))
             return;
         }
         store.requestAccessForEntityType(CNEntityType.Contacts){ (granted: Bool, err: NSError?) in
             if !granted {
-                completion?(nil,NSError(domain: "access", code: CNAuthorizationStatus.Denied.rawValue, userInfo: nil))
+                completion!(nil,NSError(domain: "access", code: CNAuthorizationStatus.Denied.rawValue, userInfo: nil))
                 return;
             }else{
                 let keys = [CNContactFormatter.descriptorForRequiredKeysForStyle(.FullName),CNContactIdentifierKey,CNContactPhoneNumbersKey,CNContactThumbnailImageDataKey]
@@ -85,7 +81,7 @@ class ContactDataManager: NSObject {
                         contact, stop in
                         contacts.append(contact)
                     }
-                    completion?(contacts,nil)
+                    completion!(contacts,nil)
                 } catch let err{
                     print(err)
                 }
@@ -106,4 +102,3 @@ class ContactDataManager: NSObject {
         return error
     }
 }
-
