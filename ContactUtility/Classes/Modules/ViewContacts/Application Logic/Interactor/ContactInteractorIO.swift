@@ -8,13 +8,14 @@
 
 import Foundation
 
-protocol ContactInteractorInput {
-    func fetchContacts(searchQuery:String?)
+@objc protocol ContactInteractorInput {
+    optional func fetchContacts(searchQuery:String?)
 }
 
-protocol ContactInteractorOutput {
-    func showContacts(contacts:[AnyObject]?)
-    func showError(message: NSError?)
-    func showFilteredContacts(contacts:[AnyObject]?)
+@objc protocol ContactInteractorOutput {
+    
+    optional func showContacts(contacts:[AnyObject]?)
+    optional func showError(message: NSError?)
+    optional func showFilteredContacts(contacts:[AnyObject]?)
 }
 

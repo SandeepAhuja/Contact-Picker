@@ -16,17 +16,17 @@ class ContactInteractor: NSObject, ContactInteractorInput{
     }
     
 
-    func fetchContacts(searchQuery:String?){
-        self.contactManager.fetchAllContacts(searchQuery ,completion: { [unowned self] people,error in
-            if (error == nil) {
-                if let _ = searchQuery {
-                    self.output?.showFilteredContacts(people)
-                }else{
-                    self.output?.showContacts(people)
-                }
-            }else{
-                self.output?.showError(error)
-            }
-        })
-    }
+//    func fetchContacts(searchQuery:String?){
+//        self.contactManager.fetchAllContacts(searchQuery ,completion: { [unowned self] people,error in
+//            if (error == nil) {
+//                if let _ = searchQuery {
+//                    self.output?.showFilteredContacts(people)
+//                }else{
+//                    self.output?.showContacts(people)
+//                }
+//            }else{
+//                self.output?.showError(error)
+//            }
+//        })
+//    }
 }

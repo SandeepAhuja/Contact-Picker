@@ -54,8 +54,10 @@ class DFGAddressBookAccessRoutine: DFGAddressBookAccessBaseRoutine {
         }else{
             if self.ref.errorRef == nil {
                 ABAddressBookRequestAccessWithCompletion(self.ref.addressBook) { granted, error in
-                    if completionBlock != nil {
-                        completionBlock!(granted: granted, error: error as NSError)
+                    if completionBlock != nil && granted {
+                        completionBlock!(granted: granted, error: nil)
+                    }else{
+                        completionBlock!(granted: false, error: error as NSError)
                     }
                 }
             }else {

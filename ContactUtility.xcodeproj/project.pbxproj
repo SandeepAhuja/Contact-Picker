@@ -23,25 +23,31 @@
 		673F82CC1CBCEB9F0088FA1C /* ContactViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 673F82CB1CBCEB9E0088FA1C /* ContactViewController.xib */; };
 		67B8F1141CBE40630081B64F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B8F1121CBE40630081B64F /* BaseViewController.swift */; };
 		67B8F1151CBE40630081B64F /* RootWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B8F1131CBE40630081B64F /* RootWireFrame.swift */; };
-		67B8F11B1CBE406E0081B64F /* ContactExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B8F1161CBE406E0081B64F /* ContactExtractor.swift */; };
-		67B8F11C1CBE406E0081B64F /* ContactExtractorPlus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B8F1171CBE406E0081B64F /* ContactExtractorPlus.swift */; };
-		67B8F11D1CBE406E0081B64F /* ContactRecordBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B8F1181CBE406E0081B64F /* ContactRecordBuilder.swift */; };
-		67B8F11E1CBE406E0081B64F /* ImageExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B8F1191CBE406E0081B64F /* ImageExtractor.swift */; };
-		67B8F11F1CBE406E0081B64F /* UIImage+Thumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B8F11A1CBE406E0081B64F /* UIImage+Thumbnail.swift */; };
 		67C538CE1CAAAA9A00CCBFEC /* ContactDisplayData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C538CD1CAAAA9A00CCBFEC /* ContactDisplayData.swift */; };
 		67C538D01CAAAE3B00CCBFEC /* ContactDisplaySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C538CF1CAAAE3B00CCBFEC /* ContactDisplaySection.swift */; };
 		67C538D21CAAAE7C00CCBFEC /* ContactDisplayItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C538D11CAAAE7C00CCBFEC /* ContactDisplayItem.swift */; };
 		67E6A8041CAB93F8009B3234 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67E6A8031CAB93F8009B3234 /* Contacts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		67E6A8061CAB9406009B3234 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67E6A8051CAB9406009B3234 /* AddressBook.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		67E9EB051CC12FFE00DB461D /* AddressBookWrapperRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E9EAF41CC12FFE00DB461D /* AddressBookWrapperRef.swift */; };
+		67E9EB061CC12FFE00DB461D /* ContactExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E9EAF51CC12FFE00DB461D /* ContactExtractor.swift */; };
+		67E9EB071CC12FFE00DB461D /* ContactExtractorPlus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E9EAF61CC12FFE00DB461D /* ContactExtractorPlus.swift */; };
+		67E9EB081CC12FFE00DB461D /* ContactRecordBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E9EAF71CC12FFE00DB461D /* ContactRecordBuilder.swift */; };
+		67E9EB091CC12FFE00DB461D /* DFGAddressBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E9EAF81CC12FFE00DB461D /* DFGAddressBook.swift */; };
+		67E9EB0A1CC12FFE00DB461D /* DFGAddressBookAccessRoutine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E9EAF91CC12FFE00DB461D /* DFGAddressBookAccessRoutine.swift */; };
+		67E9EB0B1CC12FFE00DB461D /* DFGAddressBookBaseRoutine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E9EAFA1CC12FFE00DB461D /* DFGAddressBookBaseRoutine.swift */; };
+		67E9EB0C1CC12FFE00DB461D /* DFGAddressBookContactRoutine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E9EAFB1CC12FFE00DB461D /* DFGAddressBookContactRoutine.swift */; };
+		67E9EB0D1CC12FFE00DB461D /* DFGAddressBookWrapperRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E9EAFC1CC12FFE00DB461D /* DFGAddressBookWrapperRef.swift */; };
+		67E9EB0E1CC12FFE00DB461D /* DFGContactExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E9EAFD1CC12FFE00DB461D /* DFGContactExtractor.swift */; };
+		67E9EB0F1CC12FFE00DB461D /* DFGContactExtractorPlus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E9EAFE1CC12FFE00DB461D /* DFGContactExtractorPlus.swift */; };
+		67E9EB101CC12FFE00DB461D /* DFGContactListBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E9EAFF1CC12FFE00DB461D /* DFGContactListBuilder.swift */; };
+		67E9EB111CC12FFE00DB461D /* DFGContactRecordBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E9EB001CC12FFE00DB461D /* DFGContactRecordBuilder.swift */; };
+		67E9EB121CC12FFE00DB461D /* DFGImageExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E9EB011CC12FFE00DB461D /* DFGImageExtractor.swift */; };
+		67E9EB131CC12FFE00DB461D /* DFGTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E9EB021CC12FFE00DB461D /* DFGTypes.swift */; };
+		67E9EB141CC12FFE00DB461D /* ImageExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E9EB031CC12FFE00DB461D /* ImageExtractor.swift */; };
+		67E9EB151CC12FFE00DB461D /* UIImage+Thumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E9EB041CC12FFE00DB461D /* UIImage+Thumbnail.swift */; };
 		67EB27911CB7D258005C8717 /* ContactName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67EB27901CB7D258005C8717 /* ContactName.swift */; };
 		67EB27931CB7D45C005C8717 /* ContactPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67EB27921CB7D45C005C8717 /* ContactPhone.swift */; };
 		67F389EF1CBB8CAE0063FEE0 /* ContactBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F389EE1CBB8CAE0063FEE0 /* ContactBuilderTests.swift */; };
-		67FA0D091CBF5F320019148E /* AddressBookWrapperRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FA0D081CBF5F320019148E /* AddressBookWrapperRef.swift */; };
-		67FA0D0B1CBF62700019148E /* DFGAddressBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FA0D0A1CBF62700019148E /* DFGAddressBook.swift */; };
-		67FA0D0D1CBF752C0019148E /* DFGContactField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FA0D0C1CBF752C0019148E /* DFGContactField.swift */; };
-		67FA0D0F1CBF7DF70019148E /* DFGAddressBookAccessRoutine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FA0D0E1CBF7DF70019148E /* DFGAddressBookAccessRoutine.swift */; };
-		67FA0D131CBF919C0019148E /* DFGAddressBookBaseRoutine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FA0D121CBF919C0019148E /* DFGAddressBookBaseRoutine.swift */; };
-		67FA0D151CBF94630019148E /* DFGAddressBookContactRoutine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FA0D141CBF94630019148E /* DFGAddressBookContactRoutine.swift */; };
 		67FA98061CA95CC300A15C2F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FA98051CA95CC300A15C2F /* AppDelegate.swift */; };
 		67FA980F1CA95CC300A15C2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67FA980E1CA95CC300A15C2F /* Assets.xcassets */; };
 		67FA981D1CA95CC300A15C2F /* ContactUtilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FA981C1CA95CC300A15C2F /* ContactUtilityTests.swift */; };
@@ -84,25 +90,31 @@
 		673F82CB1CBCEB9E0088FA1C /* ContactViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactViewController.xib; sourceTree = "<group>"; };
 		67B8F1121CBE40630081B64F /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseViewController.swift; path = ContactLib/Common/View/BaseViewController.swift; sourceTree = SOURCE_ROOT; };
 		67B8F1131CBE40630081B64F /* RootWireFrame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RootWireFrame.swift; path = ContactLib/Common/View/RootWireFrame.swift; sourceTree = SOURCE_ROOT; };
-		67B8F1161CBE406E0081B64F /* ContactExtractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContactExtractor.swift; path = ContactLib/Common/Category/ContactExtractor.swift; sourceTree = SOURCE_ROOT; };
-		67B8F1171CBE406E0081B64F /* ContactExtractorPlus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContactExtractorPlus.swift; path = ContactLib/Common/Category/ContactExtractorPlus.swift; sourceTree = SOURCE_ROOT; };
-		67B8F1181CBE406E0081B64F /* ContactRecordBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContactRecordBuilder.swift; path = ContactLib/Common/Category/ContactRecordBuilder.swift; sourceTree = SOURCE_ROOT; };
-		67B8F1191CBE406E0081B64F /* ImageExtractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageExtractor.swift; path = ContactLib/Common/Category/ImageExtractor.swift; sourceTree = SOURCE_ROOT; };
-		67B8F11A1CBE406E0081B64F /* UIImage+Thumbnail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIImage+Thumbnail.swift"; path = "ContactLib/Common/Category/UIImage+Thumbnail.swift"; sourceTree = SOURCE_ROOT; };
 		67C538CD1CAAAA9A00CCBFEC /* ContactDisplayData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactDisplayData.swift; sourceTree = "<group>"; };
 		67C538CF1CAAAE3B00CCBFEC /* ContactDisplaySection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactDisplaySection.swift; sourceTree = "<group>"; };
 		67C538D11CAAAE7C00CCBFEC /* ContactDisplayItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactDisplayItem.swift; sourceTree = "<group>"; };
 		67E6A8031CAB93F8009B3234 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
 		67E6A8051CAB9406009B3234 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		67E9EAF41CC12FFE00DB461D /* AddressBookWrapperRef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressBookWrapperRef.swift; sourceTree = "<group>"; };
+		67E9EAF51CC12FFE00DB461D /* ContactExtractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactExtractor.swift; sourceTree = "<group>"; };
+		67E9EAF61CC12FFE00DB461D /* ContactExtractorPlus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactExtractorPlus.swift; sourceTree = "<group>"; };
+		67E9EAF71CC12FFE00DB461D /* ContactRecordBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactRecordBuilder.swift; sourceTree = "<group>"; };
+		67E9EAF81CC12FFE00DB461D /* DFGAddressBook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DFGAddressBook.swift; sourceTree = "<group>"; };
+		67E9EAF91CC12FFE00DB461D /* DFGAddressBookAccessRoutine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DFGAddressBookAccessRoutine.swift; sourceTree = "<group>"; };
+		67E9EAFA1CC12FFE00DB461D /* DFGAddressBookBaseRoutine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DFGAddressBookBaseRoutine.swift; sourceTree = "<group>"; };
+		67E9EAFB1CC12FFE00DB461D /* DFGAddressBookContactRoutine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DFGAddressBookContactRoutine.swift; sourceTree = "<group>"; };
+		67E9EAFC1CC12FFE00DB461D /* DFGAddressBookWrapperRef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DFGAddressBookWrapperRef.swift; sourceTree = "<group>"; };
+		67E9EAFD1CC12FFE00DB461D /* DFGContactExtractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DFGContactExtractor.swift; sourceTree = "<group>"; };
+		67E9EAFE1CC12FFE00DB461D /* DFGContactExtractorPlus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DFGContactExtractorPlus.swift; sourceTree = "<group>"; };
+		67E9EAFF1CC12FFE00DB461D /* DFGContactListBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DFGContactListBuilder.swift; sourceTree = "<group>"; };
+		67E9EB001CC12FFE00DB461D /* DFGContactRecordBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DFGContactRecordBuilder.swift; sourceTree = "<group>"; };
+		67E9EB011CC12FFE00DB461D /* DFGImageExtractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DFGImageExtractor.swift; sourceTree = "<group>"; };
+		67E9EB021CC12FFE00DB461D /* DFGTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DFGTypes.swift; sourceTree = "<group>"; };
+		67E9EB031CC12FFE00DB461D /* ImageExtractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageExtractor.swift; sourceTree = "<group>"; };
+		67E9EB041CC12FFE00DB461D /* UIImage+Thumbnail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Thumbnail.swift"; sourceTree = "<group>"; };
 		67EB27901CB7D258005C8717 /* ContactName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactName.swift; sourceTree = "<group>"; };
 		67EB27921CB7D45C005C8717 /* ContactPhone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactPhone.swift; sourceTree = "<group>"; };
 		67F389EE1CBB8CAE0063FEE0 /* ContactBuilderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactBuilderTests.swift; sourceTree = "<group>"; };
-		67FA0D081CBF5F320019148E /* AddressBookWrapperRef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressBookWrapperRef.swift; sourceTree = "<group>"; };
-		67FA0D0A1CBF62700019148E /* DFGAddressBook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DFGAddressBook.swift; sourceTree = "<group>"; };
-		67FA0D0C1CBF752C0019148E /* DFGContactField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DFGContactField.swift; sourceTree = "<group>"; };
-		67FA0D0E1CBF7DF70019148E /* DFGAddressBookAccessRoutine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DFGAddressBookAccessRoutine.swift; sourceTree = "<group>"; };
-		67FA0D121CBF919C0019148E /* DFGAddressBookBaseRoutine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DFGAddressBookBaseRoutine.swift; sourceTree = "<group>"; };
-		67FA0D141CBF94630019148E /* DFGAddressBookContactRoutine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DFGAddressBookContactRoutine.swift; sourceTree = "<group>"; };
 		67FA98021CA95CC300A15C2F /* ContactUtility.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContactUtility.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		67FA98051CA95CC300A15C2F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = ../AppDelegate.swift; sourceTree = "<group>"; };
 		67FA980E1CA95CC300A15C2F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
@@ -245,24 +257,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		6705D5B41CAA4F1E002EA3BB /* Category */ = {
-			isa = PBXGroup;
-			children = (
-				67B8F1161CBE406E0081B64F /* ContactExtractor.swift */,
-				67B8F1171CBE406E0081B64F /* ContactExtractorPlus.swift */,
-				67B8F1181CBE406E0081B64F /* ContactRecordBuilder.swift */,
-				67B8F1191CBE406E0081B64F /* ImageExtractor.swift */,
-				67B8F11A1CBE406E0081B64F /* UIImage+Thumbnail.swift */,
-				67FA0D081CBF5F320019148E /* AddressBookWrapperRef.swift */,
-				67FA0D0A1CBF62700019148E /* DFGAddressBook.swift */,
-				67FA0D0C1CBF752C0019148E /* DFGContactField.swift */,
-				67FA0D0E1CBF7DF70019148E /* DFGAddressBookAccessRoutine.swift */,
-				67FA0D121CBF919C0019148E /* DFGAddressBookBaseRoutine.swift */,
-				67FA0D141CBF94630019148E /* DFGAddressBookContactRoutine.swift */,
-			);
-			path = Category;
-			sourceTree = "<group>";
-		};
 		6705D5BF1CAA8743002EA3BB /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -271,6 +265,30 @@
 			);
 			path = View;
 			sourceTree = "<group>";
+		};
+		67E9EAF31CC12FFE00DB461D /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				67E9EAF41CC12FFE00DB461D /* AddressBookWrapperRef.swift */,
+				67E9EAF51CC12FFE00DB461D /* ContactExtractor.swift */,
+				67E9EAF61CC12FFE00DB461D /* ContactExtractorPlus.swift */,
+				67E9EAF71CC12FFE00DB461D /* ContactRecordBuilder.swift */,
+				67E9EAF81CC12FFE00DB461D /* DFGAddressBook.swift */,
+				67E9EAF91CC12FFE00DB461D /* DFGAddressBookAccessRoutine.swift */,
+				67E9EAFA1CC12FFE00DB461D /* DFGAddressBookBaseRoutine.swift */,
+				67E9EAFB1CC12FFE00DB461D /* DFGAddressBookContactRoutine.swift */,
+				67E9EAFC1CC12FFE00DB461D /* DFGAddressBookWrapperRef.swift */,
+				67E9EAFD1CC12FFE00DB461D /* DFGContactExtractor.swift */,
+				67E9EAFE1CC12FFE00DB461D /* DFGContactExtractorPlus.swift */,
+				67E9EAFF1CC12FFE00DB461D /* DFGContactListBuilder.swift */,
+				67E9EB001CC12FFE00DB461D /* DFGContactRecordBuilder.swift */,
+				67E9EB011CC12FFE00DB461D /* DFGImageExtractor.swift */,
+				67E9EB021CC12FFE00DB461D /* DFGTypes.swift */,
+				67E9EB031CC12FFE00DB461D /* ImageExtractor.swift */,
+				67E9EB041CC12FFE00DB461D /* UIImage+Thumbnail.swift */,
+			);
+			path = Library;
+			sourceTree = SOURCE_ROOT;
 		};
 		67FA97F91CA95CC300A15C2F = {
 			isa = PBXGroup;
@@ -298,6 +316,7 @@
 		67FA98041CA95CC300A15C2F /* ContactUtility */ = {
 			isa = PBXGroup;
 			children = (
+				67E9EAF31CC12FFE00DB461D /* Library */,
 				67FA98351CA95D1200A15C2F /* Classes */,
 				67FA98391CA95DAF00A15C2F /* Resources */,
 				67FA98411CA95DF900A15C2F /* Supporting Files */,
@@ -342,7 +361,6 @@
 			isa = PBXGroup;
 			children = (
 				6705D5BF1CAA8743002EA3BB /* View */,
-				6705D5B41CAA4F1E002EA3BB /* Category */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -506,34 +524,40 @@
 			buildActionMask = 2147483647;
 			files = (
 				67EB27911CB7D258005C8717 /* ContactName.swift in Sources */,
-				67FA0D131CBF919C0019148E /* DFGAddressBookBaseRoutine.swift in Sources */,
+				67E9EB091CC12FFE00DB461D /* DFGAddressBook.swift in Sources */,
+				67E9EB121CC12FFE00DB461D /* DFGImageExtractor.swift in Sources */,
 				6705D5C71CAA8EC2002EA3BB /* ContactModuleInterface.swift in Sources */,
-				67B8F11E1CBE406E0081B64F /* ImageExtractor.swift in Sources */,
-				67FA0D0F1CBF7DF70019148E /* DFGAddressBookAccessRoutine.swift in Sources */,
+				67E9EB071CC12FFE00DB461D /* ContactExtractorPlus.swift in Sources */,
+				67E9EB111CC12FFE00DB461D /* DFGContactRecordBuilder.swift in Sources */,
 				67C538D01CAAAE3B00CCBFEC /* ContactDisplaySection.swift in Sources */,
-				67FA0D0B1CBF62700019148E /* DFGAddressBook.swift in Sources */,
 				67EB27931CB7D45C005C8717 /* ContactPhone.swift in Sources */,
+				67E9EB0D1CC12FFE00DB461D /* DFGAddressBookWrapperRef.swift in Sources */,
+				67E9EB051CC12FFE00DB461D /* AddressBookWrapperRef.swift in Sources */,
 				67B8F1141CBE40630081B64F /* BaseViewController.swift in Sources */,
 				6705D5C91CAA90B6002EA3BB /* ContactViewInterface.swift in Sources */,
+				67E9EB131CC12FFE00DB461D /* DFGTypes.swift in Sources */,
 				6705D5B31CAA4A06002EA3BB /* ContactDataManager.swift in Sources */,
-				67FA0D0D1CBF752C0019148E /* DFGContactField.swift in Sources */,
 				67C538CE1CAAAA9A00CCBFEC /* ContactDisplayData.swift in Sources */,
+				67E9EB151CC12FFE00DB461D /* UIImage+Thumbnail.swift in Sources */,
+				67E9EB0C1CC12FFE00DB461D /* DFGAddressBookContactRoutine.swift in Sources */,
+				67E9EB061CC12FFE00DB461D /* ContactExtractor.swift in Sources */,
 				6705D5BC1CAA6E4E002EA3BB /* ContactPresenter.swift in Sources */,
 				67C538D21CAAAE7C00CCBFEC /* ContactDisplayItem.swift in Sources */,
+				67E9EB0F1CC12FFE00DB461D /* DFGContactExtractorPlus.swift in Sources */,
+				67E9EB141CC12FFE00DB461D /* ImageExtractor.swift in Sources */,
+				67E9EB081CC12FFE00DB461D /* ContactRecordBuilder.swift in Sources */,
+				67E9EB101CC12FFE00DB461D /* DFGContactListBuilder.swift in Sources */,
 				67FA98061CA95CC300A15C2F /* AppDelegate.swift in Sources */,
 				6705D5BE1CAA7DF9002EA3BB /* ContactInteractorIO.swift in Sources */,
+				67E9EB0B1CC12FFE00DB461D /* DFGAddressBookBaseRoutine.swift in Sources */,
 				6705D5B01CAA49E3002EA3BB /* ContactViewController.swift in Sources */,
+				67E9EB0E1CC12FFE00DB461D /* DFGContactExtractor.swift in Sources */,
+				67E9EB0A1CC12FFE00DB461D /* DFGAddressBookAccessRoutine.swift in Sources */,
 				6705D5C31CAA87E2002EA3BB /* AppDependencies.swift in Sources */,
 				6705D5BA1CAA6253002EA3BB /* ContactInteractor.swift in Sources */,
-				67B8F11B1CBE406E0081B64F /* ContactExtractor.swift in Sources */,
-				67B8F11C1CBE406E0081B64F /* ContactExtractorPlus.swift in Sources */,
 				6705D5C51CAA884C002EA3BB /* ContactWireFrame.swift in Sources */,
-				67B8F11F1CBE406E0081B64F /* UIImage+Thumbnail.swift in Sources */,
 				67B8F1151CBE40630081B64F /* RootWireFrame.swift in Sources */,
-				67FA0D151CBF94630019148E /* DFGAddressBookContactRoutine.swift in Sources */,
-				67FA0D091CBF5F320019148E /* AddressBookWrapperRef.swift in Sources */,
 				673F82A01CBCBC660088FA1C /* ResultViewController.swift in Sources */,
-				67B8F11D1CBE406E0081B64F /* ContactRecordBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

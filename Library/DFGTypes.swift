@@ -1,8 +1,8 @@
 //
-//  DFGContactField.swift
+//  DFGTypes.swift
 //  ContactUtility
 //
-//  Created by Hitesh on 14/04/16.
+//  Created by Hitesh on 15/04/16.
 //  Copyright © 2016 Daffodil. All rights reserved.
 //
 
@@ -16,7 +16,7 @@ struct DFGAddressBookAccess {
 }
 
 struct DFGContactFields : OptionSetType {
-    let rawValue : Int
+    let rawValue : Int64
     
     static let None = DFGContactFields(rawValue: 0)
     static let DFGContactFieldName = DFGContactFields(rawValue: 1 << 0)
@@ -39,7 +39,7 @@ struct DFGContactFields : OptionSetType {
     static let DFGContactFieldRecordDate = DFGContactFields(rawValue: 1 << 16)
     static let DFGContactFieldDefault = [DFGContactFieldName,DFGContactFieldPhonesOnly,DFGContactFieldThumbnail]
     static let DFGContactFieldAll = DFGContactFields(rawValue: 0xFFFFFFFF)
-
+    
 }
 
 struct DFGSocialNetworkType : OptionSetType {

@@ -13,6 +13,8 @@ import QuartzCore
 class ContactViewController: BaseViewController {
     
     // MARK: Properties
+    var selectedContacts:[String] = []
+    let addressBook = DFGAddressBook()
     var eventHandler : ContactModuleInterface?
     var dataProperty : ContactDisplayData?
     var sectionIndexes :[String]?
@@ -24,18 +26,43 @@ class ContactViewController: BaseViewController {
     var indexedSearchVisible :Bool?
     @IBOutlet var noContentView : UIView!
     
+    
     // MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.configureDependencies()
         self.configureView()
+    }
+    
+    func configureDependencies(){
+        self.addressBook.fieldsMask = DFGContactFields.DFGContactFieldDefault
+        self.addressBook.sortDescriptors = [NSSortDescriptor(key: "name.firstName", ascending: true),
+            NSSortDescriptor(key: "name.lastName", ascending: true)]
+        
+        self.addressBook.filterBlock = {
+            (contact: ContactDisplayItem) -> Bool in
+            if let phones = contact.phones {
+                return phones.count > 0
+            }
+            return false
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
-        eventHandler?.updateContacts()
+        self.loadContacts()
     }
-    
+
     // MARK: Selector
+    func loadContacts() {
+        self.addressBook.loadContacts({[unowned self]
+            (contacts: [ContactDisplayItem]?, error: NSError?) in
+            self.dataProperty = DFGContactRecordBuilder.contactDisplayData(contacts)
+            dispatch_async(dispatch_get_main_queue(),{ () -> Void in
+                self.reloadEntries()
+            })
+        })
+    }
     func configureView() {
         strongTableView = self.tableView
         self.tableView.allowsMultipleSelection = self.allowMultipleSelection != nil ? self.allowMultipleSelection! : false
@@ -85,6 +112,13 @@ class ContactViewController: BaseViewController {
         else {
             upcomingItem = resultController.filteredProducts[indexPath.row]
             upcomingItem.isSelected = !upcomingItem.isSelected
+            if upcomingItem.isSelected {
+                selectedContacts.append(upcomingItem.identifier!)
+            }else{
+                if  let index:Int = selectedContacts.indexOf(upcomingItem.identifier!) where index != NSIntegerMax{
+                    selectedContacts.removeAtIndex(index)
+                }
+            }
             resultController.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
         }
     }
@@ -174,7 +208,27 @@ extension ContactViewController : UISearchResultsUpdating,UISearchBarDelegate {
         
         let lockQueue = dispatch_queue_create("com.test.LockQueue", nil)
         dispatch_sync(lockQueue) {
-            self.eventHandler?.searchContacts(strippedString)
+            self.addressBook.fieldsMask = DFGContactFields.DFGContactFieldDefault
+            self.addressBook.sortDescriptors = [NSSortDescriptor(key: "name.firstName", ascending: true),
+                NSSortDescriptor(key: "name.lastName", ascending: true)]
+            
+            self.addressBook.filterBlock = {
+                (contact: ContactDisplayItem) -> Bool in
+                if let name = contact.name?.firstName, lastName = contact.name?.lastName {
+                    let found:Bool = name.containsString(strippedString) || lastName.containsString(strippedString)
+                    return found
+                }
+                return false
+            }
+            
+            self.addressBook.loadContacts({[unowned self]
+                (contacts: [ContactDisplayItem]?, error: NSError?) in
+                dispatch_async(dispatch_get_main_queue(), { [unowned self] () -> Void in
+                    if contacts != nil{
+                        self.updateFilteredContacts(contacts!)
+                    }
+                })
+            })
         }
         
     }

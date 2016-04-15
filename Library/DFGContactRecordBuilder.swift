@@ -1,8 +1,8 @@
 //
-//  ContactRecordBuilder.swift
+//  DFGContactRecordBuilder.swift
 //  ContactUtility
 //
-//  Created by Hitesh on 08/04/16.
+//  Created by Hitesh on 15/04/16.
 //  Copyright © 2016 Daffodil. All rights reserved.
 //
 
@@ -10,18 +10,18 @@ import UIKit
 import AddressBook
 import Contacts
 
-class ContactRecordBuilder: NSObject {
+class DFGContactRecordBuilder: NSObject {
     var extractor:AnyObject
     
     override init() {
         if #available(iOS 9.0, *) {
-            extractor = ContactExtractorPlus()
+            extractor = DFGContactExtractorPlus()
         } else {
-            extractor = ContactExtractor()
+            extractor = DFGContactExtractor()
         }
     }
     
-    func contactWithRecord(record:AnyObject,fieldMask:DFGContactFields)->ContactDisplayItem?{
+    func contactWithRecord(record:AnyObject,fieldMask:[DFGContactFields])->ContactDisplayItem?{
         if #available(iOS 9.0, *) {
             return self.contactWithCNContact(record as! CNContact,fieldMask: fieldMask)
         } else {
@@ -30,8 +30,8 @@ class ContactRecordBuilder: NSObject {
         }
     }
     
-    func contactWithRecordRef(recordRef:ABRecordRef,fieldMask:DFGContactFields)->ContactDisplayItem?{
-        let localExtractor:ContactExtractor = self.extractor as! ContactExtractor
+    func contactWithRecordRef(recordRef:ABRecordRef,fieldMask:[DFGContactFields])->ContactDisplayItem?{
+        let localExtractor:DFGContactExtractor = self.extractor as! DFGContactExtractor
         localExtractor.person = recordRef
         let contactItem = ContactDisplayItem()
         contactItem.identifier = String(ABRecordGetRecordID(recordRef))
@@ -42,15 +42,15 @@ class ContactRecordBuilder: NSObject {
             contactItem.phones = localExtractor.phonesWithLabels(true) as? [ContactPhone]
         }
         if fieldMask.contains(DFGContactFields.DFGContactFieldThumbnail){
-            contactItem.thumbnailImage = ImageExtractor.thumbnailWithRecordRef(recordRef)
+            contactItem.thumbnailImage = DFGImageExtractor.thumbnailWithRecordRef(recordRef)
         }
-
+        
         return contactItem
     }
     
     @available(iOS 9.0, *)
-    func contactWithCNContact(contact:CNContact,fieldMask:DFGContactFields)->ContactDisplayItem? {
-        let localExtractor:ContactExtractorPlus = self.extractor as! ContactExtractorPlus
+    func contactWithCNContact(contact:CNContact,fieldMask:[DFGContactFields])->ContactDisplayItem? {
+        let localExtractor:DFGContactExtractorPlus = self.extractor as! DFGContactExtractorPlus
         localExtractor.contact = contact
         let contactItem = ContactDisplayItem()
         contactItem.identifier = contact.identifier
@@ -62,12 +62,12 @@ class ContactRecordBuilder: NSObject {
             contactItem.phones = localExtractor.phonesWithLabels(true)
         }
         if fieldMask.contains(DFGContactFields.DFGContactFieldThumbnail){
-            contactItem.thumbnailImage = ImageExtractor.thumbnailWithRecordRef(contact)
+            contactItem.thumbnailImage = DFGImageExtractor.thumbnailWithRecordRef(contact)
         }
         return contactItem
     }
     
-    func getIndexedContacts(collection:[ContactDisplayItem])->[String: [ContactDisplayItem]]{
+    class func getIndexedContacts(collection:[ContactDisplayItem])->[String: [ContactDisplayItem]]{
         var indexedAuthors = [String: [ContactDisplayItem]]()
         if collection.count > 0 {
             for person in collection {
@@ -102,37 +102,19 @@ class ContactRecordBuilder: NSObject {
         }
         return indexedAuthors
     }
-
-    func contactDisplayItemsCollection(contacts:[AnyObject]) -> [ContactDisplayItem]{
-        var collection:[ContactDisplayItem] = []
-        for contact in contacts {
-            if let item:ContactDisplayItem = self.contactWithRecord(contact) {
-                collection.append(item)
-            }
-        }
-        return collection
-    }
     
-    func contactDisplayData(contacts:[AnyObject]?)->ContactDisplayData?{
+   class func contactDisplayData(contacts:[ContactDisplayItem]?)->ContactDisplayData?{
         var contactDisplayData:ContactDisplayData? = nil
         if let people = contacts {
-            var collection:[ContactDisplayItem] = []
-            
-            for contact in people {
-                if let item:ContactDisplayItem = self.contactWithRecord(contact){
-                    collection.append(item)
-                }
-            }
-            
-            if collection.count > 0 {
-                let indexedAuthors = self.getIndexedContacts(collection)
+            if people.count > 0 {
+                let indexedAuthors = self.getIndexedContacts(people)
                 var sections = [ContactDisplaySection]()
                 for (key,value) in indexedAuthors {
                     if let section = ContactDisplaySection(name: key, items: value as [ContactDisplayItem]){
                         sections.append(section)
                     }
                 }//end of for loop
-                    
+                
                 sections.sortInPlace{$0.name!.compare ($1.name!) == .OrderedAscending}
                 if let section = sections.first {
                     if section.name == "#" {
@@ -157,3 +139,4 @@ class ContactRecordBuilder: NSObject {
     }
     
 }
+
