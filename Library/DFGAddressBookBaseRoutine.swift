@@ -9,8 +9,8 @@
 import UIKit
 
 class DFGAddressBookAccessBaseRoutine: NSObject {
-    var ref:AddressBookWrapperRef
-    init(addressBook:AddressBookWrapperRef){
+    var ref:DFGAddressBookWrapperRef
+    init(addressBook:DFGAddressBookWrapperRef){
         self.ref = addressBook
     }
 }

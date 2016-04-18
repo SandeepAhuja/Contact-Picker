@@ -11,7 +11,7 @@ import AddressBook
 import Contacts
 
 class DFGAddressBookAccessRoutine: DFGAddressBookAccessBaseRoutine {
-    override init(addressBook: AddressBookWrapperRef) {
+    override init(addressBook: DFGAddressBookWrapperRef) {
         super.init(addressBook: addressBook)
     }
     

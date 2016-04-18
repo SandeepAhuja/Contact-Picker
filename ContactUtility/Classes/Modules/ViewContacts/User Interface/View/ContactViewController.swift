@@ -13,10 +13,9 @@ import QuartzCore
 class ContactViewController: BaseViewController {
     
     // MARK: Properties
-    var selectedContacts:[String] = []
     let addressBook = DFGAddressBook()
-    var eventHandler : ContactModuleInterface?
     var dataProperty : ContactDisplayData?
+    var allContacts : [ContactDisplayItem]?
     var sectionIndexes :[String]?
     var searchController : UISearchController!
     var resultController : ResultViewController!
@@ -32,8 +31,10 @@ class ContactViewController: BaseViewController {
         super.viewDidLoad()
         self.configureDependencies()
         self.configureView()
+        self.loadContacts()
     }
-    
+
+    // MARK: Selector
     func configureDependencies(){
         self.addressBook.fieldsMask = DFGContactFields.DFGContactFieldDefault
         self.addressBook.sortDescriptors = [NSSortDescriptor(key: "name.firstName", ascending: true),
@@ -48,29 +49,33 @@ class ContactViewController: BaseViewController {
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(true)
-        self.loadContacts()
-    }
-
-    // MARK: Selector
-    func loadContacts() {
-        self.addressBook.loadContacts({[unowned self]
-            (contacts: [ContactDisplayItem]?, error: NSError?) in
-            self.dataProperty = DFGContactRecordBuilder.contactDisplayData(contacts)
-            dispatch_async(dispatch_get_main_queue(),{ () -> Void in
-                self.reloadEntries()
-            })
-        })
-    }
     func configureView() {
         strongTableView = self.tableView
         self.tableView.allowsMultipleSelection = self.allowMultipleSelection != nil ? self.allowMultipleSelection! : false
         self.addRemoveSearchbar(self.searchBarVisible != nil ? self.searchBarVisible! : false)
         self.addRemoveIndexedSearch(self.indexedSearchVisible != nil ? self.indexedSearchVisible! : false)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action:"doneButtonPressed:")
     }
-  
     
+
+    func loadContacts() {
+        self.addressBook.loadContacts({[unowned self]
+            (contacts: [ContactDisplayItem]?, error: NSError?) in
+            self.allContacts = NSArray(array: contacts!) as? [ContactDisplayItem]
+            self.dataProperty = DFGContactRecordBuilder.contactDisplayData(self.allContacts)
+            dispatch_async(dispatch_get_main_queue(),{ () -> Void in
+                self.reloadEntries()
+            })
+        })
+    }
+    
+    func doneButtonPressed(sender:AnyObject){
+        let scvc:SelectedContactsTableViewController = SelectedContactsTableViewController(nibName: "SelectedContactsTableViewController", bundle: nil)
+        scvc.allContacts = NSArray(array: self.selectedContacts) as! [String]
+        self.navigationController?.pushViewController(scvc, animated: true)        
+        
+    }
+     
     // MARK: TableView Delegate and Datasource
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         var numberOfSections = dataProperty?.sections!.count
@@ -106,22 +111,19 @@ class ContactViewController: BaseViewController {
 
         if tableView === strongTableView {
             upcomingItem = upcomingSection!.items[indexPath.row]
-            upcomingItem.isSelected = !upcomingItem.isSelected
+            self.manageSelectedContacts(upcomingItem)
+            resultController.manageSelectedContacts(upcomingItem)
             tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
         }
         else {
             upcomingItem = resultController.filteredProducts[indexPath.row]
-            upcomingItem.isSelected = !upcomingItem.isSelected
-            if upcomingItem.isSelected {
-                selectedContacts.append(upcomingItem.identifier!)
-            }else{
-                if  let index:Int = selectedContacts.indexOf(upcomingItem.identifier!) where index != NSIntegerMax{
-                    selectedContacts.removeAtIndex(index)
-                }
-            }
+            resultController.manageSelectedContacts(upcomingItem)
+            self.manageSelectedContacts(upcomingItem)
             resultController.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
         }
+        
     }
+    
     override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]?{
         return sectionIndexes
     }
@@ -137,9 +139,11 @@ class ContactViewController: BaseViewController {
 // MARK: ContactViewInterface
 extension ContactViewController : ContactViewInterface {
     func updateFilteredContacts(data:[ContactDisplayItem]){
-        let resultsController = searchController.searchResultsController as! ResultViewController
-        resultsController.filteredProducts = data
-        resultsController.tableView.reloadData()
+        dispatch_async(dispatch_get_main_queue()) {[unowned self] () -> Void in
+            let resultsController = self.searchController.searchResultsController as! ResultViewController
+            resultsController.filteredProducts = data
+            resultsController.tableView.reloadData()
+        }
     }
     
     func showFetchedContactsData(data:ContactDisplayData!){
@@ -161,10 +165,11 @@ extension ContactViewController : ContactViewInterface {
                 self.resultController = ResultViewController()
                 
                 self.resultController!.tableView.delegate = self
-
+                
                 self.searchController = UISearchController(searchResultsController: resultController)
                 self.searchController.hidesNavigationBarDuringPresentation = true
                 self.searchController.searchResultsUpdater = self
+                self.searchController.delegate = self
                 self.searchController.searchBar.sizeToFit()
                 tableView.tableHeaderView = searchController.searchBar
                 
@@ -206,33 +211,66 @@ extension ContactViewController : UISearchResultsUpdating,UISearchBarDelegate {
         let whitespaceCharacterSet = NSCharacterSet.whitespaceCharacterSet()
         let strippedString = searchController.searchBar.text!.stringByTrimmingCharactersInSet(whitespaceCharacterSet)
         
-        let lockQueue = dispatch_queue_create("com.test.LockQueue", nil)
-        dispatch_sync(lockQueue) {
-            self.addressBook.fieldsMask = DFGContactFields.DFGContactFieldDefault
-            self.addressBook.sortDescriptors = [NSSortDescriptor(key: "name.firstName", ascending: true),
+        let sortDescriptors:[NSSortDescriptor] = [NSSortDescriptor(key: "name.firstName", ascending: true),
                 NSSortDescriptor(key: "name.lastName", ascending: true)]
             
-            self.addressBook.filterBlock = {
+        let filterBlock:DFGFilterContactBlock = {
                 (contact: ContactDisplayItem) -> Bool in
-                if let name = contact.name?.firstName, lastName = contact.name?.lastName {
-                    let found:Bool = name.containsString(strippedString) || lastName.containsString(strippedString)
-                    return found
-                }
+            if let name = contact.name?.firstName, lastName = contact.name?.lastName {
+                let found:Bool = name.localizedCaseInsensitiveContainsString(strippedString) || lastName.localizedCaseInsensitiveContainsString(strippedString)
+                return found
+            }else if let name = contact.name?.firstName {
+                let found:Bool = name.localizedCaseInsensitiveContainsString(strippedString)
+                return found
+            }else if let lastName = contact.name?.lastName {
+                let found:Bool = lastName.localizedCaseInsensitiveContainsString(strippedString)
+                return found
+            }else{
                 return false
             }
-            
-            self.addressBook.loadContacts({[unowned self]
-                (contacts: [ContactDisplayItem]?, error: NSError?) in
-                dispatch_async(dispatch_get_main_queue(), { [unowned self] () -> Void in
-                    if contacts != nil{
-                        self.updateFilteredContacts(contacts!)
-                    }
-                })
-            })
         }
+            
+    
+        let lockQueue = dispatch_queue_create("com.test.LockQueue", nil)
+        dispatch_sync(lockQueue) {
+            let listBuilder: DFGContactListBuilder = DFGContactListBuilder()
+            listBuilder.filterBlock = filterBlock
+            listBuilder.sortDescriptors = sortDescriptors
+            if let contactCollection:[ContactDisplayItem] = self.allContacts {
+                if let contacts = listBuilder.contactListWithAllContacts(contactCollection) {
+                    self.updateFilteredContacts(contacts)
+                }
+            }
+            
+            
+        }
+
         
     }
 }
 
+extension ContactViewController : UISearchControllerDelegate{
+    func presentSearchController(searchController: UISearchController) {
+        debugPrint("UISearchControllerDelegate invoked method: \(__FUNCTION__).")
+    }
+    
+    func willPresentSearchController(searchController: UISearchController) {
+        debugPrint("UISearchControllerDelegate invoked method: \(__FUNCTION__).")
+    }
+    
+    func didPresentSearchController(searchController: UISearchController) {
+        debugPrint("UISearchControllerDelegate invoked method: \(__FUNCTION__).")
+    }
+    
+    func willDismissSearchController(searchController: UISearchController) {
+        debugPrint("UISearchControllerDelegate invoked method: \(__FUNCTION__).")
 
+    }
+    
+    func didDismissSearchController(searchController: UISearchController) {
+        debugPrint("UISearchControllerDelegate invoked method: \(__FUNCTION__).")
+        self.reloadEntries()
+    }
+    
+}
 

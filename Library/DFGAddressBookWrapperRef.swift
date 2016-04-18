@@ -13,14 +13,14 @@ class DFGAddressBookWrapperRef: NSObject {
     var addressBook : AnyObject? = nil
     var errorRef:NSError? = nil
     
-    class var sharedInstance: AddressBookWrapperRef {
+    class var sharedInstance: DFGAddressBookWrapperRef {
         struct Static {
             static var onceToken: dispatch_once_t = 0
-            static var instance: AddressBookWrapperRef? = nil
+            static var instance: DFGAddressBookWrapperRef? = nil
             
         }
         dispatch_once(&Static.onceToken) {
-            Static.instance = AddressBookWrapperRef()
+            Static.instance = DFGAddressBookWrapperRef()
             
         }
         return Static.instance!

@@ -20,7 +20,6 @@ class ContactWireFrame: NSObject {
         viewController.searchBarVisible = true
         viewController.indexedSearchVisible = true
         viewController.allowMultipleSelection = true
-        viewController.eventHandler = contactPresenter
         contactViewController = viewController
         contactPresenter?.userInterface = viewController
         rootWireFrame?.showRootViewController(viewController, inWindow: window)

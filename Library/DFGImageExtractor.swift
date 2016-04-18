@@ -50,11 +50,10 @@ class DFGImageExtractor: NSObject {
     private class func imageWithRecordRef(recordRef:ABRecordRef,fullsize:Bool?)->UIImage? {
         let format:ABPersonImageFormat = fullsize! ? kABPersonImageFormatOriginalSize :
         kABPersonImageFormatThumbnail
-        if ABPersonHasImageData(recordRef) {
-            if let data:NSData = ABPersonCopyImageDataWithFormat(recordRef, format)?.takeRetainedValue() as? NSData{
+        if let data:NSData = ABPersonCopyImageDataWithFormat(recordRef, format)?.takeRetainedValue() as? NSData{
                 return UIImage(data: data, scale: UIScreen.mainScreen().scale)
-            }
         }
+        
         
         return nil
         

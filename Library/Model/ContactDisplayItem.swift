@@ -12,7 +12,6 @@ import AddressBook
 class ContactDisplayItem: NSObject {
     var identifier:String?
     var phones:[ContactPhone]?
-    var isSelected:Bool = false
     var thumbnailImage:UIImage?
     var name:ContactName?
 }

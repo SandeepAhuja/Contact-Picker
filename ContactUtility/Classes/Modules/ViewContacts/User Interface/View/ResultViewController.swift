@@ -24,7 +24,6 @@ class ResultViewController: BaseViewController {
         
         let upcomingItem = filteredProducts[indexPath.row]
         self.configureCell(cell, upcomingItem: upcomingItem)
-        
         return cell
     }
 

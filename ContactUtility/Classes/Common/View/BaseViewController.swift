@@ -8,21 +8,32 @@
 
 import UIKit
 
-class BaseViewController: UITableViewController {
+public class BaseViewController: UITableViewController {
+    var selectedContacts:[String] = [String]()
     static let cellIdentifier = "cell"
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         self.tableView?.registerClass(UITableViewCell.self, forCellReuseIdentifier:BaseViewController.cellIdentifier)
     }
 
-   
+    func manageSelectedContacts(selectedItem:ContactDisplayItem){
+        if selectedContacts.contains(selectedItem.identifier!) {
+            if  let index:Int = selectedContacts.indexOf(selectedItem.identifier!) where index != NSIntegerMax{
+                selectedContacts.removeAtIndex(index)
+            }
+        }else{
+            selectedContacts.append(selectedItem.identifier!)
+        }
+    }
+
     
     func configureCell(cell:UITableViewCell, upcomingItem:ContactDisplayItem){
-        if upcomingItem.isSelected == true{
+        if self.selectedContacts.contains(upcomingItem.identifier!) {
             cell.accessoryType = .Checkmark
         }else{
             cell.accessoryType = .None
         }
+
         cell.textLabel?.text = self.contactName(upcomingItem)
         
         

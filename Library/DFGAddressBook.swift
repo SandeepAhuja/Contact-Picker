@@ -17,7 +17,7 @@ class DFGAddressBook: NSObject {
     override init() {
         super.init()
         self.fieldsMask = DFGContactFields.DFGContactFieldDefault
-        let refWrapper:AddressBookWrapperRef = AddressBookWrapperRef.sharedInstance
+        let refWrapper : DFGAddressBookWrapperRef = DFGAddressBookWrapperRef.sharedInstance
         self.accessRoutine = DFGAddressBookAccessRoutine(addressBook: refWrapper)
         if refWrapper.errorRef == nil {
             self.contactRoutine = DFGAddressBookContactRoutine(addressBook: refWrapper)
@@ -37,14 +37,18 @@ class DFGAddressBook: NSObject {
         self.accessRoutine.requestAccessWithCompletion({[unowned self] (granted, error) -> Void in
             if granted {
                 var contacts : [ContactDisplayItem] = self.contactRoutine.allContactsWithContactFieldMask(self.fieldsMask)
-                contacts = listBuilder.contactListWithAllContacts(contacts)
+                contacts = listBuilder.contactListWithAllContacts(contacts)!
                 completion?(contacts,error)
             }
         })
 
     }
 
-    func loadContactByRecordID(recordId:NSNumber,completion:((ContactDisplayItem?,NSError?) -> Void)?){
+    func loadContactByRecordID(recordId:String,completion:((ContactDisplayItem?,NSError?) -> Void)?){
+        
+        if let contact = self.contactRoutine.contactWithRecordId(recordId, fieldMask: self.fieldsMask){
+            completion?(contact,nil)
+        }
         
     }
 

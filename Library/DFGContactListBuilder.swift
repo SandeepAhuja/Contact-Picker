@@ -15,7 +15,7 @@ class DFGContactListBuilder: NSObject {
         var filterBlock : DFGFilterContactBlock?
         var sortDescriptors : [NSSortDescriptor]?
                 
-        func contactListWithAllContacts(allContacts: [ContactDisplayItem]) -> [ContactDisplayItem] {
+        func contactListWithAllContacts(allContacts: [ContactDisplayItem]) -> [ContactDisplayItem]? {
             var mutableContacts: [ContactDisplayItem] = allContacts
             mutableContacts = self.filterContacts(mutableContacts)!
             mutableContacts = self.sortContacts(mutableContacts)!

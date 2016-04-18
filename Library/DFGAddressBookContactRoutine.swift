@@ -13,18 +13,18 @@ import Contacts
 
 class DFGAddressBookContactRoutine: DFGAddressBookAccessBaseRoutine {
     var contactBuilder:DFGContactRecordBuilder
-    override init(addressBook: AddressBookWrapperRef) {
+    override init(addressBook: DFGAddressBookWrapperRef) {
         self.contactBuilder = DFGContactRecordBuilder()
         super.init(addressBook: addressBook)
     }
     
-    func contactWithRecordId(recordId:NSNumber,fieldMask:[DFGContactFields])->ContactDisplayItem?{
+    func contactWithRecordId(recordId:String,fieldMask:[DFGContactFields])->ContactDisplayItem?{
         var contactItem:ContactDisplayItem?
         if self.ref.errorRef == nil {
             if #available (iOS 9.0, *) {
                 let keys = [CNContactFormatter.descriptorForRequiredKeysForStyle(.FullName),CNContactIdentifierKey,CNContactPhoneNumbersKey,CNContactThumbnailImageDataKey]
                 let fetchRequest = CNContactFetchRequest(keysToFetch:keys)
-                let predicate = CNContact.predicateForContactsWithIdentifiers([recordId.stringValue])
+                let predicate = CNContact.predicateForContactsWithIdentifiers([recordId])
                 fetchRequest.predicate = predicate
                 do{
                     let store = self.ref.addressBook as! CNContactStore
@@ -40,7 +40,7 @@ class DFGAddressBookContactRoutine: DFGAddressBookAccessBaseRoutine {
                 }
 
             }else {
-                if let recordRef:ABRecordRef = ABAddressBookGetPersonWithRecordID(self.ref.addressBook, recordId.intValue as ABRecordID).takeUnretainedValue() {
+                if let recordRef:ABRecordRef = ABAddressBookGetPersonWithRecordID(self.ref.addressBook, Int32(recordId)! as ABRecordID).takeUnretainedValue() {
                     contactItem = self.contactBuilder.contactWithRecordRef(recordRef,fieldMask: fieldMask)
                 }
             }

@@ -11,9 +11,9 @@ import AddressBook
 import Contacts
 
 class ContactDataManager: NSObject {
-    var sharedAddressbook : AddressBookWrapperRef?
+    var sharedAddressbook : DFGAddressBookWrapperRef?
     override init(){
-        sharedAddressbook = AddressBookWrapperRef.sharedInstance
+        sharedAddressbook = DFGAddressBookWrapperRef.sharedInstance
     }
 
     func fetchAllContacts(searchQuery:String?, completion:(([AnyObject]?,NSError?) -> Void)?){
