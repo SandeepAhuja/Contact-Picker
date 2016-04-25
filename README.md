@@ -1,7 +1,3 @@
-<img src="">
-
-[![Build Status]()]()
-
 ContactUtility is a wrapper on [AddressBook.framework](https://developer.apple.com/library/ios/documentation/AddressBook/Reference/AddressBook_iPhoneOS_Framework/_index.html), [Contacts.framework](https://developer.apple.com/library/watchos/documentation/Contacts/Reference/Contacts_Framework/index.html) that gives easy access to native address book without pain in a head.
 
 #### Features
@@ -31,28 +27,30 @@ let addressBook = DFGAddressBook()
 
 
 **Select contact fields bit-mask**
-
+```Swift
 Available fields:
-* DFGContactFieldName - *first name*, *last name*, *middle name*, *composite name*
-* DFGContactFieldJob - *company (organization)*, *job title*
-* DFGContactFieldThumbnail - *thumbnail* image
-* DFGContactFieldPhonesOnly - array of *phone numbers* disregarding *phone labels*
-* DFGContactFieldPhonesWithLabels - array *phones* with *original and localized labels*
-* DFGContactFieldEmailsOnly - array of *email addresses* disregarding *email labels*
-* DFGContactFieldEmailsWithLabels - array of *email addresses* with *original and localized labels*
-* DFGContactFieldAddressesWithLabels - array of contact *addresses* with *original and localized labels*
-* DFGContactFieldAddressesOnly - array of contact *addresses* disregarding *addresses labels*
-* DFGContactFieldSocialProfiles - array of contact *profiles in social networks*
-* DFGContactFieldBirthday - date of *birthday*
-* DFGContactFieldWebsites - array of strings with *website URLs*
-* DFGContactFieldNote - string with *notes*
-* DFGContactFieldRelatedPersons - array of *related persons*
-* DFGContactFieldLinkedRecordIDs - array of contact *linked records IDs*
-* DFGContactFieldSource - contact *source ID* and *source name*
-* DFGContactFieldDates - contact *dates* with *localized and original labels*
-* DFGContactFieldRecordDate - contact record *creation date* and *modification date*
-* DFGContactFieldDefault - contact *name and phones* without *labels*
-* DFGContactFieldAll - all contact fields described above
+* DFGContactFieldName - *first name*, *last name*, *middle name*, *composite name*.
+* DFGContactFieldJob - *company (organization)*, *job title*.
+* DFGContactFieldThumbnail - *thumbnail* image.
+* DFGContactFieldPhonesOnly - array of *phone numbers* disregarding *phone labels*.
+* DFGContactFieldPhonesWithLabels - array *phones* with *original and localized labels*.
+* DFGContactFieldEmailsOnly - array of *email addresses* disregarding *email labels*.
+* DFGContactFieldEmailsWithLabels - array of *email addresses* with *original and localized labels*.
+* DFGContactFieldAddressesWithLabels - array of contact *addresses* with *original and localized labels*.
+* DFGContactFieldAddressesOnly - array of contact *addresses* disregarding *addresses labels*.
+* DFGContactFieldSocialProfiles - array of contact *profiles in social networks*.
+* DFGContactFieldBirthday - date of *birthday*.
+* DFGContactFieldWebsites - array of strings with *website URLs*.
+* DFGContactFieldNote - string with *notes*.
+* DFGContactFieldRelatedPersons - array of *related persons*.
+* DFGContactFieldLinkedRecordIDs - array of contact *linked records IDs*.
+* DFGContactFieldSource - contact *source ID* and *source name*.
+* DFGContactFieldDates - contact *dates* with *localized and original labels*.
+* DFGContactFieldRecordDate - contact record *creation date* and *modification date*.
+* DFGContactFieldDefault - contact *name and phones* without *labels*.
+* DFGContactFieldAll - all contact fields described above.
+
+```
 
 > Contact `recordID` property is always available
 
@@ -60,6 +58,7 @@ Example of field mask with name and thumbnail:
 ```Swift
 let addressBook = DFGAddressBook()
 self.fieldsMask = DFGContactFields.DFGContactFieldDefault
+
 ```
 
 **Filter contacts**
