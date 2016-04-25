@@ -143,4 +143,4 @@ Drag and Drop Libray folder from Demo Project.
 If you have improvements or concerns, feel free to post [an issue](https://xyz.com/issues) and write details.
 
 [Check out](https://xyz.com/ContactUtility) 
-[Email us](mailto:sandeep.ahuja@daffodilsw.com with other ideas and projects.
+[Email us](mailto:sandeep.ahuja@daffodilsw.com,rajat.chugh@daffodilsw.com with other ideas and projects.
