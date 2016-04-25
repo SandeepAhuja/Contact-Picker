@@ -283,17 +283,9 @@
 		67E66F461CC4FC80008302C8 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				67E66F471CC4FC80008302C8 /* Category */,
 				67E66F481CC4FC80008302C8 /* View */,
 			);
 			path = Common;
-			sourceTree = "<group>";
-		};
-		67E66F471CC4FC80008302C8 /* Category */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Category;
 			sourceTree = "<group>";
 		};
 		67E66F481CC4FC80008302C8 /* View */ = {
