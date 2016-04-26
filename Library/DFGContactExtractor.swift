@@ -76,5 +76,7 @@ class DFGContactExtractor: NSObject {
         }
         return []
     }
+    
+    
 }
 

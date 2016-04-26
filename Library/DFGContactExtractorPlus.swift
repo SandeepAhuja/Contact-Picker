@@ -20,6 +20,10 @@ class DFGContactExtractorPlus: NSObject {
         return contactName
     }
     
+    func emailWithLabels(flag:Bool){
+    
+    }
+    
     
     func phonesWithLabels(flag:Bool)->[ContactPhone]?{
         if (contact!.isKeyAvailable(CNContactPhoneNumbersKey)) {

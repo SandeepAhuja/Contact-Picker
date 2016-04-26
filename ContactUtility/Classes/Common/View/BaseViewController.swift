@@ -34,8 +34,9 @@ public class BaseViewController: UITableViewController {
             cell.accessoryType = .None
         }
 
-        cell.textLabel?.text = self.contactName(upcomingItem)
-        
+
+        upcomingItem.name?.fullName = self.contactName(upcomingItem)
+        cell.textLabel?.text = upcomingItem.name?.fullName
         
         var finalimage:UIImage?
         if let image = upcomingItem.thumbnailImage {

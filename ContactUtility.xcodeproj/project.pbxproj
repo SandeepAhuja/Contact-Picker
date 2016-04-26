@@ -50,6 +50,7 @@
 		67FA98281CA95CC300A15C2F /* ContactUtilityUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FA98271CA95CC300A15C2F /* ContactUtilityUITests.swift */; };
 		67FA983E1CA95DAF00A15C2F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67FA983A1CA95DAF00A15C2F /* LaunchScreen.storyboard */; };
 		67FA983F1CA95DAF00A15C2F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67FA983C1CA95DAF00A15C2F /* Main.storyboard */; };
+		7B0175A31CCF501300FF5EC5 /* ContactEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0175A21CCF501300FF5EC5 /* ContactEmail.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +121,7 @@
 		67FA98291CA95CC300A15C2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		67FA983B1CA95DAF00A15C2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		67FA983D1CA95DAF00A15C2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7B0175A21CCF501300FF5EC5 /* ContactEmail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactEmail.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -276,6 +278,7 @@
 				67E66F2A1CC4FBE7008302C8 /* ContactDisplaySection.swift */,
 				67E66F2B1CC4FBE7008302C8 /* ContactName.swift */,
 				67E66F2C1CC4FBE7008302C8 /* ContactPhone.swift */,
+				7B0175A21CCF501300FF5EC5 /* ContactEmail.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -571,6 +574,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				67E66F341CC4FBE7008302C8 /* DFGContactExtractorPlus.swift in Sources */,
+				7B0175A31CCF501300FF5EC5 /* ContactEmail.swift in Sources */,
 				67E66F3B1CC4FBE7008302C8 /* ContactDisplaySection.swift in Sources */,
 				6705D5C71CAA8EC2002EA3BB /* ContactModuleInterface.swift in Sources */,
 				67E66F321CC4FBE7008302C8 /* DFGAddressBookWrapperRef.swift in Sources */,
@@ -698,7 +702,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "9257b383-5083-4b02-ba04-74bbb23b1b92";
+				PROVISIONING_PROFILE = "a0064210-7f73-4436-94f1-ea0ac7a9d1ca";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -722,7 +726,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Rohit K Singhania (TFZ6PN49ES)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rohit K Singhania (TFZ6PN49ES)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -737,7 +742,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "9257b383-5083-4b02-ba04-74bbb23b1b92";
+				PROVISIONING_PROFILE = "a0064210-7f73-4436-94f1-ea0ac7a9d1ca";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -756,9 +761,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = iZofy.com.iZofy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9257b383-5083-4b02-ba04-74bbb23b1b92";
+				PROVISIONING_PROFILE = "a0064210-7f73-4436-94f1-ea0ac7a9d1ca";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -772,8 +778,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = iZofy.com.iZofy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9257b383-5083-4b02-ba04-74bbb23b1b92";
+				PROVISIONING_PROFILE = "a0064210-7f73-4436-94f1-ea0ac7a9d1ca";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

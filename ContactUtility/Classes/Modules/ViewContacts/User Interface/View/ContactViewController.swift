@@ -55,9 +55,39 @@ class ContactViewController: BaseViewController {
         self.addRemoveSearchbar(self.searchBarVisible != nil ? self.searchBarVisible! : false)
         self.addRemoveIndexedSearch(self.indexedSearchVisible != nil ? self.indexedSearchVisible! : false)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action:"doneButtonPressed:")
+        self.navigationItem.leftBarButtonItem = selectAll
     }
     
-
+    var selectAll : UIBarButtonItem {
+        get{
+            return UIBarButtonItem(title: "Select All", style: .Plain, target: self, action: "selectAllPressed:")
+        }
+    }
+    
+    var deselectAll : UIBarButtonItem {
+        get{
+            return UIBarButtonItem(title: "Deselect All", style: .Plain, target: self, action: "deselectAllPressed:")
+        }
+    }
+    
+    func selectAllPressed(sender:UIBarButtonItem){
+        self.navigationItem.leftBarButtonItem = deselectAll
+        if let sections = self.dataProperty?.sections {
+            selectedContacts.removeAll()
+            for section in sections {
+                for contact in section.items{
+                    selectedContacts.append(contact.identifier!)
+                }
+            }
+            self.reloadEntries()
+        }
+    }
+    func deselectAllPressed(sender:UIBarButtonItem){
+        self.navigationItem.leftBarButtonItem = selectAll
+        selectedContacts.removeAll()
+        self.reloadEntries()
+    }
+    
     func loadContacts() {
         self.addressBook.loadContacts({[unowned self]
             (contacts: [ContactDisplayItem]?, error: NSError?) in
@@ -216,7 +246,10 @@ extension ContactViewController : UISearchResultsUpdating,UISearchBarDelegate {
             
         let filterBlock:DFGFilterContactBlock = {
                 (contact: ContactDisplayItem) -> Bool in
-            if let name = contact.name?.firstName, lastName = contact.name?.lastName {
+            if let completeName = contact.name?.fullName {
+                let found:Bool = completeName.localizedCaseInsensitiveContainsString(strippedString)
+                return found
+            }else if let name = contact.name?.firstName, lastName = contact.name?.lastName {
                 let found:Bool = name.localizedCaseInsensitiveContainsString(strippedString) || lastName.localizedCaseInsensitiveContainsString(strippedString)
                 return found
             }else if let name = contact.name?.firstName {
