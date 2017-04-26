@@ -2,8 +2,8 @@
 //  ContactUtilityTests.swift
 //  ContactUtilityTests
 //
-//  Created by Hitesh on 28/03/16.
-//  Copyright © 2016 Daffodil. All rights reserved.
+//  Created by Sandeep Ahuja on 28/03/16.
+//  Copyright © 2016 DreamWorks. All rights reserved.
 //
 
 import XCTest

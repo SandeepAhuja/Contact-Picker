@@ -25,7 +25,6 @@ let addressBook = DFGAddressBook()
 
 ```
 
-
 **Select contact fields bit-mask**
 ```Swift
 Available fields:
@@ -142,5 +141,5 @@ Drag and Drop Libray folder from Demo Project.
 
 If you have improvements or concerns, feel free to post [an issue](https://xyz.com/issues) and write details.
 
-[Check out](https://xyz.com/ContactUtility) 
-[Email us](mailto:sandeep.ahuja@daffodilsw.com,rajat.chugh@daffodilsw.com with other ideas and projects.
+#[Check out](https://xyz.com/ContactUtility) 
+[Email us](mailto:sundeep.ahuja@outlook.com with other ideas and projects.

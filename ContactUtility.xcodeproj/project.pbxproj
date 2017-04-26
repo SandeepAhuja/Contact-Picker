@@ -504,7 +504,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0720;
-				ORGANIZATIONNAME = Daffodil;
+				ORGANIZATIONNAME = Dreamworks;
 				TargetAttributes = {
 					67FA98011CA95CC300A15C2F = {
 						CreatedOnToolsVersion = 7.2;
@@ -759,7 +759,7 @@
 				INFOPLIST_FILE = ContactUtility/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = iZofy.com.iZofy;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dreamworks.-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "a0064210-7f73-4436-94f1-ea0ac7a9d1ca";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -776,7 +776,7 @@
 				INFOPLIST_FILE = ContactUtility/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = iZofy.com.iZofy;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dreamworks.-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "a0064210-7f73-4436-94f1-ea0ac7a9d1ca";
 				SWIFT_OBJC_BRIDGING_HEADER = "";

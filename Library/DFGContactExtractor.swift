@@ -2,8 +2,8 @@
 //  DFGContactExtractor.swift
 //  ContactUtility
 //
-//  Created by Hitesh on 15/04/16.
-//  Copyright © 2016 Daffodil. All rights reserved.
+//  Created by Sandeep Ahuja on 15/04/16.
+//  Copyright © 2016 DreamWorks. All rights reserved.
 //
 
 import AddressBook
@@ -60,14 +60,14 @@ class DFGContactExtractor: NSObject {
         var array: [AnyObject] = [AnyObject]()
         if let multiValue = ABRecordCopyValue(self.person, property)?.takeRetainedValue() {
             let count: CFIndex = ABMultiValueGetCount(multiValue)
-            for var i = 0; i < count; i++ {
+            for i in 0..<count{
                 if let value = ABMultiValueCopyValueAtIndex(multiValue, i)?.takeRetainedValue(){
                     let object = block(multiValue: multiValue, value: value, index: i)
                     if let finalobject:AnyObject = object {
                         array.append(finalobject)
                     }
                 }
-            }
+            }            
         }
         
         

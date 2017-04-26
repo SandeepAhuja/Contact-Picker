@@ -2,8 +2,8 @@
 //  ContactViewController.swift
 //  ContactUtility
 //
-//  Created by Hitesh on 29/03/16.
-//  Copyright © 2016 Daffodil. All rights reserved.
+//  Created by Sandeep Ahuja on 29/03/16.
+//  Copyright © 2016 DreamWorks. All rights reserved.
 //
 
 import UIKit
@@ -54,19 +54,19 @@ class ContactViewController: BaseViewController {
         self.tableView.allowsMultipleSelection = self.allowMultipleSelection != nil ? self.allowMultipleSelection! : false
         self.addRemoveSearchbar(self.searchBarVisible != nil ? self.searchBarVisible! : false)
         self.addRemoveIndexedSearch(self.indexedSearchVisible != nil ? self.indexedSearchVisible! : false)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action:"doneButtonPressed:")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action:#selector(doneButtonPressed))
         self.navigationItem.leftBarButtonItem = selectAll
     }
     
     var selectAll : UIBarButtonItem {
         get{
-            return UIBarButtonItem(title: "Select All", style: .Plain, target: self, action: "selectAllPressed:")
+            return UIBarButtonItem(title: "Select All", style: .Plain, target: self, action: #selector(selectAllPressed))
         }
     }
     
     var deselectAll : UIBarButtonItem {
         get{
-            return UIBarButtonItem(title: "Deselect All", style: .Plain, target: self, action: "deselectAllPressed:")
+            return UIBarButtonItem(title: "Deselect All", style: .Plain, target: self, action: #selector(deselectAllPressed))
         }
     }
     
@@ -284,24 +284,24 @@ extension ContactViewController : UISearchResultsUpdating,UISearchBarDelegate {
 
 extension ContactViewController : UISearchControllerDelegate{
     func presentSearchController(searchController: UISearchController) {
-        debugPrint("UISearchControllerDelegate invoked method: \(__FUNCTION__).")
+        //debugPrint("UISearchControllerDelegate invoked method: \(__FUNCTION__).")
     }
     
     func willPresentSearchController(searchController: UISearchController) {
-        debugPrint("UISearchControllerDelegate invoked method: \(__FUNCTION__).")
+        //debugPrint("UISearchControllerDelegate invoked method: \(__FUNCTION__).")
     }
     
     func didPresentSearchController(searchController: UISearchController) {
-        debugPrint("UISearchControllerDelegate invoked method: \(__FUNCTION__).")
+        //debugPrint("UISearchControllerDelegate invoked method: \(__FUNCTION__).")
     }
     
     func willDismissSearchController(searchController: UISearchController) {
-        debugPrint("UISearchControllerDelegate invoked method: \(__FUNCTION__).")
+        //debugPrint("UISearchControllerDelegate invoked method: \(__FUNCTION__).")
 
     }
     
     func didDismissSearchController(searchController: UISearchController) {
-        debugPrint("UISearchControllerDelegate invoked method: \(__FUNCTION__).")
+        //debugPrint("UISearchControllerDelegate invoked method: \(__FUNCTION__).")
         self.reloadEntries()
     }
     

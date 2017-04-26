@@ -2,8 +2,8 @@
 //  SelectedContactsTableViewController.swift
 //  ContactUtility
 //
-//  Created by Hitesh on 18/04/16.
-//  Copyright © 2016 Daffodil. All rights reserved.
+//  Created by Sandeep Ahuja on 18/04/16.
+//  Copyright © 2016 DreamWorks. All rights reserved.
 //
 
 import UIKit
