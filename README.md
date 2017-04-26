@@ -139,7 +139,7 @@ Contacts.framework      Status(optional)
 Drag and Drop Libray folder from Demo Project.
 #### Contacts
 
-If you have improvements or concerns, feel free to post [an issue](https://xyz.com/issues) and write details.
+If you have improvements or concerns, feel free to post [an issue](sundeep.ahuja@gmail.com) and write details.
 
-#[Check out](https://xyz.com/ContactUtility) 
+#[Check out](sundeep.ahuja@gmail.com) 
 [Email us](mailto:sundeep.ahuja@outlook.com with other ideas and projects.
