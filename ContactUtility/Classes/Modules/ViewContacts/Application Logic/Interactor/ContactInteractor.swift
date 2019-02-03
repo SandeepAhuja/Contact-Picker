@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import AddressBookUI
+
 class ContactInteractor: NSObject, ContactInteractorInput{
     var output:ContactInteractorOutput?
     var contactManager: ContactDataManager

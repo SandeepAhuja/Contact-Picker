@@ -30,7 +30,7 @@ class ContactUtilityUITests: XCTestCase {
     }
     
     func testExample() {
-        XCUIDevice.sharedDevice().orientation = .Portrait
+        XCUIDevice.shared().orientation = .portrait
         let app = XCUIApplication()
         let tablesQuery = app.tables
         tablesQuery.staticTexts["John Appleseed"].tap()
@@ -42,7 +42,7 @@ class ContactUtilityUITests: XCTestCase {
     }
     
     func testSearchBar(){
-        XCUIDevice.sharedDevice().orientation = .Portrait
+        XCUIDevice.shared().orientation = .portrait
         
         let app = XCUIApplication()
         app.tables.searchFields["Search"].tap()

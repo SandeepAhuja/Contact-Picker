@@ -32,16 +32,16 @@ class ContactDisplayDataTests: XCTestCase {
 //        let data = ContactDisplayData.getIndexedContacts(<#T##ContactDisplayData#>)
 //    }
     
-    func randomStringWithLength (len : Int) -> String {
+    func randomStringWithLength (_ len : Int) -> String {
         
         let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         
         let randomString : NSMutableString = NSMutableString(capacity: len)
         
-        for (var i=0; i < len; i++){
+        for i in 0..<len {
             let length = UInt32 (letters.length)
             let rand = arc4random_uniform(length)
-            randomString.appendFormat("%C", letters.characterAtIndex(Int(rand)))
+            randomString.appendFormat("%C", letters.character(at: Int(rand)))
         }
         
         return randomString as String
@@ -49,7 +49,7 @@ class ContactDisplayDataTests: XCTestCase {
 
     func testPerformanceExample() {
         // This is an example of a performance test case.
-        self.measureBlock {
+        self.measure {
             // Put the code you want to measure the time of here.
         }
     }

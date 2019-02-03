@@ -7,19 +7,43 @@
 //
 
 import UIKit
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
 
-public class BaseViewController: UITableViewController {
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
+
+open class BaseViewController: UITableViewController {
     var selectedContacts:[String] = [String]()
     static let cellIdentifier = "cell"
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView?.registerClass(UITableViewCell.self, forCellReuseIdentifier:BaseViewController.cellIdentifier)
+        self.tableView?.register(UITableViewCell.self, forCellReuseIdentifier:BaseViewController.cellIdentifier)
     }
 
-    func manageSelectedContacts(selectedItem:ContactDisplayItem){
+    func manageSelectedContacts(_ selectedItem:ContactDisplayItem){
         if selectedContacts.contains(selectedItem.identifier!) {
-            if  let index:Int = selectedContacts.indexOf(selectedItem.identifier!) where index != NSIntegerMax{
-                selectedContacts.removeAtIndex(index)
+            if  let index:Int = selectedContacts.index(of: selectedItem.identifier!), index != NSIntegerMax{
+                selectedContacts.remove(at: index)
             }
         }else{
             selectedContacts.append(selectedItem.identifier!)
@@ -27,11 +51,11 @@ public class BaseViewController: UITableViewController {
     }
 
     
-    func configureCell(cell:UITableViewCell, upcomingItem:ContactDisplayItem){
+    func configureCell(_ cell:UITableViewCell, upcomingItem:ContactDisplayItem){
         if self.selectedContacts.contains(upcomingItem.identifier!) {
-            cell.accessoryType = .Checkmark
+            cell.accessoryType = .checkmark
         }else{
-            cell.accessoryType = .None
+            cell.accessoryType = .none
         }
 
 
@@ -44,9 +68,9 @@ public class BaseViewController: UITableViewController {
         }else{
             finalimage = UIImage(named: "contactplaceholder")
         }
-        finalimage = finalimage?.makeThumbnailOfSize(CGSizeMake(30, 30))
+        finalimage = finalimage?.makeThumbnailOfSize(CGSize(width: 30, height: 30))
         cell.imageView?.image = finalimage
-        cell.imageView?.contentMode = .ScaleAspectFill
+        cell.imageView?.contentMode = .scaleAspectFill
         
         let layer:CALayer = (cell.imageView?.layer)!
         layer.cornerRadius = 15
@@ -54,8 +78,8 @@ public class BaseViewController: UITableViewController {
         cell.imageView?.clipsToBounds = true
     }
     
-    func contactName(contact :ContactDisplayItem) -> String? {
-        if let firstName = contact.name?.firstName, lastName = contact.name?.lastName {
+    func contactName(_ contact :ContactDisplayItem) -> String? {
+        if let firstName = contact.name?.firstName, let lastName = contact.name?.lastName {
             return "\(firstName) \(lastName)"
         }
         else if let firstName = contact.name?.firstName {
@@ -65,8 +89,8 @@ public class BaseViewController: UITableViewController {
             return "\(lastName)"
         }
         else if contact.phones?.count > 0{
-            for phone in contact.phones!{
-                return phone.number as String!
+            for phone in (contact.phones)! {
+                return phone.number
             }
         }
         return "No Name"

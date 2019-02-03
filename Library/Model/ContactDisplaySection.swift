@@ -22,10 +22,10 @@ class ContactDisplaySection: NSObject {
     }
     
     convenience init?(name: String?, items: [ContactDisplayItem]?) {
-        guard let sectionName = name where !sectionName.isEmpty else{
+        guard let sectionName = name, !sectionName.isEmpty else{
             return nil
         }
-        guard let sectionItems = items where sectionItems.count > 0 else{
+        guard let sectionItems = items, sectionItems.count > 0 else{
             return nil
         }
         self.init(sectionName: name!,sectionItems: items!)

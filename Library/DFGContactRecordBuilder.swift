@@ -7,49 +7,24 @@
 //
 
 import UIKit
-import AddressBook
+
 import Contacts
 
 class DFGContactRecordBuilder: NSObject {
     var extractor:AnyObject
     
-    override init() {
-        if #available(iOS 9.0, *) {
-            extractor = DFGContactExtractorPlus()
-        } else {
-            extractor = DFGContactExtractor()
-        }
+    override init() {        
+        self.extractor = DFGContactExtractorPlus()
+        super.init()
     }
     
-    func contactWithRecord(record:AnyObject,fieldMask:[DFGContactFields])->ContactDisplayItem?{
-        if #available(iOS 9.0, *) {
-            return self.contactWithCNContact(record as! CNContact,fieldMask: fieldMask)
-        } else {
-            // Fallback on earlier versions
-            return self.contactWithRecordRef(record as ABRecordRef,fieldMask: fieldMask)
-        }
+    func contactWithRecord(_ record:CNContact,fieldMask:[DFGContactFields])->ContactDisplayItem?{
+        return self.contactWithCNContact(record,fieldMask: fieldMask)
     }
     
-    func contactWithRecordRef(recordRef:ABRecordRef,fieldMask:[DFGContactFields])->ContactDisplayItem?{
-        let localExtractor:DFGContactExtractor = self.extractor as! DFGContactExtractor
-        localExtractor.person = recordRef
-        let contactItem = ContactDisplayItem()
-        contactItem.identifier = String(ABRecordGetRecordID(recordRef))
-        if (fieldMask.contains(DFGContactFields.DFGContactFieldName)){
-            contactItem.name = localExtractor.name()
-        }
-        if (fieldMask.contains(DFGContactFields.DFGContactFieldPhonesOnly) || (fieldMask.contains(DFGContactFields.DFGContactFieldPhonesWithLabels))){
-            contactItem.phones = localExtractor.phonesWithLabels(true) as? [ContactPhone]
-        }
-        if fieldMask.contains(DFGContactFields.DFGContactFieldThumbnail){
-            contactItem.thumbnailImage = DFGImageExtractor.thumbnailWithRecordRef(recordRef)
-        }
-        
-        return contactItem
-    }
     
     @available(iOS 9.0, *)
-    func contactWithCNContact(contact:CNContact,fieldMask:[DFGContactFields])->ContactDisplayItem? {
+    func contactWithCNContact(_ contact:CNContact,fieldMask:[DFGContactFields])->ContactDisplayItem? {
         let localExtractor:DFGContactExtractorPlus = self.extractor as! DFGContactExtractorPlus
         localExtractor.contact = contact
         let contactItem = ContactDisplayItem()
@@ -67,7 +42,7 @@ class DFGContactRecordBuilder: NSObject {
         return contactItem
     }
     
-    class func getIndexedContacts(collection:[ContactDisplayItem])->[String: [ContactDisplayItem]]{
+    class func getIndexedContacts(_ collection:[ContactDisplayItem])->[String: [ContactDisplayItem]]{
         var indexedAuthors = [String: [ContactDisplayItem]]()
         if collection.count > 0 {
             for person in collection {
@@ -80,9 +55,9 @@ class DFGContactRecordBuilder: NSObject {
                 }else{
                     var initialLetter = ""
                     if person.name?.lastName?.isEmpty == false{
-                        initialLetter = (person.name?.lastName!.substringToIndex((person.name!.lastName?.startIndex.advancedBy(1))!).uppercaseString)!
+                        initialLetter = (person.name?.lastName?.substring(to: 1).uppercased())!
                     }else if person.name?.firstName?.isEmpty == false{
-                        initialLetter = (person.name?.firstName!.substringToIndex((person.name?.firstName!.startIndex.advancedBy(1))!).uppercaseString)!
+                        initialLetter = (person.name?.firstName?.substring(to: 1).uppercased())!
                     }
                     
                     if sectionvalidNames.contains(initialLetter) {
@@ -103,7 +78,7 @@ class DFGContactRecordBuilder: NSObject {
         return indexedAuthors
     }
     
-   class func contactDisplayData(contacts:[ContactDisplayItem]?)->ContactDisplayData?{
+   class func contactDisplayData(_ contacts:[ContactDisplayItem]?)->ContactDisplayData?{
         var contactDisplayData:ContactDisplayData? = nil
         if let people = contacts {
             if people.count > 0 {
@@ -115,7 +90,7 @@ class DFGContactRecordBuilder: NSObject {
                     }
                 }//end of for loop
                 
-                sections.sortInPlace{$0.name!.compare ($1.name!) == .OrderedAscending}
+                sections.sort{$0.name!.compare ($1.name!) == .orderedAscending}
                 if let section = sections.first {
                     if section.name == "#" {
                         if sections.count > 0{

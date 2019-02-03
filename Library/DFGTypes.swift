@@ -15,7 +15,7 @@ struct DFGAddressBookAccess {
     static let DFGAddressBookAccessDenied = DFGAddressBookAccess(rawValue: 2)
 }
 
-struct DFGContactFields : OptionSetType {
+struct DFGContactFields : OptionSet {
     let rawValue : Int64
     
     static let None = DFGContactFields(rawValue: 0)
@@ -42,7 +42,7 @@ struct DFGContactFields : OptionSetType {
     
 }
 
-struct DFGSocialNetworkType : OptionSetType {
+struct DFGSocialNetworkType : OptionSet {
     let rawValue : Int
     static let DFGSocialNetworkUnknown = DFGSocialNetworkType(rawValue: 0)
     static let DFGSocialNetworkFacebook = DFGSocialNetworkType(rawValue: 1)

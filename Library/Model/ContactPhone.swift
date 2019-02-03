@@ -12,9 +12,9 @@ class ContactPhone: NSObject,NSCopying{
     required override init() { // <== Need "required" because we need to call dynamicType() below
 
     }
-    func copyWithZone(zone: NSZone) -> AnyObject { // <== NSCopying
+    func copy(with zone: NSZone?) -> Any { // <== NSCopying
         // *** Construct "one of my current class". This is why init() is a required initializer
-        let theCopy = self.dynamicType.init()
+        let theCopy = type(of: self).init()
         theCopy.number = self.number
         theCopy.originalLabel = self.originalLabel
         theCopy.localizedLabel = self.localizedLabel

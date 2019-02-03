@@ -8,7 +8,6 @@
 
 import Foundation
 import Contacts
-import AddressBook
 
 class ContactDisplayData: NSObject {
     var sections:[ContactDisplaySection]?

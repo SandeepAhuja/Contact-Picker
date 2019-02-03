@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import AddressBook
 import Contacts
 
 class ContactDataManager: NSObject {
@@ -16,72 +15,34 @@ class ContactDataManager: NSObject {
         sharedAddressbook = DFGAddressBookWrapperRef.sharedInstance
     }
 
-    func fetchAllContacts(searchQuery:String?, completion:(([AnyObject]?,NSError?) -> Void)?){
-            if #available(iOS 9.0, *) {
-                fetchContactsFromContactApi(searchQuery, completion: completion)
-            } else {
-                fetchContactsFromAddressBook(searchQuery, completion: completion)
-            }
+    func fetchAllContacts(_ searchQuery:String?, completion:(([AnyObject]?,NSError?) -> Void)?){
+        fetchContactsFromContactApi(searchQuery, completion: completion)
     }
-
-    @available (iOS 8,*)
-    func fetchContactsFromAddressBook(searchQuery:String?, completion:(([AnyObject]?,NSError?) -> Void)?){
-        let status = ABAddressBookGetAuthorizationStatus();
-        if status == .Denied || status == .Restricted{
-            completion?(nil,self.getError(ABAuthorizationStatus.Denied.rawValue))
-            return;
-        }
-        
-        
-        guard let addressBook = sharedAddressbook?.addressBook else {
-            print(sharedAddressbook?.errorRef)
-            completion?(nil,sharedAddressbook?.errorRef)
-            return
-        }
-        
-        ABAddressBookRequestAccessWithCompletion(addressBook) {[unowned self] granted, error in
-            if !granted {
-                completion?(nil,self.getError(ABAuthorizationStatus.Denied.rawValue))
-            }
             
-            if let contactName = searchQuery where contactName.characters.count > 0 {
-                if let allContacts = ABAddressBookCopyPeopleWithName(addressBook,contactName as CFStringRef)?.takeRetainedValue(){
-                completion?(allContacts as [AnyObject],nil)
-                }
-            }else{
-                if let allContacts = ABAddressBookCopyArrayOfAllPeople(addressBook)?.takeRetainedValue(){
-                    completion?(allContacts as [AnyObject],nil)
-                }
-            }
-        }
-    }
-
-    
-    @available(iOS 9.0, *)
-    func fetchContactsFromContactApi(searchQuery:String?, completion:(([AnyObject]?,NSError?) -> Void)?){
+    func fetchContactsFromContactApi(_ searchQuery:String?, completion:(([AnyObject]?,NSError?) -> Void)?){
         let store = CNContactStore()
-        let authorizationStatus:CNAuthorizationStatus = CNContactStore.authorizationStatusForEntityType(CNEntityType.Contacts)
-        if authorizationStatus == .Denied || authorizationStatus == .Restricted{
+        let authorizationStatus:CNAuthorizationStatus = CNContactStore.authorizationStatus(for: CNEntityType.contacts)
+        if authorizationStatus == .denied || authorizationStatus == .restricted{
             completion?(nil,NSError(domain: "access", code: authorizationStatus.rawValue, userInfo: nil))
             return;
         }
-        store.requestAccessForEntityType(CNEntityType.Contacts){ (granted: Bool, err: NSError?) in
+        store.requestAccess(for: .contacts) { (granted, err) in
             if !granted {
-                completion?(nil,NSError(domain: "access", code: CNAuthorizationStatus.Denied.rawValue, userInfo: nil))
+                completion?(nil,NSError(domain: "access", code: CNAuthorizationStatus.denied.rawValue, userInfo: nil))
                 return;
             }else{
-                let keys = [CNContactFormatter.descriptorForRequiredKeysForStyle(.FullName),CNContactIdentifierKey,CNContactPhoneNumbersKey,CNContactThumbnailImageDataKey]
+                let keys:[CNKeyDescriptor] = [CNContactIdentifierKey as CNKeyDescriptor,CNContactPhoneNumbersKey as CNKeyDescriptor,CNContactThumbnailImageDataKey as CNKeyDescriptor,CNContactFormatter.descriptorForRequiredKeys(for: .fullName)]
                 var contacts = [CNContact]()
-                let fetchRequest = CNContactFetchRequest(keysToFetch:keys)
+                let fetchRequest = CNContactFetchRequest(keysToFetch: keys)
                 if let name = searchQuery {
-                    if name.characters.count > 0{
-                        let predicate = CNContact.predicateForContactsMatchingName(name )
+                    if name.count > 0{
+                        let predicate = CNContact.predicateForContacts(matchingName: name )
                         fetchRequest.predicate = predicate
                     }
                 }
                 
                 do{
-                    try store.enumerateContactsWithFetchRequest(fetchRequest) {
+                    try store.enumerateContacts(with: fetchRequest) {
                         contact, stop in
                         contacts.append(contact)
                     }
@@ -92,10 +53,9 @@ class ContactDataManager: NSObject {
                 
             }
         }
-        
-        }
+    }
     
-    func getError(status:Int)->(NSError?){
+    func getError(_ status:Int)->(NSError?){
         let userInfo = [
             NSLocalizedDescriptionKey: NSLocalizedString("Operation was unsuccessful.", comment: ""),
             NSLocalizedFailureReasonErrorKey: NSLocalizedString("Please allow the app to access your contacts through the Settings.", comment: ""),

@@ -17,7 +17,7 @@ class AppDependencies: NSObject {
         configureDependencies()
     }
     
-    func installRootViewControllerIntoWindow(window: UIWindow) {
+    func installRootViewControllerIntoWindow(_ window: UIWindow) {
         contactWireframe.presentContactInterfaceFromWindow(window)
     }
     

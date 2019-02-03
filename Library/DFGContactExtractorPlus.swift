@@ -16,25 +16,24 @@ class DFGContactExtractorPlus: NSObject {
         contactName.firstName = contact?.givenName
         contactName.lastName = contact?.familyName
         contactName.middleName = contact?.middleName
-        contactName.fullName = CNContactFormatter.stringFromContact(contact!, style: .FullName)
+        contactName.fullName = CNContactFormatter.string(from: contact!, style: .fullName)
         return contactName
     }
     
-    func emailWithLabels(flag:Bool){
+    func emailWithLabels(_ flag:Bool){
     
     }
     
     
-    func phonesWithLabels(flag:Bool)->[ContactPhone]?{
+    func phonesWithLabels(_ flag:Bool)->[ContactPhone]?{
         if (contact!.isKeyAvailable(CNContactPhoneNumbersKey)) {
             var phones:[ContactPhone] = []
             for phoneNumber:CNLabeledValue in contact!.phoneNumbers {
-                let a = phoneNumber.value as! CNPhoneNumber
+                let a = phoneNumber.value 
                 let phone = ContactPhone()
                 phone.number = a.stringValue
                 phone.originalLabel = phoneNumber.label
-                phone.localizedLabel = CNLabeledValue.localizedStringForLabel(phoneNumber.label)
-                print("\(phone.localizedLabel)")
+                phone.localizedLabel = CNLabeledValue<NSString>.localizedString(forLabel: phoneNumber.label!) as String                
                 phones.append(phone)
             }
             return phones

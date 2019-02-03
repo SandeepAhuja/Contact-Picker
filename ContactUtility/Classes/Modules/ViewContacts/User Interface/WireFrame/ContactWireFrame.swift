@@ -15,7 +15,7 @@ class ContactWireFrame: NSObject {
     var contactViewController: ContactViewController?
     
      
-    func presentContactInterfaceFromWindow(window: UIWindow) {
+    func presentContactInterfaceFromWindow(_ window: UIWindow) {
         let viewController = ContactViewController(nibName: "ContactViewController", bundle: nil)
         viewController.searchBarVisible = true
         viewController.indexedSearchVisible = true
@@ -25,9 +25,9 @@ class ContactWireFrame: NSObject {
         rootWireFrame?.showRootViewController(viewController, inWindow: window)
     }
     
-    func presentAlertContoller(message:NSError?) {
-        let alert = UIAlertController(title: .None, message: message?.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
-        contactViewController?.presentViewController(alert, animated: true, completion: nil)                
+    func presentAlertContoller(_ message:NSError?) {
+        let alert = UIAlertController(title: .none, message: message?.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
+        contactViewController?.present(alert, animated: true, completion: nil)                
     }
     
     

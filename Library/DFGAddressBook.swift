@@ -22,7 +22,7 @@ class DFGAddressBook: NSObject {
         if refWrapper.errorRef == nil {
             self.contactRoutine = DFGAddressBookContactRoutine(addressBook: refWrapper)
         }else{
-            print("Addressbook initialization error: + \(refWrapper.errorRef?.localizedDescription)")
+            print("Addressbook initialization error: + \(String(describing: refWrapper.errorRef?.localizedDescription))")
         }
     }
     
@@ -30,7 +30,7 @@ class DFGAddressBook: NSObject {
         return DFGAddressBookAccessRoutine.accessStatus()
     }
     
-    func loadContacts(completion:(([ContactDisplayItem]?,NSError?) -> Void)?){
+    func loadContacts(_ completion:(([ContactDisplayItem]?,Error?) -> Void)?){
         let listBuilder: DFGContactListBuilder = DFGContactListBuilder()
         listBuilder.filterBlock = self.filterBlock
         listBuilder.sortDescriptors = self.sortDescriptors
@@ -44,7 +44,7 @@ class DFGAddressBook: NSObject {
 
     }
 
-    func loadContactByRecordID(recordId:String,completion:((ContactDisplayItem?,NSError?) -> Void)?){
+    func loadContactByRecordID(_ recordId:String,completion:((ContactDisplayItem?,NSError?) -> Void)?){
         
         if let contact = self.contactRoutine.contactWithRecordId(recordId, fieldMask: self.fieldsMask){
             completion?(contact,nil)
@@ -52,7 +52,7 @@ class DFGAddressBook: NSObject {
         
     }
 
-    func loadPhotoByRecordID(recordId:NSNumber,completion:((UIImage?,NSError?) -> Void)?){
+    func loadPhotoByRecordID(_ recordId:NSNumber,completion:((UIImage?,NSError?) -> Void)?){
         
     }
     

@@ -8,55 +8,33 @@
 
 import Foundation
 import UIKit
-import AddressBook
 import Contacts
 
 class DFGImageExtractor: NSObject {
-    
-    class func thumbnailWithRecordRef(recordRef:AnyObject)->UIImage?{
-        if #available(iOS 9.0, *) {
-            return imageWithCNContact(recordRef as! CNContact, fullSize: false)
-        }else{
-            return imageWithRecordRef(recordRef, fullsize: false)
-        }
+    class func thumbnailWithRecordRef(_ recordRef:CNContact)->UIImage?{
+        return imageWithCNContact(recordRef, fullSize: false)
     }
     
-    class func photoWithRecordRef(recordRef:ABRecordRef)->UIImage?{
-        if #available(iOS 9.0, *) {
-            return imageWithCNContact(recordRef as! CNContact, fullSize: true)
-        }else{
-            return imageWithRecordRef(recordRef, fullsize: true)
-        }
+    class func photoWithRecordRef(_ recordRef:CNContact)->UIImage?{
+        return imageWithCNContact(recordRef, fullSize: true)
     }
     
     @available(iOS 9.0, *)
-    private class func imageWithCNContact(contact:CNContact,fullSize:Bool?)->UIImage?{
+    fileprivate class func imageWithCNContact(_ contact:CNContact,fullSize:Bool?)->UIImage?{
         if fullSize == true {
             if (contact.isKeyAvailable(CNContactImageDataKey)){
                 if let imgData = contact.imageData{
-                    return UIImage(data: imgData, scale: UIScreen.mainScreen().scale)
+                    return UIImage(data: imgData, scale: UIScreen.main.scale)
                 }
             }
         }else {
             if (contact.isKeyAvailable(CNContactThumbnailImageDataKey)){
                 if let imgData = contact.thumbnailImageData{
-                    return UIImage(data: imgData, scale: UIScreen.mainScreen().scale)
+                    return UIImage(data: imgData, scale: UIScreen.main.scale)
                 }
             }
         }
         return nil
-    }
-    
-    private class func imageWithRecordRef(recordRef:ABRecordRef,fullsize:Bool?)->UIImage? {
-        let format:ABPersonImageFormat = fullsize! ? kABPersonImageFormatOriginalSize :
-        kABPersonImageFormatThumbnail
-        if let data:NSData = ABPersonCopyImageDataWithFormat(recordRef, format)?.takeRetainedValue() as? NSData{
-                return UIImage(data: data, scale: UIScreen.mainScreen().scale)
-        }
-        
-        
-        return nil
-        
     }
     
 }

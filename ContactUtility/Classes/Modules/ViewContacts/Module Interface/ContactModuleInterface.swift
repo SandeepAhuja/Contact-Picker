@@ -9,6 +9,6 @@
 import Foundation
 
 @objc protocol ContactModuleInterface {
-    optional func updateContacts()
-    optional func searchContacts(searchSting:String)
+    @objc optional func updateContacts()
+    @objc optional func searchContacts(_ searchSting:String)
 }

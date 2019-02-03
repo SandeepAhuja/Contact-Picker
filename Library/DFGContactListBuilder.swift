@@ -9,13 +9,13 @@
 import UIKit
 import Foundation
 
-typealias DFGFilterContactBlock = (contact:ContactDisplayItem)->Bool
+typealias DFGFilterContactBlock = (_ contact:ContactDisplayItem)->Bool
 
 class DFGContactListBuilder: NSObject {
         var filterBlock : DFGFilterContactBlock?
         var sortDescriptors : [NSSortDescriptor]?
                 
-        func contactListWithAllContacts(allContacts: [ContactDisplayItem]) -> [ContactDisplayItem]? {
+        func contactListWithAllContacts(_ allContacts: [ContactDisplayItem]) -> [ContactDisplayItem]? {
             var mutableContacts: [ContactDisplayItem] = allContacts
             mutableContacts = self.filterContacts(mutableContacts)!
             mutableContacts = self.sortContacts(mutableContacts)!
@@ -23,20 +23,20 @@ class DFGContactListBuilder: NSObject {
             
         }
         
-        func filterContacts(contacts: [ContactDisplayItem])->[ContactDisplayItem]? {
+        func filterContacts(_ contacts: [ContactDisplayItem])->[ContactDisplayItem]? {
             if (self.filterBlock != nil) {
                 var predicate: NSPredicate
                 predicate = NSPredicate(block: { (contact, _) -> Bool in
-                    return self.filterBlock!(contact: contact as! ContactDisplayItem)
+                    return self.filterBlock!(contact as! ContactDisplayItem)
                 })
-                return (contacts as NSArray).filteredArrayUsingPredicate(predicate) as? [ContactDisplayItem]
+                return (contacts as NSArray).filtered(using: predicate) as? [ContactDisplayItem]
             }
             return contacts
         }
 
-        func sortContacts(contacts: [ContactDisplayItem])->[ContactDisplayItem]? {
+        func sortContacts(_ contacts: [ContactDisplayItem])->[ContactDisplayItem]? {
             if (self.sortDescriptors != nil) {
-                return (contacts as NSArray).sortedArrayUsingDescriptors(self.sortDescriptors!) as?[ContactDisplayItem]
+                return (contacts as NSArray).sortedArray(using: self.sortDescriptors!) as?[ContactDisplayItem]
             }
             return contacts
         }
